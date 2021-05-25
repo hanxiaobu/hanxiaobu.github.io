@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux系统编程-信号 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux系统编程-信号 信号相关函数：一、signal函数：函数作用：注册信号捕捉函数 ；给内核注册信号处理函数。理解：完成信号的注册，注册一个用户自定义的函数。也就是说信号就要发生了，就会去调用信号处理函数，这个信号处理函数是用户自己写的。也就是说自己写的信号处理函数还需要signal注册，才能让信号知道执行哪个函数。函数原型typedef void (*sighandler_t)(int);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统编程-信号">
+<meta property="og:url" content="http://example.com/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux系统编程-信号 信号相关函数：一、signal函数：函数作用：注册信号捕捉函数 ；给内核注册信号处理函数。理解：完成信号的注册，注册一个用户自定义的函数。也就是说信号就要发生了，就会去调用信号处理函数，这个信号处理函数是用户自己写的。也就是说自己写的信号处理函数还需要signal注册，才能让信号知道执行哪个函数。函数原型typedef void (*sighandler_t)(int);">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B71.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B73.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B72.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B74.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B75.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B76.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B77.png">
+<meta property="article:published_time" content="2021-05-17T00:35:25.212Z">
+<meta property="article:modified_time" content="2021-05-17T01:12:01.385Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B71.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux系统编程-信号" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/" class="article-date">
+  <time class="dt-published" datetime="2021-05-17T00:35:25.212Z" itemprop="datePublished">2021-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux系统编程-信号
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux系统编程-信号"><a href="#Linux系统编程-信号" class="headerlink" title="Linux系统编程-信号"></a>Linux系统编程-信号</h2><ol>
+<li><p>信号相关函数：<br>一、signal函数：<br>函数作用：注册信号捕捉函数 ；给内核注册信号处理函数。<br>理解：完成信号的注册，注册一个用户自定义的函数。也就是说信号就要发生了，就会去调用信号处理函数，这个信号处理函数是用户自己写的。也就是说自己写的信号处理函数还需要signal注册，才能让信号知道执行哪个函数。<br>函数原型<br><code>typedef void (*sighandler_t)(int); //定义函数指针 可以作为回调函数</code><br><code>sighandler_t signal(int signum, sighandler_t handler);</code><br>函数参数<br>signum：信号编号 使用的时候不要用数字 用宏<br>sighandler_t handler是信号处理函数的函数名，函数名就是函数的首地址，就是指针<br>sighandler_t：函数指针  其中int类型就是信号的编号<br>handler其实也算是回调函数 ，singal函数会把这个函数拉到内核中执行， 严格上说signal是给内核注册一个信号函数<br>handler：信号处理函数<br>二、kill函数：<br>函数作用：发送指定信号给指定进程<br>kill命令：<code>kill -SIGKILL 进程PID</code><br>kill函数原型：<code>int kill(pid_t pid, int sig);</code><br>sig信号参数：不推荐直接使用数字，应使用宏名，因为不同操作系统信号编号可能不同，但名称一致。<br>pid参数：  </p>
+<ul>
+<li>pid &gt; 0: 发送信号给指定的进程。</li>
+<li>pid = 0: 发送信号给与调用kill函数进程属于同一进程组的所有进程。</li>
+<li>pid &lt; -1:  取|pid|发给对应进程组。</li>
+<li>pid = -1：发送给进程有权限发送的系统中所有进程。</li>
+</ul>
+<p>三、raise函数：<br>函说描述：给当前进程发送指定信号(自己给自己发)<br>函数原型：<code>int raise(int sig);</code><br>函数返回值：成功：0，失败非0值<br>函数拓展：<code>raise(signo) == kill(getpid(), signo);</code><br>四、abort函数<br>函数描述：给自己发送异常终止信号  6) SIGABRT，并产生core文件<br>函数原型：<code>void abort(void);</code><br>函数拓展：<code>abort() == kill(getpid(), SIGABRT);</code><br>五、alarm函数<br>函数原型：<code>unsigned int alarm(unsigned int seconds);</code><br>函数描述：<br>设置定时器(闹钟)。在指定seconds后，内核会给当前进程发送14）SIGALRM信号。进程收到该信号，默认动作终止。  </p>
+<ul>
+<li>每个进程都有且只有唯一的一个定时器。如果有两个定时器，后边的会覆盖前边的</li>
+<li>alarm函数的返回值：0或者是上一个alarm剩余的秒数</li>
+<li>alarm(0)：取消定时器</li>
+<li>alarm函数发送的是SIGALRM信号</li>
+</ul>
+<p>[88573]Alarm clock<br>实际执行时间 = 系统时间 + 用户时间 + 损耗时间  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;[%d]\n&quot;</span>,i++);<span class="comment">//结果80000次</span></span><br><span class="line">real	<span class="number">0</span>m1<span class="number">.001</span>s</span><br><span class="line">user	<span class="number">0</span>m0<span class="number">.007</span>s</span><br><span class="line">sys	<span class="number">0</span>m0<span class="number">.269</span>s</span><br></pre></td></tr></table></figure>
+<p>损耗时间=实际执行时间-（系统时间 + 用户时间）=0.8s<br>文件重定向之后</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">time ./alarm_uncle &gt;test.<span class="built_in">log</span> <span class="comment">//结果8000000次</span></span><br><span class="line">real	<span class="number">0</span>m1<span class="number">.002</span>s</span><br><span class="line">user	<span class="number">0</span>m0<span class="number">.051</span>s</span><br><span class="line">sys	<span class="number">0</span>m0<span class="number">.941</span>s</span><br></pre></td></tr></table></figure>
+<p>损耗时间=实际执行时间-（系统时间 + 用户时间）=0.01s<br>损耗时间==user(用户)和sys(内核)切换的时间 比如write和sys/write之间切换<br>原因是：调用printf函数打印数字遇到\n才会打印，打印过程涉及到从用户区到内核区的切换，切换次数越多消耗的时间越长，效率越低；而使用文件重定向，由于操作的带缓冲的，所以涉及到用户区到内核区的切换次数大大减少，从而使损耗降低。</p>
+<ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B71.png" alt="avatar"></li>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B73.png" alt="avatar"></li>
+<li>后一个alarm会取代前面的alarm,alarm(1)，一秒钟之后会执行sighandler函数</li>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B72.png" alt="avatar"></li>
+</ul>
+</li>
+<li><p>信号的状态<br>信号的产生：<br>按键产生，<br>Ctrl+c 终止进程 只有进程阻塞在终端上，才好用   产生SIGINI 信号<br>Ctrl+z 挂起 不在终端上了 按Ctrl+c不好用<br>Ctrl+\ 使进程退出<br>系统调用产生，如：kill、raise(发送信号给当前进程)、abort(使进程终止)<br>软件条件产生(软中断)，如：定时器alarm    每个进程都有唯一的定时器<br>硬件异常产生(硬中断)，如：非法访问内存(段错误)、除0(浮点数例外)、内存对齐出错(总线错误)<br>命令产生，如：kill命令<br>未决：产生和递达之间的状态。主要由于阻塞(屏蔽)导致该状态。<br>递达：递送并且到达进程。<br>信号的处理方式<br>执行默认动作  Term<br>忽略信号(丢弃不处理)  ignore<br>捕捉信号(调用用户的自定义的处理函数)  signal<br>信号的特质<br>信号的实现手段导致信号有很强的延时性<br>文件描述符表，还包含了信号相关的信息，主要指阻塞信号集和未决信号集。<br>信号的四要素  </p>
+<ul>
+<li>信号的编号</li>
+<li>信号的名称</li>
+<li>产生信号的事件</li>
+<li>信号的默认处理动作</li>
+</ul>
+<p>特别需要注意的是：<code>The signals SIGKILL and SIGSTOP cannot be caught, blocked, or ignored.</code><br>几个常用到的信号：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SIGINT(ctrl+c)、SIGQUIT(ctrl+\，使进程退出)、SIGKILL(进程终止，不能被捕获)、</span><br><span class="line">SIGSEGV(非法访问内存，段溢出)、SIGUSR1、SIGUSR2(系统留给我们自己的)、SIGPIPE、</span><br><span class="line">SIGALRM、SIGTERM(进程终止，可以被捕获)、SIGSTOP、SIGCONT、</span><br><span class="line">SIGCHLD(子进程退出之后给父进程发信号，父进程收到信号回收子进程)、</span><br></pre></td></tr></table></figure></li>
+<li><p>setitimer函数：<br>函数原型<br><code>int setitimer(int which, const struct itimerval *new_value,struct itimerval *old_value);</code><br>函数参数：<br>which：指定定时方式<br>自然定时：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ITIMER_REAL → <span class="number">14</span>）SIGALRM计算自然时间</span><br><span class="line">new_value：<span class="class"><span class="keyword">struct</span> <span class="title">itimerval</span>, 负责设定<span class="title">timeout</span>时间。</span></span><br><span class="line"><span class="class"><span class="title">itimerval</span>.<span class="title">it_value</span>:</span> 设定第一次执行function所延迟的秒数 </span><br><span class="line">itimerval.it_interval: 设定以后每几秒执行function</span><br></pre></td></tr></table></figure>
+
+<p>old_value： 存放旧的timeout值，一般指定为NULL<br>***函数没有终止是因为SIGALRM信号被signal捕获了，捕获了的意义就是按照我的方式来，就不会执行默认Term终止动作。<br>***用结构体的好处就是可以存放更多的信息 减少声明变量<br>比如：如果2个结构体存放4个相同的变量，这样的话结构体需要声明6个变量，不用结构体需要声明8个变量<br>代码实现：    </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sighandler</span><span class="params">(<span class="keyword">int</span> signo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;signo==[%d]\n&quot;</span>,signo);</span><br><span class="line">&#125;   </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//注册信号 SIGALAM信号处理函数</span></span><br><span class="line">    signal(SIGALRM,sighandler); </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">itimerval</span> <span class="title">tm</span>;</span> </span><br><span class="line">    <span class="comment">//周期性时间赋值  </span></span><br><span class="line">    tm.it_interval.tv_sec=<span class="number">1</span>;</span><br><span class="line">    tm.it_interval.tv_usec=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">//第一次触发时间</span></span><br><span class="line">    tm.it_value.tv_sec=<span class="number">3</span>;</span><br><span class="line">    tm.it_value.tv_usec=<span class="number">0</span>;</span><br><span class="line">    setitimer(ITIMER_REAL,&amp;tm,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="comment">//如果没有这个while循环 signal会自动终止进程</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>//函数没有终止是因为SIGALRM信号被signal捕获了，捕获了的意义就是按照我的方式来，就不会执行默认Term终止动作。并且函数执行完回到刚才信号发生的代码位置继续执行。也就是while(1)之前的位置<br>然后按ctrl+c终止进程，SIGINT信号没有被捕获 所以执行终止</p>
+</li>
+<li><p>printf中要写”\n”：printf遇到“\n”才会打印，或者缓冲区满了才打印</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;[%d]\n&quot;</span>,i++);<span class="comment">//每一个数字都需要用户和内核的切换</span></span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;[%d]&quot;</span>,i++);<span class="comment">//缓冲区打满了才发生用户和内核的切换</span></span><br><span class="line">    <span class="comment">//下边的要比上边打印的数字多</span></span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+<p>time ./alarm_uncle &gt; test.log 文件重定向，输出到文件 相当于第二种，因为写文件操作带缓冲（缓冲满了存到文件中）<br>如果写文件操作要用fopen fread fclose操作 不要用open read 。前者带缓冲效率高</p>
+</li>
+<li><p>信号都是事先约定好的<br>信号的优先级要高于普通操作<br>kill -l 查看信号的命令<br>kill发信号的时候<br>1，要说明发的哪个信号(信号的编号)<br>2，还有给哪个进程(pid)发信号<br>实现过程：进程A通过kill已经告诉内核要给谁发信号，内核就知道给谁转发信号，转给进程B  </p>
+<ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B74.png" alt="avatar"></li>
+</ul>
+</li>
+<li><p>man 7 signal 信号相关的所有信息<br>bash ：开启一个终端就会产生一个bash的进程，是默认的进程<br>如果A进程知道B进程中的pid，所以A进程可以给B进程发信号，但是必须是在同一用户下<br>man手册中的”(2)”什么意思：<br><code>alarm（2）代表man 2 alarm</code><br><code>abort（3）代表man 3 abort</code><br>***开发过程中看见参数前加coust一定是输入 因为传入的不能改<br><code>int setitimer(int which, const struct itimerval *new_value,struct itimerval *old_value);</code><br>***函数声明中看到什么old参数都是传出参数</p>
+<ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B75.png" alt="avatar"></li>
+</ul>
+</li>
+<li><p>SIGCHLD信号：！！！这个超级重点代码在备注里  </p>
+<ol>
+<li>SIGCHLD信号的产生条件：<br>子进程收到SIGSTOP，SIGCONT<br>子进程退出</li>
+<li>SIGCHLD信号的作用：<br>子进程退出之后，内核会给其父进程发送SIGCHLD信号，父进程收到这个信号之后，<br>调用waitpid或者wait完成对子进程的回收  </li>
+<li>sigchld.c：<ul>
+<li>有可能还没有完成对SIGCHLD信号的注册，三个子进程就全部退出了<br>解决办法：在fork之前先将SIGCHLD信号阻塞，然后在完成对SIGCHLD信号的注册之后<br>解除对SIGCHLD信号的阻塞；  </li>
+<li>有可能在SIGCHLD信号处理函数执行期间，另外的2个子进程同时全部退出，此时会出现一个僵尸进程。  </li>
+<li>解决办法：在信号处理函数中应该循环回收，当waitpid返回-1的时候就已经回收完  </li>
+<li>所有子进程了，此时可以break；</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>从3中知道调用哪个函数是由用户注册决定的，内核调用我们自己写的函数，怎么做我们说的算，什么时候做内核说的算，这就是回调函数<br>要想处理信号必须进入内核，用户调用系统函数，系统函数很多都可以进入内核<br>可以进系统内核的函数有哪类：<br><code>read write  sigprocmask printf</code>  I/O操作 sleep(1)里边调用alarm可以进入内核 阻塞的函数都可以进入内核<br>注意：</p>
+<ol>
+<li>谁调用回调函数，就回到谁的位置:比如：4运行完返回内核，5调用完返回到用户中断处</li>
+<li>函数调用最终要压栈，函数完成之后要弹栈 弹到调用者的位置。</li>
+<li>信号有一定延时性</li>
+</ol>
+<ul>
+<li> <img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B76.png" alt="avatar">  </li>
+</ul>
+</li>
+<li><p>进程间通讯不要用信号，但是信号可以实现两个进程之间通讯<br>主要是用到信号的两个函数：signal函数，sigaction函数，然后写个信号处理函数，函数中完成数据库断开链接、释放资源、收到异常信号退出进程<br>阻塞函数（sleep alarm）遇到信号之后都会被中断<br>被信号中断都会产生错误：EINTR interrupted function call<br>SIGCHLD函数中要将SIGCHLD信号阻塞写在前边，防止sigaction完成注册以前全部退出</p>
+</li>
+<li><p>信号集<br>数据集它的变量是sigset_t数据类型变量是用typedef定义的，可以想象成int<br>未决信号集那个框就是sigset_t变量，它里边有很多位，每个位上只有两种值0(没有)、1(有)<br>涉及到位操作只有0,1两种值<br>sigset_t类型是unsigned long int，其中int四个字节，long int 8个字节 64位，kill -l 显示正好64种信号 一位一编号<br>信号阻塞期间信号产生多次，当解开阻塞后，信号只处理一次，不支持排队<br>信号集存在内核中的PCB中。<br>信号集相关函数：  </p>
+<pre><code class="c">  int sigemptyset(sigset_t *set);
+  int sigfillset(sigset_t *set);    
+  int sigaddset(sigset_t *set, int signum);    
+  int sigdelset(sigset_t *set, int signum);    
+  int sigismember(const sigset_t *set, int signum);
+</code></pre>
+<p>  以上函数都是在栈上操作的<br>  sigprocmask函数：  操作的内核<br>  函数说明：用来屏蔽信号、解除屏蔽也使用该函数。其本质，读取或修改进程控制块中的信号屏蔽字（阻塞信号集）<br>  函数参数：set传入参数<br>  sigpending函数：<br>  函数说明：读取当前进程的未决信号集；将内核中的未决信号集拷贝出来，拷贝到栈上的 sigset_t set中<br>  函数参数：set传出参数。<br>  要想使用信号集，第一步先定义sigset_t类型变量  </p>
+<ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/%E4%BF%A1%E5%8F%B77.png" alt="avatar"></li>
+</ul>
+</li>
+<li><p>信号捕捉函数： ***主要是用到信号的两个函数<br>signal函数：<br>sigaction函数：<br>特别需要注意的是：The signals SIGKILL and SIGSTOP cannot be caught, blocked, or ignored.<br>typedef void (*sighandler_t)(int); //定义函数指针 可以作为回调函数<br>函数原型：int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);<br>函数参数：<br>signum：捕捉的信号<br>act：    传入参数，新的处理方式。<br>oldact： 传出参数，旧的处理方式    </p>
+<pre><code class="c">struct sigaction &#123;
+    void  (*sa_handler)(int);    // 信号处理函数
+    sigset_t  sa_mask; //信号处理函数执行期间需要阻塞的信号
+    int      sa_flags; //通常为0，表示使用默认标识
+&#125;;
+</code></pre>
+<p>   注意：  </p>
+<ol>
+<li>在xxx信号处理函数执行期间，若xxx信号再次产生多次，则信号处理函数不会被打断，当信号处理函数执行完成之后，后来产生的信号只会被处理一次，信号不支持排队</li>
+<li>在xxx信号处理函数执行期间（前提是sa_mask中阻塞了yyy信号）,若收到了yyy信号，则yyy信号会被阻塞,当xxx信号处理函数执行完毕后，则yyy信号会被处理一次。</li>
+<li>在xxx信号处理函数执行期间（前提是sa_mask中没有阻塞yyy信号）,若收到了yyy信号，会先执行yyy信号</li>
+</ol>
+</li>
+<li><p>sigprocmask函数将信号添加到阻塞信号集中<br>代表进程已经阻塞掉添加的信号到未决信号集中，暂时不需要处理<br>sigaction函数通过sigemptyset或者sigaddset函数将信号存在sigset_t (64位)中<br>然后阻塞信号处理函数执行期间要阻塞的信号<br>这两种都不支持排队<br>avoid避免<br>top命令查看 cpu状态<br>定义在栈上变量不初始化就是随机值<br>定义在全局或者staitc变量默认为零<br>所以栈上定义一个值 开始不用，可以先等于NULL</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/" data-id="ckp3bili800004sueafrj269d" data-title="Linux系统编程-信号" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux网络编程-高并发服务器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">守护进程-线程-网络基本概念</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

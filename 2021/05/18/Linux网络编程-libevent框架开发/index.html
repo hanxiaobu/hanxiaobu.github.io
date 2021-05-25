@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux网络编程-libevent框架开发 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="libevent框架开发 编写一个基于event实现的tcp服务器：  1234567891011121314151617181920212223242526272829303132333435363738394041424344451 创建socket---socket()2 设置端口复用---setsocketopt(lfd, SOL_SOCKET, SO_REUSEADDR, &amp;op">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux网络编程-libevent框架开发">
+<meta property="og:url" content="http://example.com/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="libevent框架开发 编写一个基于event实现的tcp服务器：  1234567891011121314151617181920212223242526272829303132333435363738394041424344451 创建socket---socket()2 设置端口复用---setsocketopt(lfd, SOL_SOCKET, SO_REUSEADDR, &amp;op">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/libevent.png">
+<meta property="og:image" content="http://example.com/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/libevent1.png">
+<meta property="og:image" content="http://example.com/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/libevent2.png">
+<meta property="article:published_time" content="2021-05-18T13:56:35.476Z">
+<meta property="article:modified_time" content="2021-05-18T14:25:56.115Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/libevent.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux网络编程-libevent框架开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/" class="article-date">
+  <time class="dt-published" datetime="2021-05-18T13:56:35.476Z" itemprop="datePublished">2021-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux网络编程-libevent框架开发
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="libevent框架开发"><a href="#libevent框架开发" class="headerlink" title="libevent框架开发"></a>libevent框架开发</h2><ol>
+<li>编写一个基于event实现的tcp服务器：  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 创建socket---socket()</span><br><span class="line"><span class="number">2</span> 设置端口复用---setsocketopt(lfd, SOL_SOCKET, SO_REUSEADDR, &amp;opt, <span class="keyword">sizeof</span>(<span class="keyword">int</span>))</span><br><span class="line"><span class="number">3</span> 绑定---bind()</span><br><span class="line"><span class="number">4</span> 设置监听---listen()</span><br><span class="line"><span class="number">5</span> 创建地基</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> *<span class="title">base</span> =</span> event_base_new();</span><br><span class="line"><span class="number">6</span> 创建lfd对应的事件</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">event</span> *<span class="title">ev</span> =</span> event_new(base, lfd, EV_READ | EV_PERSIST, conncb, base);</span><br><span class="line"><span class="number">7</span> 上event_base地基</span><br><span class="line">   event_add(ev, <span class="literal">NULL</span>);</span><br><span class="line"><span class="number">8</span> 进入事件循环   event_base_dispatch里边一定调用epoll_wait </span><br><span class="line">   event_base_dispatch(base);</span><br><span class="line"><span class="number">9</span> 释放资源</span><br><span class="line">   event_base_free(base);</span><br><span class="line">   event_free(ev);</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*event_callback_fn)</span><span class="params">(<span class="keyword">evutil_socket_t</span> fd, <span class="keyword">short</span> event, <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"><span class="comment">//监听文件描述符对应的事件回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">conncb</span><span class="params">(<span class="keyword">evutil_socket_t</span> fd, <span class="keyword">short</span> event, <span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">event_base</span> * <span class="title">base</span> =</span> (struct event_base *)arg;</span><br><span class="line">   <span class="comment">//接收新的连接</span></span><br><span class="line">   <span class="keyword">int</span> cfd = accept(fd, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">   <span class="keyword">if</span>(cfd&gt;<span class="number">0</span>)</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="comment">//创建一个新的事件</span></span><br><span class="line">      <span class="class"><span class="keyword">struct</span> <span class="title">event</span> *<span class="title">ev</span> =</span>event_new(base, cfd, EV_READ|EV_PERSIST, readcb, <span class="literal">NULL</span>);</span><br><span class="line">      event_add(ev, <span class="literal">NULL</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//读取客户端数据对应的回调函数  为什么没有写在while中是因为 read是阻塞函数 </span></span><br><span class="line"><span class="comment">//一直写的话其他事件得不到响应</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readcb</span><span class="params">(<span class="keyword">evutil_socket_t</span> fd, <span class="keyword">short</span> event, <span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="comment">//读数据</span></span><br><span class="line">   n = read(fd, buf, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">   <span class="keyword">if</span>(n&lt;=<span class="number">0</span>)</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="comment">//从base地基上删除该事件</span></span><br><span class="line">      close(fd);</span><br><span class="line">      event_del(ev);</span><br><span class="line">      event_free(ev);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//发送数据给对方</span></span><br><span class="line">   write(fd, buf, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!signal_event || event_add(signal_event, <span class="literal">NULL</span>)&lt;<span class="number">0</span>) </span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Could not create/add a signal event!\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;<span class="comment">//这个条件的意思是先执行 event_add(signal_event, NULL)，然后再判断</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="comment">//函数前加static表示只能本机使用</span></span><br><span class="line">listener_cb(struct evconnlistener *listener, <span class="keyword">evutil_socket_t</span> fd,</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span></span><br><span class="line">conn_writecb(struct bufferevent *bev, <span class="keyword">void</span> *user_data)</span><br><span class="line">&#123;</span><br><span class="line">	struct evbuffer *output = bufferevent_get_output(bev);</span><br><span class="line">	<span class="keyword">if</span> (evbuffer_get_length(output) == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;flushed answer\n&quot;</span>);</span><br><span class="line">		<span class="comment">//bufferevent_free(bev);</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="comment">//不应该在写回调事件里往buffer事件里写，由于往bufferevent中写才会触发写回调</span></span><br><span class="line"><span class="comment">//写事件回调在后，写bufferevent在前</span></span><br></pre></td></tr></table></figure></li>
+<li>bufferevent的读事件回调触发时机:<br>当数据由内核的读缓冲区到bufferevent的读缓冲区的时候, 会触发bufferevent的<br>读事件回调.需要注意的是: 数据有内核到bufferevent的过程不是用户程序执行的,<br>是有bufferevent内部操作的.<br>bufferevent的写事件回调触发时机:<br>当用户程序将数据写到bufferevent的写缓冲区之后, bufferevent会自动将数据<br>写到内核的写缓冲区,最终有内核程序将数据发送出去.<br>事件回调:<br>当bufferevent绑定的socket连接, 断开或者异常的时候触发事件回调.<br>bufferevent绑定文件描述符一般是cfd，evconnlistenter_new函数绑定的lfd，然后将lfd隐藏<br>bufferevent_socket_connect函数内部已经将buffer缓冲区和通信描述符进行绑定</li>
+<li>框架和库的区别：框架提供了一整套的开发流程，按照流程来就可以。但是库仅仅是函数怎么用，怎么用取决于自己。<br>但是想用框架必须按照框架的流程来，框架也提供很多函数，那些也是库<br>使用libevent库编写代码在编译程序的时候需要指定库名:-levent;<br>read write send 都是操作内存缓冲区，不是发送数据，发送数据是内核行为<br>一关闭文件描述符就会刷新缓冲区<br>libevent源码安装需要编译</li>
+<li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> **p=event_get_supported_methods();</span><br><span class="line">  <span class="keyword">while</span>(p[i]!=<span class="literal">NULL</span>)</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%s \t&quot;</span>,p[i++]);     </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);<span class="comment">//其中p[i]代表*p，由于函数名就是函数地址</span></span><br></pre></td></tr></table></figure></li>
+<li>bufferevent和链接监听器代码流程图<br><img src="/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/libevent.png" alt="avatar"><h2 id="web服务器开发"><a href="#web服务器开发" class="headerlink" title="web服务器开发"></a>web服务器开发</h2></li>
+<li>web服务器开发流程：  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 创建socket，得到监听文件描述符lfd---socket()</span><br><span class="line"><span class="number">2</span> 设置端口复用-----setsockopt()</span><br><span class="line"><span class="number">3</span> 绑定-----bind()</span><br><span class="line"><span class="number">4</span> 设置监听----listen()</span><br><span class="line"><span class="number">5</span> 创建epoll树，得到树根文件描述符---epfd --epoll_create()</span><br><span class="line"><span class="number">6</span> 将监听文件描述符lfd上树----epoll_ctl(epfd, EPOLL_CTL_ADD...)</span><br><span class="line"><span class="number">7</span> <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">      <span class="comment">//等待事件发生</span></span><br><span class="line">      nready = epoll_wait();</span><br><span class="line">      <span class="keyword">if</span>(nready&lt;<span class="number">0</span>)</span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">if</span>(errno==EINTR)</span><br><span class="line">         &#123;<span class="keyword">continue</span>;&#125;<span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//下面是有事件发生，循环处理每一个文件描述符</span></span><br><span class="line">      <span class="keyword">for</span>(i = <span class="number">0</span>; i&lt;nready; i++)</span><br><span class="line">      &#123;</span><br><span class="line">         socked = event[i].data.fd;</span><br><span class="line">         <span class="comment">//有客户端链接请求到来</span></span><br><span class="line">         <span class="keyword">if</span>(socked ==lfd)</span><br><span class="line">         &#123;</span><br><span class="line">             <span class="comment">//接收新的客户端连接请求</span></span><br><span class="line">             cfd = accept();</span><br><span class="line">             <span class="comment">//将新的cfd上epoll树</span></span><br><span class="line">             epoll_ctl(epfd, EPOLL_CTL_ADD...);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">         &#123;</span><br><span class="line">             <span class="comment">//接受数据并处理</span></span><br><span class="line">             http_request(cfd);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">http_request</span><span class="params">(<span class="keyword">int</span> cfd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="comment">//读取请求行</span></span><br><span class="line">   ReadLine();</span><br><span class="line">   <span class="comment">//分析请求行，得到要请求的资源文件file</span></span><br><span class="line">       如：GET /hanzi.c /HTTP1<span class="number">.1</span></span><br><span class="line">   <span class="comment">//循环读完剩余的内核缓冲区的数据</span></span><br><span class="line">     <span class="keyword">while</span>((ReadLine())&gt;<span class="number">0</span>)</span><br><span class="line">   <span class="comment">//判断文件释放存在</span></span><br><span class="line">   stat();</span><br><span class="line">   <span class="number">1</span> 文件不存在 返回错误页：</span><br><span class="line">      组织应答消息：http响应格式消息+错误页正文内容</span><br><span class="line">   <span class="number">2</span> 文件存在：判断文件类型：</span><br><span class="line">      <span class="number">2.1</span>普通文件：http响应格式消息+消息正文</span><br><span class="line">      <span class="number">2.2</span>目录文件：http响应格式消息+html格式文件内容</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>***字符和数字之间可以转换 根据ASCII码<br>***字符char最大就是255<br>%E8%8B%A6%E7%93%9C是字符串 “苦瓜”<br>一个汉字在utf-8中占三个字节<br>E8 8B A6是字符串，其中6个字符占6个字节 需要转成3个字符16进制存到内存中<br>E8是两个字符占两个字节,但是E8两个字符却表示一个十六进制<br>首先把两个字符表示的16进制转成1个十进制数字，在把这个数字转成16进制  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">e8 = <span class="number">14</span>*<span class="number">16</span>+<span class="number">8</span>*<span class="number">1</span></span><br><span class="line">  = （<span class="string">&#x27;e&#x27;</span>-<span class="string">&#x27;a&#x27;</span>+<span class="number">10</span>）*<span class="number">16</span>+<span class="string">&#x27;8&#x27;</span>-<span class="string">&#x27;0&#x27;</span></span><br><span class="line">  =   <span class="number">232</span>  </span><br><span class="line"><span class="comment">//转换汉字编码   ：strdecode(pFile, pFile);</span></span><br></pre></td></tr></table></figure></li>
+<li>http请求消息格式说明：<ol>
+<li>请求头：如GET /aaa.txt HTTP/1.1</li>
+<li>请求行：键值对</li>
+<li>空行：\r\n</li>
+<li>请求内容</li>
+</ol>
+get 和 post的区别：<br>请求头get 和 post 请求都是请求资源,而且都会提交数据,如果提交密码信息用get请求,<br>就会明文显示,而post则不会显示出涉密信息.<br>http响应消息格式说明：<ol>
+<li>响应头：HTTP/1.1 200 OK</li>
+<li>响应行：键值对<br>content-type<br>Content-Length：要有就必须是正确的文件大小，要么写0</li>
+<li>空行：\r\n</li>
+<li>响应消息正文<br>//C++中查找文件类型的函数 map C语言中的结构体  根据jpg找 image/jpeg<br>//switch 后边不能是字符串 可以是整型 字节<br><img src="/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/libevent1.png" alt="avatar"></li>
+</ol>
+</li>
+<li>案例整体功能介绍：<br>先打开浏览器，然后输入<a target="_blank" rel="noopener" href="http://192.168.10.143:9999/hanzi.c">http://192.168.10.143:9999/hanzi.c</a><br>通过案例演示联想到的知识点：<ol>
+<li>开发网络服务器：  <ul>
+<li>多IO复用技术：epoll poll select</li>
+<li>多进程或者多线程</li>
+<li>第三方库：libevent库</li>
+</ul>
+</li>
+<li>熟悉http协议：<ul>
+<li>请求协议</li>
+<li>应答协议</li>
+</ul>
+</li>
+<li>使用的协议有http协议+TCP协议<ul>
+<li>TCP协议：建立连接的三次握手，连接建立完成后接着是数据传输</li>
+<li>web服务器：首先解析浏览器发来的请求视频，得到请求的文件名</li>
+<li>若文件存在，<ul>
+<li>判断文件类型：若是普通文件：则发送文件内容给浏览器；</li>
+<li>若是目录文件，则发送文件列表</li>
+<li>若文件不存在，则发送一个错误页给浏览器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> buf[<span class="number">1000</span>];</span><br><span class="line"><span class="built_in">memset</span>(buf,<span class="number">0</span>,<span class="number">1000</span>);</span><br><span class="line"><span class="built_in">sprintf</span>(buf,<span class="string">&quot;POST&quot;</span>);<span class="comment">//buf==&quot;POST&quot;  指针移动到数组的第四个字符</span></span><br><span class="line"><span class="built_in">sprintf</span>(buf+<span class="built_in">strlen</span>(buf),<span class="string">&quot;page&quot;</span>);<span class="comment">//buf==&quot;POSTpage&quot; 指针移动到数组的第八个字符</span></span><br><span class="line"><span class="built_in">sprintf</span>(buf+<span class="built_in">strlen</span>(buf),<span class="string">&quot;HTTP/1.0\r\n&quot;</span>);<span class="comment">//buf==&quot;POSTpageHTTP/1.0\r\n&quot;</span></span><br><span class="line"><span class="built_in">sscanf</span>(buf, <span class="string">&quot;%[^ ] %[^ ] %[^ \r\n]&quot;</span>,reqType, fileName, protocal);</span><br><span class="line"><span class="comment">//从buf中取指定长度的字符串到reqType fileName protocal中</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sprintf</span><span class="params">( <span class="keyword">char</span> *buffer, <span class="keyword">const</span> <span class="keyword">char</span> *format [, argument] … )</span></span>;</span><br><span class="line"><span class="comment">//把格式化的数据写入某个字符串</span></span><br><span class="line">超链接链表中</span><br><span class="line"><span class="built_in">sprintf</span>(buffer, <span class="string">&quot;&lt;li&gt;&lt;a href=%s&gt; %s &lt;/a&gt;&lt;/li&gt;&quot;</span>, </span><br><span class="line">namelist[num]-&gt;d_name, namelist[num]-&gt;d_name);</span><br><span class="line"><span class="comment">//这个是获取文件   如果拼的是目录需要在%s后边加&quot;/&quot;</span></span><br><span class="line"><span class="built_in">sprintf</span>(buffer, <span class="string">&quot;&lt;li&gt;&lt;a href=%s/&gt; %s &lt;/a&gt;&lt;/li&gt;&quot;</span>, </span><br><span class="line">namelist[num]-&gt;d_name, namelist[num]-&gt;d_name);</span><br></pre></td></tr></table></figure>
+<img src="/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/libevent2.png" alt="avatar"></li>
+<li>守护进程讲了 切换目录  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//改变当前进程的工作目录</span></span><br><span class="line">	<span class="keyword">char</span> path[<span class="number">255</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="built_in">sprintf</span>(path,<span class="string">&quot;%s/%s&quot;</span>,getenv(<span class="string">&quot;HOME&quot;</span>),<span class="string">&quot;webpath&quot;</span>);</span><br><span class="line">	chdir(path);</span><br><span class="line">   echo $HOME 获取环境变量  getenv()函数 /home/xiaobu</span><br><span class="line">   env 表示环境变量 其中PWD=/home/xiaobu 等号左边叫名字右边叫值</span><br><span class="line">   <span class="comment">//其中HOME在linux和unix中都用 表示用户的家目录</span></span><br><span class="line">   ```  </span><br><span class="line">   访问目录有三个函数就是  opendir closedir readdir ***scandir</span><br><span class="line"><span class="number">7.</span> 实际开发中 要先搞通整个流程 再有时间抠细节  </span><br><span class="line">   xml和html区别就是xml可以自己定义  </span><br><span class="line">   json键值对格式 ，<span class="built_in">map</span>键值对格式，其中键不能重复  </span><br><span class="line">   \r\n 表示换行  \r表示移到这一行的末尾， \n表示换行  </span><br><span class="line">   DNS域名服务器是用来解析外网域名的，IE先解析域名找到对应ip然后操作  </span><br><span class="line">   应用层协议：ssh协议 ftp协议 telnet协议 邮件协议 http协议  </span><br><span class="line">   ``serv_addr.sin_addr.s_addr = INADDR_ANY;``  </span><br><span class="line">   其中INADDR_ANY宏的值是<span class="number">0</span>，做不做大小端转换都是<span class="number">0</span>  </span><br><span class="line">   stat函数参数第一个是路径 第二个是一个输出参数 变化的东西都需要传入参数  </span><br><span class="line">   %s 可以代表字符串首地址  </span><br><span class="line">   ```c</span><br><span class="line">   <span class="keyword">for</span>循环中<span class="keyword">if</span>中如果有<span class="keyword">continue</span>，等价于<span class="keyword">if</span> <span class="keyword">else</span></span><br><span class="line">   <span class="keyword">for</span>()</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="keyword">if</span>()&#123;<span class="keyword">continue</span>;&#125;</span><br><span class="line">      <span class="keyword">if</span>()&#123;<span class="string">&quot;文件内容&quot;</span>&#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>()</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="keyword">if</span>()&#123;&#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;<span class="string">&quot;文件内容&quot;</span>&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">va_start(ap, outfmt);</span><br><span class="line">     <span class="built_in">vfprintf</span>(msgfile, outfmt, ap);</span><br><span class="line">     va_end(ap);</span><br><span class="line"><span class="comment">//处理可变参数</span></span><br></pre></td></tr></table></figure></li>
+<li>知识点归纳:  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 网络通信.</span><br><span class="line">	socket API函数: socket bind listen accept read | recv send write</span><br><span class="line">	三次握手和四次挥手</span><br><span class="line">	TCP协议</span><br><span class="line">	服务端开发: </span><br><span class="line">		服务端的基本开发流程:</span><br><span class="line">			<span class="number">1</span> socket</span><br><span class="line">			<span class="number">2</span> setsockopt</span><br><span class="line">			<span class="number">3</span> bind</span><br><span class="line">			<span class="number">4</span> listen</span><br><span class="line">			<span class="number">5</span> <span class="keyword">while</span>(<span class="number">1</span>) &#123;	 &#125;</span><br><span class="line">		客户端的基本开发流程:</span><br><span class="line">			<span class="number">1</span> socket</span><br><span class="line">			<span class="number">2</span> connect</span><br><span class="line">			<span class="number">3</span> <span class="keyword">while</span>(<span class="number">1</span>) &#123;write();read();&#125;	     </span><br><span class="line">		多进程</span><br><span class="line">		多线程</span><br><span class="line">		多路复用技术: select poll epoll</span><br><span class="line">		多路IO复用与多线程或者多进程结合使用</span><br><span class="line">		第三方库: libevent</span><br><span class="line"><span class="number">2</span> 报文编解码</span><br><span class="line"><span class="number">3</span> 进程间通信    pipe fifo mmap 本地套接字  网络套接字  共享内存</span><br><span class="line"><span class="number">4</span> 数据库操作相关知识点    oracle的occi库</span><br><span class="line"><span class="number">5</span> QT相关</span><br><span class="line"><span class="number">6</span> 守护进程的创建步骤</span><br><span class="line"><span class="number">7</span> 信号相关知识点    SIGUSR1 SIGUSR2    signal   sigaction </span><br><span class="line"><span class="number">8</span> shell编程相关</span><br><span class="line"><span class="number">9</span> 加密算法相关</span><br><span class="line"><span class="number">10</span> 多线程开发</span><br><span class="line"><span class="number">11</span> c++基础的概念    封装 继承  多态</span><br><span class="line">     多态的三个条件：父类的虚方法 子类得继承  父类的指针或者引用指向子类对象</span><br><span class="line">-------------------------------------</span><br><span class="line">子系统划分:</span><br><span class="line"><span class="number">1</span> 秘钥协商客户端子系统</span><br><span class="line"><span class="number">2</span> 秘钥协商服务端子系统</span><br><span class="line"><span class="number">3</span> 客户端信息注册报备图形化界面系统</span><br><span class="line">模块划分:</span><br><span class="line"><span class="number">1</span> 报文编解码模块</span><br><span class="line"><span class="number">2</span> 网络通信模块</span><br><span class="line"><span class="number">3</span> 共享内存操作模块</span><br><span class="line"><span class="number">4</span> 数据库操作模块</span><br><span class="line"><span class="number">5</span> 外联接口</span><br></pre></td></tr></table></figure></li>
+<li>加密三要素:<br>(秘钥+加密算法)+明文==&gt;密文  (秘钥+解码算法)+密文==&gt;明文<br>加密<br>明文: 123456<br>算法: a+秘钥<br>秘钥是: 222222<br>密文: 345678<br>解密:<br>密文: 345678<br>算法: a-秘钥<br>秘钥是: 222222<br>明文: 123456<br>加密算法:  <pre><code class="c">1 对称加密算法
+    DES 3DES AES
+2 非对称加密
+    RSA
+3 哈希算法
+    哈希算法不是用来加密的, 因为不可逆
+    SHA1 SHA2  MD4 MD5 HMAC      
+</code></pre>
+33b3bc8e05b4fcc16bd531dd9adac166<br>所谓的加密算法就是为了防止客户端发送到服务端的数据被中途篡改</li>
+<li>源码的安装一般由有这三个步骤：<br>配置(configure)、编译(make)、安装(make install)<br>./config   //生成makefile还可以检查文件<br>make    //把源码编译成库文件和可执行文件<br>make test       （可选）<br>make install     (使用管理员权限执行该命令)<br>报错：  <ol>
+<li>解决openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory错误<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xyb930826/p/6077348.html">https://www.cnblogs.com/xyb930826/p/6077348.html</a>  </li>
+<li>关于执行locate时报错“locate: can not stat () `/var/lib/mlocate/mlocate.db’: No such file or directory”的处理<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/hzlwoshifanren/article/details/53381103">https://blog.csdn.net/hzlwoshifanren/article/details/53381103</a>  </li>
+<li>错误：只允许在 C99 模式下使用‘for’循环初始化声明 用gcc编译出现<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wojiuguowei/article/details/82788535">https://blog.csdn.net/wojiuguowei/article/details/82788535</a></li>
+</ol>
+</li>
+<li>1 该项目的使用场合?<br>涉及到网络数据传输的对数据传输安全有需求的, 就需要对数据进行加密;<br>加密就需要用到秘钥, 秘钥如何产生? —-&gt; 就用到了秘钥协商系统.<br>秘钥协商服务系统就是用来生成秘钥的, 该秘钥是对称秘钥.<br>2 大的项目需要划分成几个小的子系统, 子系统可以进一步划分成模块,<br>每个模块可以实现多种功能, 各个模块之间也有相互协作.<br>3 秘钥协商服务系统总体流程说明:  <ul>
+<li>客户端发起秘钥协商的请求, 发送给服务端的随机字符串为abc</li>
+<li>服务端收到客户端的随机字符串之后, 自己也生成一个随机字符串123, 且将123发送给客户端;</li>
+<li>服务端将abc123作为生成秘密的原材料, 通过使用某种算法生成一个新的秘钥</li>
+<li>客户端收到服务端发送的123之后, 也进行组合abc123, 也使用与服务端相同的算法, 也生成新的秘钥(这个秘钥应该与服务端生成的秘钥一样)</li>
+<li>当客户端和服务端都生成秘钥之后, 可以通过秘钥校验验证客户端和服务端生成的秘钥是否一致.</li>
+<li>客户端将秘钥写入共享内存, 服务端将秘钥写入共享内存.</li>
+</ul>
+</li>
+<li>为什么要用客户端和服务器之间协商生成密钥？ 原理：两者的对称加密<br>那么：直接随机生成一个固定的数字然后加密给不同的两个站点也可以<br>但是：1 主要是这个平台支持多端，相当于不同的客户端，所以用客户端和服务端协商密钥<br>2 不同站点对应不同的端。每两个站点组合生成密钥，分别把相同密钥存在两端<br>这个密钥系统会提供一个接口给第三方 防止内存误操作</li>
+<li>windows环境下测试openssl库函数:<br>1 包含库函数所在头文件路径  相当于linux下添加库文件 -I （大i）<br>2 包含库文件所在路径            相当于linux下添加库文件 -L<br>3 具体包含的库文件的名字      相当于linux下添加库文件 -l（小L）<br>添加方法：项目上右键(不是解决方案上)属性-&gt;VC++目录中包含目录和库目录<br>属性-&gt;链接器-&gt;输入-&gt;附加依赖项</li>
+<li>free -m 看看内存大小<br>Redhat7使用CentOS7的Yum源<br><a target="_blank" rel="noopener" href="https://blog.51cto.com/sky9896/2312007">https://blog.51cto.com/sky9896/2312007</a><br>bash代表一个进程 bashrc代表一个配置文件<br>！！！整个系统最重要的就是客户端给服务端发送的哈希值不被篡改就可以<br>因为即便获取到了也没用，因为客户端给服务端发送的是一半，服务端也给我服务端发自己的一半<br>即便两者都被获取到了 我们用的也不是哈希值，用的是哈希的头部<br>接口：就是按照我的规定去执行 访问我指定的数据和我指定的方法</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/" data-id="ckp3biliq00084suefg8k8hwi" data-title="Linux网络编程-libevent框架开发" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux网络编程-高并发服务器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

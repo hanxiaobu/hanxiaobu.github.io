@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux系统编程 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux系统编程1  gdb调试：gdb是在程序运行的结果与预期不符合的时候，可以使用gdb进行调试，特别注意的是：使用gdb调试需要在编译的时候加-g参数。（在调试的时候就可以看到源代码）gcc -g -c hello.c    &#x2F;&#x2F;-g用的时候和-c一起用 生成.o文件gcc -o hello hello.o &#x2F;&#x2F;如果通过.o文件生成可执行文件时，添加-g文件看不懂二进制gdb有点像小型的s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统编程">
+<meta property="og:url" content="http://example.com/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux系统编程1  gdb调试：gdb是在程序运行的结果与预期不符合的时候，可以使用gdb进行调试，特别注意的是：使用gdb调试需要在编译的时候加-g参数。（在调试的时候就可以看到源代码）gcc -g -c hello.c    &#x2F;&#x2F;-g用的时候和-c一起用 生成.o文件gcc -o hello hello.o &#x2F;&#x2F;如果通过.o文件生成可执行文件时，添加-g文件看不懂二进制gdb有点像小型的s">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B1.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B2.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B3.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B4.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B8.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B9.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B10.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B11.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B12.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B13.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B14.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B24.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B25.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B26.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B27.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B28.png">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B29.png">
+<meta property="article:published_time" content="2021-05-16T07:09:49.292Z">
+<meta property="article:modified_time" content="2021-05-17T00:34:48.648Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux系统编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2021-05-16T07:09:49.292Z" itemprop="datePublished">2021-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux系统编程
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux系统编程1"><a href="#Linux系统编程1" class="headerlink" title="Linux系统编程1"></a>Linux系统编程1</h2><ol>
+<li><ol>
+<li>gdb调试：<br>gdb是在程序运行的结果与预期不符合的时候，可以使用gdb进行调试，<br>特别注意的是：使用gdb调试需要在编译的时候加-g参数。（在调试的时候就可以看到源代码）<br><code>gcc -g -c hello.c    //-g用的时候和-c一起用 生成.o文件</code><br><code>gcc -o hello hello.o //如果通过.o文件生成可执行文件时，添加-g文件看不懂二进制</code><br>gdb有点像小型的shell，里边也有命令<br>启动gdb：<br><code>gdb program（./main）set args hello world </code><br><code>show args</code>  </li>
+<li>执行程序：<br>run 会在第一个断点处停下来<br>start 会在第一条语句处(；)停下来</li>
+<li>list：<br>list(可以用“l”简写)显示源代码 只显示10行<br>list fun  list main 查看main函数<br>list linenum   list 1 回到第一行<br>list file linenum   list fun1.c：1 进入fun1.c函数中的第一行<br>list - 显示当前文件开始处的源程序。<br>set listsize count：设置一次显示源代码的行数。<br>show listsize：查看当前listsize的设置。<br>enter执行刚刚执行过的命令</li>
+<li>断点操作<br>break 设置断点, 可以简写为b<br>b linenum<br>b func<br>b file:linenum<br>b file:func<br>info break 简写 i b  查询所有断点<br>disable  m n | m-n<br>enable m n | m-n<br>delete m n | m-n   d 后边什么都不写就是删除所有<br>b test.c:9 if intValue == 5 条件断点</li>
+<li>调试命令：<br>run 运行程序, 可简写为r<br>next 单步跟踪, 函数调用当作一条简单语句执行, 可简写为n<br>step 单步跟踪, 函数调进入被调用函数体内, 可简写为s<br>finish 退出进入的函数, 如果出不去, 看一下函数体中的循环中是否有断点，如果有删掉，或者设置无效<br>until 跳出循环 在一个循环体内单步跟踪时, 这个命令可以运行程序“直到退出循环体”,可简写为u,<br>如果出不去, 看一下函数体中的循环中是否有断点，如果有删掉，或者设置无效<br>continue 继续运行程序, 可简写为c(若有断点则跳到下一个断点处)<br>print var 打印变量值</li>
+<li>自动显示（需要执行才能看见）<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">display  var</span><br><span class="line">info display</span><br><span class="line">disable display m n | m-n </span><br><span class="line">enable display m n | m-n</span><br><span class="line"><span class="keyword">delete</span> display  m n | m-n</span><br><span class="line">undisplay m n | m-n</span><br></pre></td></tr></table></figure></li>
+<li>查看变量的名字<br><code>ptype argv</code><br><code>type=char **</code><br><code>p width --打印变量width 的值$4 = 13</code><br>你可以使用set var命令来告诉GDB, width不是你GDB的参数, 而是程序的变量名, 如：<code>set var width=47  // 将变量var值设置为47</code></li>
+<li>gdb调试适合单进程，不适合多线程.gdb退出不是exit 是Quit</li>
+<li>*gdb适合单进程 如果多线程或者多进程 就很复杂（属于命令行）<br>vs中通过断点调试，可以把变量值打开，可以查地址（属于图形化界面）<br>！！！最牛逼的调试方式就是：打印日志，要打印到文件中，方便查看<br>args是arguments 参数的复数(名词复数)的缩写<br>argc默认的值是1，就是自己  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;this is main!\n&quot;</span>);</span><br><span class="line">   	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">   	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;argc; i++)</span><br><span class="line">   	&#123;</span><br><span class="line">   		<span class="built_in">printf</span>(<span class="string">&quot;[%d]:[%s]\n&quot;</span>, i, argv[i]);</span><br><span class="line">   	&#125;</span><br><span class="line">       fun1();</span><br><span class="line">       fun2();</span><br><span class="line">   	<span class="built_in">printf</span>(<span class="string">&quot;sum(10)==[%d]\n&quot;</span>, sum(<span class="number">10</span>));</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
+<li>c 文件的编译用gcc c++文件的编译用g++<br>gcc编译程序时，</li>
+</ol>
+<ul>
+<li>编译成可执行程序 </li>
+<li>编译成库文件 </li>
+<li>编译成.o文件（属于库文件）<br>tab键是一个字符</li>
+</ul>
+</li>
+<li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;argc; i++)</span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;[%d]:[%s]\n&quot;</span>, i, argv[i]);</span><br><span class="line">&#125;<span class="comment">//打印main函数的命令行参数，其中i=0</span></span><br></pre></td></tr></table></figure>
+<img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B1.png" alt="avatar"></li>
+<li>makefile：<br>makefile文件是用来管理项目工程文件，通过执行make命令，make就会解析并执行makefile文件<br>makefile命名：makefile 或者Makefile<br>makefile的编写：<br>规则：<br>目标：依赖(条件)<br>(tab)命令<br>这命令会将依赖生成目标<br>第一个版本：    <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  main：main.c fun1.c fun2.c sum.c</span><br><span class="line">gcc -o main main.c fun1.c fun2.c sum.c</span><br></pre></td></tr></table></figure>
+缺点：改其中一个文件(main.c) 所有文件都需要重新编译<br>第二个版本：     <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  main：main.o fun1.o fun2.o sum.o</span><br><span class="line">gcc -o main mian.o fun1.o fun2.o sum.o</span><br><span class="line">  <span class="comment">//生成main.o的规则</span></span><br><span class="line">  main.o：main.c</span><br><span class="line">  	gcc -c main.c -I./</span><br><span class="line">  fun1.o：fun1.c</span><br><span class="line">  	gcc -c fun1.c </span><br><span class="line">  fun2.o：fun2.c</span><br><span class="line">  	gcc -c fun2.c </span><br><span class="line">  sum.o：sum.c</span><br><span class="line">  	gcc -c sum.c </span><br></pre></td></tr></table></figure>
+检查规则：<br>要想生成目标文件，先要检查依赖条件是否都存在：<br>若都存在，则比较目标时间和依赖的时间，如果依赖时间比目标时间新，<br>则重新生成目标；否则不重新生成<br>若不存在，则往下找有没有生成依赖的规则，有则生成，如果没有则报错。<br>//touch可以更新文件最后修改时间<br>缺点: 冗余, 若.c文件数量很多, 编写起来比较麻烦.<br>第三个版本：   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">target=main</span><br><span class="line">objects=main.o fun1.o fun2.o sum.o</span><br><span class="line">CC=gcc</span><br><span class="line">CPPFLAGS=-I./</span><br><span class="line">$(target)：$(objects)</span><br><span class="line">	$(CC) -o main $(objects)</span><br><span class="line">main.o：main.c</span><br><span class="line">	$(CC)  -c main.c $(CPPFLAGS)</span><br><span class="line">fun1.o：fun1.c</span><br><span class="line">	$(CC)  -c fun1.c </span><br><span class="line">fun2.o：fun2.c</span><br><span class="line">	$(CC) -c fun2.c </span><br><span class="line">sum.o：sum.c</span><br><span class="line">	$(CC)  -c sum.c </span><br></pre></td></tr></table></figure>
+makefile中的变量：  <ul>
+<li>普通变量：<ul>
+<li>自定义变量：<code>var=hello，$(var)</code></li>
+<li>自带变量：<code>CC CPPFLAGS(头文件路径) CFLAGS LDFLAGS(链接路径)</code></li>
+</ul>
+</li>
+<li>自动变量：<code>$@(目标) $&lt;(第一个依赖) $^(所有依赖)（只能在规则中的命令中使用） </code> </li>
+<li>模式规则：<code>%.o:%.c------&gt;前后的%必须相同</code>  </li>
+</ul>
+第四个版本：     <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">target=main</span><br><span class="line">src=$(wildcard *.c)</span><br><span class="line">objects=$(patsubst %.c,%.o,$(src))</span><br><span class="line">CC=gcc</span><br><span class="line">CPPFLAGS=-I./</span><br><span class="line">$(target)：$(objects)</span><br><span class="line">	$(CC) -o $@ $^</span><br><span class="line">%.o:%.c</span><br><span class="line">	$(CC)  -c $&lt; $(CPPFLAGS)</span><br></pre></td></tr></table></figure>
+makefile函数：<ol>
+<li>wildcard – 查找指定目录下的指定类型的文件<code>src=$(wildcard *.c) //找到当前目录下所有后缀为.c的文件,赋值给src</code></li>
+<li>patsubst – 匹配替换<code>obj=$(patsubst %.c,%.o, $(src)) //把src变量里所有后缀为.c的文件替换成.o//src=$(wildcard *.c)，</code>其中”*.c”是wildcard函数的参数，用<code>&quot;$()&quot;获取wildcard *.c函数的返回值赋给src字符串</code></li>
+<li>如：当前目录下有a.c b.c c.c<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  src=$(wildcard *.c)-----&gt;src=a.c b.c c.c</span><br><span class="line">obj=$(patsubst %.c,%.o, $(src))-----&gt;obj=a.o b.o c.o</span><br></pre></td></tr></table></figure>
+第五个版本：  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">target=main</span><br><span class="line">src=$(wildcard *.c)</span><br><span class="line">objects=$(patsubst %.c,%.o,$(src))</span><br><span class="line">CC=gcc</span><br><span class="line">CPPFLAGS=-I./</span><br><span class="line">$(target)：$(objects)</span><br><span class="line">	$(CC) -o $@ $^</span><br><span class="line">%.o:%.c</span><br><span class="line">	$(CC)  -c $&lt; $(CPPFLAGS)</span><br><span class="line">.PHONY：clean</span><br><span class="line">clean：</span><br><span class="line">	rm -f $(objects) $(target)</span><br></pre></td></tr></table></figure>
+makefile增加清理功能<br>终极目标：makefile文件中第一次出现的目标叫做终极目标<br><code>.PHONY：clean     //伪目标不检查更新  </code><br><code>clean：  rm -f $(objects) $(target)  </code><br>！！！使用 -f 可以指定makefile文件，如：make -f mainmak 或者执行make -f mainmak clean<br>生成main文件之后可以删除head.h文件，类似于静态库，在预编译阶段展开编译到程序中<br>如果make clean放在前边作为终极目标，那么需要make main命令实现main规则</li>
+</ol>
+</li>
+<li>dev/tty  设备文件只能用open打开，fopen中能打开普通文件<br>perror和errno:<br>一个进程里边都有一个errno，errno会对应一个错误描述信息，errno可以用perror打印出来。<br>errno是一个全局变量, 当系统调用后若出错会将errno进行设置, perror可以将errno对应的描述信息打印出来.<br>E2BIG   Argument list too long (POSIX.1)<br>//E2BIG(宏 整型值)对应后边信息    POSIX代表可移植的，是个标准<br>每个程序（进程）之间的errno是不一样的  errno只是在一个进程中有用</li>
+<li>C库函数与系统函数的关系：<br>调用和被调用的关系；库函数是对系统函数的进一步封装<br>C标准函数有 stdin stdout stderr(标准错误输出)，stdout是文件指针，所以至少有三项…<br>printf函数是标准输出函数，内部调用write函数，write函数中有文件描述符，可以将printf中的文件描述符通过write函数传下去，hello也可以传下午，然后sys_write()可以调用内核中设备驱动函数，由设备驱动函数将字符串显示到屏幕上。<br>系统调用: 由操作系统实现并提供给外部应用程序的编程接口，<br>(Application Programming Interface, API), 是应用程序同系统之间数据交互的桥梁。***应用层write()是对系统调用层sys_wirte()的封装<br><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B2.png" alt="avatar"></li>
+<li>C库IO函数的工作流程：<br>文件指针 （结构体类型指针）FILE *fp，fp调用fopen()之后，在堆区分配空间把地址返回给fp，里边存放与文件相关的信息和保存了文件的状态，比如<ul>
+<li>文件描述符、</li>
+<li>读写指针（光标）位置变化。</li>
+<li>fp不指向文件，但是fp关联文件。  </li>
+</ul>
+文件描述符（整型）0~1024 ，其中0,1,2被占用。刚写完的文件是读不到的，因为光标到最后了 需要fseek将光标移到开始位置（或者关闭重启）。<ul>
+<li>文件存在磁盘上，缓冲在内存上 </li>
+<li>通过文件描述符可以找到inode，每个数据块都有一个inode，通过inode找到磁盘数据块</li>
+<li>fp指针至少有三项：1，文件描述符FD  2，文件指针 FP_POS 3，文件缓冲区BUFFER<br><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B3.png" alt="avatar"><br>fopen打开hello.txt文件，返回fp指针，fp指针中存放文件描述符FD对应txt文件，fp指针中存放文件读写指针位置，表示在文件读写过程中的实际位置，fp指针中存放I/O缓冲区（内存地址），通过这个地址可以找到对应内存块，最后将内存块中的内容存到txt磁盘上，或者从磁盘上txt中读取内容到内存块中再传到用户程序中<br><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B4.png" alt="avatar"></li>
+</ul>
+</li>
+<li>阻塞和非阻塞是文件的属性还是read函数的属性?<br>通过读文件测试得知：read函数在读完文件之后，再次read，<br>则read会立即返回，表明read函数读取普通文件是非阻塞的。<br>设备文件：/dev/tty  标准输入STDIN_FILENO<br>通过读/dev/tty终端设备文件，表明read函数读取设备文件是阻塞的<br>结论：阻塞和非阻塞是文件本身的属性, 不是read函数的属性.<br>socket pipe 设备文件 这三种文件都是阻塞的 普通文件是非阻塞的</li>
+<li>man命令：<br>man fileno 直接查看系统命令<br>man 2 wirte 其中2 代表系统调用<br>man 3  ……代表标准C语言函数<br>man 4 …… 设备文件的说明，通常在/dev下的文件<br>***0x00和0效果一样  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">   <span class="built_in">memset</span>(buf, <span class="number">0x00</span>, <span class="keyword">sizeof</span>(buf));  </span><br><span class="line">   <span class="built_in">memset</span>(buf,<span class="number">0</span>,<span class="keyword">sizeof</span>(buf));  </span><br><span class="line">   main()  </span><br><span class="line">   &#123;</span><br><span class="line">   &#125;<span class="comment">//查看函数“&#125;”的位置，shift+%命令</span></span><br><span class="line">   ```  </span><br><span class="line">   还有就是~/lib，~/在makefile中不好用  </span><br><span class="line">   当前目录：程序在哪执行的，哪就是当前目录  </span><br><span class="line">   位操作符：&amp; | ~ 与或非 <span class="keyword">off_t</span>表示偏移键</span><br><span class="line"><span class="number">9.</span> 文件I/O  </span><br><span class="line">   linux中系统函数成功，大多数返回<span class="number">0</span>(或者大于<span class="number">0</span>的数)  </span><br><span class="line">   失败返回<span class="number">-1</span>，如果有指针返回<span class="literal">NULL</span>，并设置errno(对应一个错误描述)  </span><br><span class="line">   <span class="number">1.</span> open函数  </span><br><span class="line">   函数原型``<span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> flags, <span class="keyword">mode_t</span> mode)</span></span>;``</span><br><span class="line">	参数：mode, 表示该文件的访问权限。  </span><br><span class="line">   文件最终权限：``mode &amp; ~umask(掩码)    比如mode是<span class="number">0777</span>  umask是<span class="number">0002</span> “`”``是取反的操作  </span><br><span class="line">	mode=<span class="number">0777</span> 因为是<span class="number">8</span>进制所以前边的<span class="number">0</span>代表<span class="number">8</span>进制  </span><br><span class="line">   每个用户都有一个文件掩码umask 掩码的意思就是把这个权限去掉 掩盖的意思 掩盖其他人写的权限  </span><br><span class="line">   成功: 返回一个最小且未被占用的文件描述符</span><br><span class="line">   <span class="number">2.</span> close函数内部有个隐藏操作：刷新  </span><br><span class="line">   linux提供的函数都是不带缓冲的，比如fclose()内部调用的就是close()，会将缓冲区的内容刷新到磁盘里面，也就是说打开文件之后记得close，有open就有close</span><br><span class="line">   <span class="number">3.</span> read函数和fread()，fput()一样，fgets()是读  </span><br><span class="line">   函数原型: ``<span class="keyword">ssize_t</span> read(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);``  </span><br><span class="line">   参数：fd 是open返回的 count代表<span class="keyword">sizeof</span>(buf)  </span><br><span class="line">   例如：buf是<span class="number">100</span>字节(count=<span class="number">100</span>)  但是里边的文件是<span class="number">50</span>字节，最终读取<span class="number">50</span>字节  </span><br><span class="line">   返回值：读取的字节数</span><br><span class="line">   <span class="number">4.</span> write函数  </span><br><span class="line">   函数原型: ``<span class="function"><span class="keyword">ssize_t</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count)</span></span>;  ``</span><br><span class="line">   参数：count代表buf中实际字节数<span class="built_in">strlen</span>(buf)，不是buf的大小(<span class="keyword">sizeof</span>(buf))  </span><br><span class="line">   例如：``<span class="keyword">char</span> buf[<span class="number">256</span>]=<span class="string">&quot;hello world&quot;</span>；``</span><br><span class="line">   <span class="number">5.</span> lseek函数 类似fseek函数 移动指针  </span><br><span class="line">   使用lseek函数<span class="string">&quot;获取文件大小&quot;</span>  </span><br><span class="line">   使用lseek函数<span class="string">&quot;实现文件拓展&quot;</span>   </span><br><span class="line">   例如：U盘拷文件时，U盘只有<span class="number">800</span>M 但是文件<span class="number">1</span>G，如何实现U盘插上就能看见内存不够。或者迅雷下载时提醒内存不够</span><br><span class="line">   <span class="number">6.</span> perror函数 打印函数调用失败原因</span><br><span class="line">   <span class="number">7.</span> ![avatar](/Linux系统编程/系统编程<span class="number">5.</span>png)</span><br><span class="line"><span class="number">10.</span> 一个程序运行起来之后就叫进程，  </span><br><span class="line">    程序运行，操作系统就会为其分配一个<span class="number">4</span>G(<span class="number">32</span>位系统<span class="number">2</span>^<span class="number">32</span>)虚拟地址空间，进程执行起来需要资源，cpu资源、内存资源、终端设备。一个程序启动以后默认有三个终端（<span class="built_in">stdin</span> <span class="built_in">stdout</span> <span class="built_in">stderr</span>），终端也是文件。  </span><br><span class="line">    用户区空间(<span class="number">3</span>G)：</span><br><span class="line">    <span class="number">1.</span> shell也是程序(进程)，shell也有环境变量</span><br><span class="line">    <span class="number">2.</span> 命令行参数：main函数有实际上有三个参数，但是我们见到的都是两个参数（一个是参数的个数，一个是具体的参数）给命令行传参(main函数) ./main hello world ni hao 后边四个就是参数。main函数就是一个命令</span><br><span class="line">    <span class="number">3.</span> 函数不要返回局部变量指针，函数结束会被释放掉，变成野指针</span><br><span class="line">    <span class="number">4.</span> 堆的地址分配是从低地址到高地址，栈是从高到低</span><br><span class="line">    <span class="number">5.</span> .bss(未初始化全局变量)  .data(已初始化全局变量)在main函数之外定义的全局变量，如果初始化了在.data区，如果没有初始化默认是<span class="number">0</span>，在.bss区(未初始化全局变量)。</span><br><span class="line">    <span class="number">6.</span> 一般情况下<span class="literal">NULL</span>就是<span class="number">0</span>  </span><br><span class="line">      内核区空间(<span class="number">1</span>G)：  </span><br><span class="line">      特点：不能读写，不能直接操作内核，我们只能操作用户空间  </span><br><span class="line">      内核是操作系统去管理，资源分配的事  </span><br><span class="line">      进程是操作系统管理  </span><br><span class="line">      内核中的进程管理中有个PCB（进程控制块）</span><br><span class="line">      ![avatar](/Linux系统编程/系统编程<span class="number">6.</span>png)</span><br><span class="line"><span class="number">11.</span> 虚拟地址空间：  </span><br><span class="line">    进程的虚拟地址空间分为用户区和内核区, 其中内核区是受保护的, 用户是不能够对其进行读写操作的;  </span><br><span class="line">    内核区中很重要的一个就是进程管理, 进程管理中有一个区域就是PCB(本质是一个结构体);  </span><br><span class="line">    PCB中有文件描述符表, 文件描述符表中存放着打开的文件描述符, 涉及到文件的IO操作都会用到这个文件描述符.  </span><br><span class="line">    PCB进程控制块里存放文件描述符表，它里边存放多个打开的文件描述符（打开的文件），每个进程默认打开三个文件描述符， <span class="number">0</span>-&gt;<span class="built_in">stdin</span> <span class="number">1</span>-&gt;<span class="built_in">stdout</span> <span class="number">2</span>-&gt;<span class="built_in">stderr</span>，如果<span class="number">0</span>-&gt;<span class="built_in">stdin</span>关闭，这个<span class="number">0</span>文件描述符被回收，再打开文件从<span class="number">0</span>开始分配，一个进程最多打开<span class="number">1024</span>个文件（<span class="number">0</span>~<span class="number">1023</span>）  </span><br><span class="line">    pcb：结构体:task_stuct, 该结构体在:  </span><br><span class="line">    /usr/src/linux-headers<span class="number">-4.4</span><span class="number">.0</span><span class="number">-97</span>/include/linux/sched.h:<span class="number">1390</span>  </span><br><span class="line">    每一个进程都有一个文件描述符表：<span class="number">1024</span>  </span><br><span class="line">    •前三个被占用, 分别是<span class="number">0</span>-&gt;STDIN_FILENO, <span class="number">1</span>-&gt;STDOUT_FILENO, <span class="number">2</span>-&gt;STDERR_FILENO  </span><br><span class="line">    •文件描述符作用：通过文件描述符找到inode, 通过inode找到磁盘数据块.  </span><br><span class="line">    虚拟地址空间-&gt;内核区-&gt;进程管理-&gt;PCB-&gt;文件描述表-&gt;文件描述符-&gt;文件IO操作使用文件描述符  </span><br><span class="line">    FILE *fp = fopen();<span class="comment">//C语言中  </span></span><br><span class="line">    <span class="keyword">int</span> fp=open();<span class="comment">//linux中直接操作文件描述符  </span></span><br><span class="line">    有个函数通过文件指针找到文件描述符：<span class="function"><span class="keyword">int</span> <span class="title">fileno</span><span class="params">(FILE *stream)</span></span></span><br><span class="line">    ![avatar](/Linux系统编程/系统编程7.png)</span><br><span class="line"><span class="number">12.</span> fcntl函数:  </span><br><span class="line">    函数描述: 改变已经打开的文件的属性  </span><br><span class="line">    函数原型: <span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> cmd, ... <span class="comment">/* arg */</span> )</span></span>; <span class="comment">//&quot;... /* arg */ &quot;代表变参函数，最常见的变参函数printf  </span></span><br><span class="line">    若cmd为F_DUPFD, 复制文件描述符, 与dup相同  </span><br><span class="line">    若cmd为F_GETFL, 获取文件描述符的flag属性值  </span><br><span class="line">    若cmd为 F_SETFL, 设置文件描述符的flag属性  </span><br><span class="line">    fcntl函数常用的操作:</span><br><span class="line">    <span class="number">1.</span> 复制一个新的文件描述符:</span><br><span class="line">   ``<span class="keyword">int</span> newfd = fcntl(fd, F_DUPFD, <span class="number">0</span>);``</span><br><span class="line">    <span class="number">2.</span> 获取文件的属性标志</span><br><span class="line">   ``<span class="keyword">int</span> flag = fcntl(fd, F_GETFL, <span class="number">0</span>)``</span><br><span class="line">    <span class="number">3.</span> 设置文件状态标志</span><br><span class="line">   ``flag = flag | O_APPEND;``</span><br><span class="line">   ``fcntl(fd, F_SETFL, flag)``</span><br><span class="line">    <span class="number">4.</span> 常用的属性标志</span><br><span class="line">         - O_APPEND-----设置文件打开为末尾添加</span><br><span class="line">         - O_NONBLOCK-----设置打开的文件描述符为非阻塞</span><br><span class="line">    <span class="number">5.</span> make dup2可以取代gcc dup2  </span><br><span class="line">       make dup2  将dup2.c生成dup2 可执行文件   </span><br><span class="line">       gcc dup2生成  a.out可执行文件</span><br><span class="line"><span class="number">13.</span> stat/lstat函数  </span><br><span class="line">    函数描述: 获取文件属性  </span><br><span class="line">    函数原型:   </span><br><span class="line">    ``<span class="function"><span class="keyword">int</span> <span class="title">stat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, struct stat *buf)</span></span>;  ``  </span><br><span class="line">    ``<span class="function"><span class="keyword">int</span> <span class="title">lstat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, struct stat *buf)</span></span>;`  </span><br><span class="line">    <span class="comment">//const char *pathname，文件路径包含文件名字，输入参数（我们告诉函数）  </span></span><br><span class="line">    <span class="comment">//struct stat *buf，输出参数（函数告诉我们），c++输出可以用引用和地址，把指针传进去  </span></span><br><span class="line">    引用的本质就是常量指针  </span><br><span class="line">    ***开发过程中看见参数前加coust一定是输入，因为传入的不能改  </span><br><span class="line">    shell命令id 打印用户的id 一个用户只有一个id   </span><br><span class="line">    获取文件类型：  </span><br><span class="line">    If (st_mode &amp; S_IWUSR)  ------为真表明可写     <span class="comment">//读写执行要写在三个if中  </span></span><br><span class="line">    If (st_mode &amp; S_IXUSR)   ------为真表明可执行  </span><br><span class="line">    If (st_mode &amp; S_IRUSR)   -----为真表明可读，其中st_mode是我们获取的权限，如果st_mode中有可读，则st_mode 和 S_IRUSR取与为可读，证明st_mode中有可读权限  </span><br><span class="line">    使用st_mode成员判断文件类型</span><br><span class="line">    ```c</span><br><span class="line">     <span class="keyword">if</span>((sb.st_mode &amp; S_IFMT) == S_IFLNK)</span><br><span class="line">        &#123;   </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;链接文件\n&quot;</span>);</span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">if</span> (S_ISREG(sb.st_mode))&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;普通文件\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    ```    </span><br><span class="line">    判断文件权限</span><br><span class="line">     ```c</span><br><span class="line">     <span class="keyword">if</span>(sb.st_mode &amp; S_IROTH)&#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot;-------R----&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">     ```  </span><br><span class="line">     stat函数和lstat函数的区别  </span><br><span class="line">     对于普通文件, 这两个函数没有区别, 是一样的.  </span><br><span class="line">     对于连接文件,调用lstat函数获取的是链接文件本身的属性信息;   </span><br><span class="line">     而stat函数获取的是链接文件指向的文件的属性信息. stat穿透</span><br><span class="line"><span class="number">14.</span> 多个<span class="keyword">if</span>和<span class="keyword">if</span> <span class="keyword">else</span> <span class="keyword">if</span>相比，<span class="keyword">if</span> elseif更好，不需要多次判断  </span><br><span class="line">    权限不是互斥的只能用<span class="keyword">if</span> 不能用<span class="keyword">else</span>和switct <span class="keyword">case</span>  </span><br><span class="line">    <span class="keyword">switch</span> <span class="keyword">case</span> 要不<span class="keyword">if</span> <span class="keyword">else</span>效率高  </span><br><span class="line">    <span class="comment">//过滤掉.和..文件  </span></span><br><span class="line">    ```c</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(pDent-&gt;d_name,<span class="string">&quot;.&quot;</span>)==<span class="number">0</span>||<span class="built_in">strcmp</span>(pDent-&gt;d_name,<span class="string">&quot;..&quot;</span>)==<span class="number">0</span>)</span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;   </span><br></pre></td></tr></table></figure>
+ //过滤的时候不能用memcmp(pDent-&gt;d_name,”.”)，会把”.”隐藏文件都过滤掉</li>
+<li>使用dup2函数实现标准输出重定向操作<br>类似于”&gt;” 比如：ls -l &gt;test.log<br>dup2(fd，STDOUT_FILENO)；STDOUT_FILENO追随fd，类似cp a b ，将a内容拷贝到b内容中 b追随a<br>STDOUT_FILENO默认指向/dev/tty<br><code>***1,printf(&quot;ni hao hello world&quot;);  </code><br><code>***2,write(STDOUT_FILENO，&quot;ni hao hello world&quot;，strlen(&quot;ni hao hello world&quot;));  </code><br>//1和2一个意思，printf是C语言的库函数 write是linux提供的系统函数 ，printf内部调用write函数<br><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B8.png" alt="avatar"></li>
+<li><ol>
+<li>dup函数和dup2函数讲解 <img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B9.png" alt="avatar">  </li>
+<li>dup2函数讲解  <img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B10.png" alt="avatar"></li>
+<li>dup2函数讲解验证思路 函数原型：<code>dup2(oldfd,newfd);</code> <img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B11.png" alt="avatar"><br>!!!函数的参数如果是指针或者引用可以输入或者输出</li>
+</ol>
+</li>
+<li>程序和进程：<br>程序：是指编译好的二进制文件，在磁盘上，占用磁盘空间, 是一个静态的概念.<br>进程：一个启动的程序， 进程占用的是系统资源，如：物理内存，CPU，终端等，是一个动态的概念<br>程序 → 剧本(纸)<br>进程 → 戏(舞台、演员、灯光、道具…)<br>同一个程序可以在多个终端执行，类似于同一台戏可以在多个舞台演出。<br>***每启动一个程序都会有一个进程PID，即使是相同的程序多次启动也会有个不同的PID<br>并发和并行：<br>并发：在一个时间段内，一个cpu上，有多个程序在执行；<br>并行：在一个时间片，有多个程序在执行（前提是有多个cpu）<br>cpu会将一个大的时间段分成多个小的时间片，让进程轮流使用cpu的时间片<br>PCB-进程控制块（Processing Control Block）：<br>每个进程在内核中都有一个进程控制块（PCB）来维护进程相关的信息，Linux内核的进程控制块是task_struct结构体。<br>进程id。系统中每个进程有唯一的id，在C语言中用pid_t类型表示，其实就是一个非负整数。<br>//pid_t，看到”_t”这种，代表type define定义出来的，可以对这个类型进行重新定义（相当于起了一个别名）  <ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B12.png" alt="avatar"></li>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B13.png" alt="avatar"><h2 id="Linux系统编程2"><a href="#Linux系统编程2" class="headerlink" title="Linux系统编程2"></a>Linux系统编程2</h2></li>
+</ul>
+</li>
+<li>ps和kill命令：<br>ps是查看进程相关信息的，比如pid属于哪个组，哪个用户，哪个会话<br>tty代表设备终端  command执行的命令或者可执行程序  SID会话(包含组)<br>kill和read 既是命令又是函数 man kill 或者 man 2 kill<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  ps aux | grep &quot;xxx&quot;</span><br><span class="line">ps ajx(-ajx) | grep &quot;xxx&quot;</span><br><span class="line">ps -ef | grep bash</span><br><span class="line">-a：（all）当前系统所有用户的进程</span><br><span class="line">-u：查看进程所有者及其他一些信息</span><br><span class="line">-x：显示没有控制终端的进程 -- 不能与用户进行交互的进程【输入、输出】</span><br><span class="line">-j: 列出与作业控制相关的信息</span><br><span class="line">kill -l 查看系统有哪些信号</span><br><span class="line">kill -9 pid 杀死某个线程 </span><br><span class="line">kill -15 杀死进程，但是可以被进程捕获，kill 9 不能被捕获</span><br></pre></td></tr></table></figure></li>
+<li>进程状态切换图：  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kill -SIGSTOP <span class="number">3387</span>  暂停 （T）代表暂停</span><br><span class="line">ps -ef | grep sleep 命令查看进程</span><br><span class="line">ps -ajx 查看进程全部信息</span><br><span class="line">kill -SIGCONT <span class="number">3387</span> 继续 （S）代表sleep</span><br><span class="line">kill <span class="number">-9</span> <span class="number">3387</span> 彻底杀死进程</span><br></pre></td></tr></table></figure>
+//sleep 100（100代表100s）程序运行一半时接收SIGSTOP命令挂起，然后再接收SIGCONT命令回到就绪状态，<br>然后获得cpu时间片继续运行<br><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B14.png" alt="avatar"></li>
+<li>execl函数讲解：<br>换核不换壳<br>套路：如果想在一个进程内部执行系统命令或者是应用程序，优先应该想到如下方式：<br>先fork()，然后在子进程里面执行execl拉起可执行程序或者命令。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line">   pid=fork();  </span><br><span class="line">   <span class="keyword">if</span>(pid==<span class="number">0</span>)</span><br><span class="line">   &#123;</span><br><span class="line">	execl(……)；</span><br><span class="line">   &#125;<span class="comment">//当然父进程中也可以执行这个</span></span><br><span class="line">   ```  </span><br><span class="line">   execl和execlp函数的区别：  </span><br><span class="line">   execl函数原型: <span class="function"><span class="keyword">int</span> <span class="title">execl</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">const</span> <span class="keyword">char</span> *arg, ... <span class="comment">/* (char  *) NULL */</span>)</span></span>;  </span><br><span class="line">   execlp函数原型: <span class="function"><span class="keyword">int</span> <span class="title">execlp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *file, <span class="keyword">const</span> <span class="keyword">char</span> *arg, ...<span class="comment">/* (char  *) NULL */</span>)</span></span>;  </span><br><span class="line">   <span class="comment">//path一般拉起自定义写的应用程序，比如当前目录中的hello.c生成的hello程序  </span></span><br><span class="line">   <span class="comment">//如果想执行一个ls -l 系统命令，用file，因为ls -l 的命令已经配置到PATH环境变量里了</span></span><br><span class="line">   ![avatar](/Linux系统编程/系统编程<span class="number">15.</span>png)</span><br><span class="line"><span class="number">4.</span> 循环创建子进程：  </span><br><span class="line">   正常顺序是：i=<span class="number">0</span>，父进程fork()出来一个子进程，并且fork出来的子进程拥有和父进程相同的代码段，也要返回循环。i=<span class="number">1</span>，父进程又fork出来一个子进程，并且fork出来的子进程拥有和父进程相同的代码段。并且第一次fork出来的子进程也fork出来孙子进程，拥有和子进程相同的代码，返回循环……  </span><br><span class="line">   <span class="comment">//其中父进程创建出来的子进程之间的i值是相互独立的，更改不影响其他子进程。  </span></span><br><span class="line">   <span class="comment">//个人感觉如果不添加break的话 最终除了父进程，其他子进程中的i全部变成i=2。  </span></span><br><span class="line">   <span class="comment">//因为这个不是彼此子进程相互影响，是父子之间进行改变  </span></span><br><span class="line">   循环创建兄弟子进程：其中<span class="keyword">break</span>;阻止子进程返回循环，父进程i变化到<span class="number">3</span>，i=<span class="number">0</span>、<span class="number">1</span>、<span class="number">2</span>代表是自进程  </span><br><span class="line">   sleep（<span class="number">1</span>）有延缓执行的作用</span><br><span class="line">   ![avatar](/Linux系统编程/系统编程<span class="number">16.</span>png)</span><br><span class="line"><span class="number">5.</span> fork函数：  </span><br><span class="line">   函数作用：创建子进程  ***也就是创建进程  </span><br><span class="line">   返回值：调用成功:父进程返回子进程的pid，子进程返回<span class="number">0</span>；  </span><br><span class="line">   所以父进程的返回值(pid&gt;<span class="number">0</span>)  </span><br><span class="line">   父进程中的pid值和子进程中的getpid()获得的pid一样，因为这个pid就是fork的返回值  </span><br><span class="line">   父进程中的getpid就是父进程本身的进程，fpid就是父进程的父进程  </span><br><span class="line">   如果不判断pid是否大于<span class="number">0</span>，结果下边的逻辑父子都执行  </span><br><span class="line">   在fork函数之前的<span class="built_in">printf</span>只打印一次，在fork函数之后的<span class="built_in">printf</span>打印两次  </span><br><span class="line">   getpid函数：  </span><br><span class="line">   返回自己当前进程的pid，谁调用它就返回谁</span><br><span class="line">   ![avatar](/Linux系统编程/系统编程<span class="number">17.</span>png)</span><br><span class="line"><span class="number">6.</span> fork进程就是被当前的shell（<span class="number">2815</span>）(-bash)拉起来的，  </span><br><span class="line">   <span class="number">1</span>号进程是很多进程的父进程，很多进城就是被<span class="number">1</span>号进程拉起来的  </span><br><span class="line">   父子进程共享标准输出  </span><br><span class="line">   如果sleep(<span class="number">1</span>)，父进程先回到shell，子进程后执行完的。在shell中执行的每一个进程，退出之后都会回到shell，  </span><br><span class="line">   fork创建之后 父子进程是并行执行，他们关系是父子，以后一般都会在子进程中拉起一个函数，函数拉起一个可执行程序  </span><br><span class="line">   ！！！父进程先死掉才会出现这种，子进程变成孤儿 需要多敲一个回车才能返回shell  </span><br><span class="line">   解决办法：在父进程中加一个wait(<span class="literal">NULL</span>)；阻塞保证父进程后退出，阻止孤儿进程产生  </span><br><span class="line">      - ![avatar](/Linux系统编程/系统编程<span class="number">18.</span>png)</span><br><span class="line">   父进程先死掉才会出现这种，子进程变成孤儿 需要多敲一个回车才能返回shell</span><br><span class="line">      - ![avatar](/Linux系统编程/系统编程<span class="number">19.</span>png)</span><br><span class="line"><span class="number">7.</span> 只要有父进程，子进程的内核资源就会被回收，子进程可以回收自己的用户资源，但是不能回收内核资源  </span><br><span class="line">   回收指的就是回收内核资源  </span><br><span class="line">   孤儿进程：  </span><br><span class="line">   父进程先退出，子进程就变成了孤儿进程，此时被init进程(<span class="number">1</span>号进程)领养  </span><br><span class="line">   当孤儿进程退出之后，就会被init进程回收。  </span><br><span class="line">   僵尸进程：  </span><br><span class="line">   子进程先退出，父进程没有完成对子进程的回收，此时子进程就变成了僵尸进程。  </span><br><span class="line">   如何解决僵尸进程：  </span><br><span class="line">   不能使用kill <span class="number">-9</span>杀死僵尸进程，原因是僵尸进程是一个死掉的进程，不接收信号；  </span><br><span class="line">   应该使用杀死僵尸进程的父进程的方法来解决僵尸进程：  </span><br><span class="line">   原因是：杀死其父进程可以让init进程领养僵尸进程，最后由init进程回收僵尸进程</span><br><span class="line">      - ![avatar](/Linux系统编程/系统编程<span class="number">20.</span>png)</span><br><span class="line"><span class="number">8.</span> 父子进程不能共享全局变量：  </span><br><span class="line">   写时复制，读时共享  </span><br><span class="line">   ``ps -ef | grep bash``  </span><br><span class="line">   管道实现进程间通信：  </span><br><span class="line">   管道两边都是进程，两个进程之间通信用的就是管道，ps输出写到管道里，grep bash读从管道里  </span><br><span class="line">   从虚拟空间映射到物理内存，和从物理内存映射到虚拟空间的过程是MMU内存管理单元做的</span><br><span class="line">      - ![avatae](/Linux系统编程/系统编程<span class="number">21.</span>png)</span><br><span class="line">      - ![avatae](/Linux系统编程/系统编程<span class="number">22.</span>png)</span><br><span class="line"><span class="number">9.</span> wait函数：  </span><br><span class="line">    函数原型：<span class="keyword">pid_t</span> wait(<span class="keyword">int</span> *status);  </span><br><span class="line">    返回值： &gt;<span class="number">0</span>：回收的子进程的PID，<span class="number">-1</span>：没有子进程  </span><br><span class="line">    参数：status：子进程的退出状态  </span><br><span class="line">    <span class="keyword">if</span>(WIFEXITED(status))&#123;WEXITSTATUS(status)&#125;  </span><br><span class="line">    <span class="keyword">if</span>(WIFSIGNALED(status))&#123;WTERMSIG(status)&#125;  </span><br><span class="line">    wait函数在父进城中调用，并且是阻塞函数  </span><br><span class="line">    waitpid函数：  </span><br><span class="line">    函数原型：<span class="function"><span class="keyword">pid_t</span> <span class="title">waitpid</span><span class="params">(<span class="keyword">pid_t</span> pid, <span class="keyword">int</span> *status, in options)</span></span>;  </span><br><span class="line">    参数：  </span><br><span class="line">    pid：  </span><br><span class="line">    pid&gt;<span class="number">0</span>：表示等待指定的子进程  </span><br><span class="line">    pid=<span class="number">-1</span>：表示等待任意子进程  </span><br><span class="line">    status：同wait函数  </span><br><span class="line">    options：  </span><br><span class="line">    <span class="number">0</span>：表示阻塞   </span><br><span class="line">    WNOHANG：表示不阻塞  </span><br><span class="line">    返回值：  </span><br><span class="line">    &gt;<span class="number">0</span>：回收的子进程的PID  </span><br><span class="line">    =<span class="number">0</span>：若options取值为WNOHANG，则表示子进程还活着  </span><br><span class="line">    <span class="number">-1</span>：表示已经没有子进程了  </span><br><span class="line">    注意：调用一次waitpid活着wait函数只能回收一个子进程。  </span><br><span class="line">    如果有三个子进程，需要回收四次，最后一次返回<span class="number">-1</span></span><br><span class="line">      - ![avatar](/Linux系统编程/系统编程<span class="number">23.</span>png)</span><br><span class="line">    ```c</span><br><span class="line">    <span class="keyword">int</span> main()</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="comment">//创建子进程</span></span><br><span class="line">          <span class="keyword">pid_t</span> pid =fork();</span><br><span class="line">          <span class="keyword">if</span>(pid&lt;<span class="number">0</span>)<span class="comment">//fork失败的情况</span></span><br><span class="line">          &#123;   </span><br><span class="line">              perror(<span class="string">&quot;fork error&quot;</span>);</span><br><span class="line">              <span class="keyword">return</span> <span class="number">-1</span>; </span><br><span class="line">          &#125;   </span><br><span class="line">          <span class="keyword">else</span> <span class="keyword">if</span>(pid&gt;<span class="number">0</span>)<span class="comment">//父进程</span></span><br><span class="line">          &#123;   </span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">&quot;father:[%d],pid ==[%d],fpid==[%d]\n&quot;</span>,pid,getpid(),getppid());</span><br><span class="line">              <span class="keyword">int</span> status;</span><br><span class="line">              <span class="comment">//pid_t wpid=wait(&amp;status);</span></span><br><span class="line">              <span class="comment">//pid_t wpid=waitpid(pid,&amp;status,0);//pid代表当前的子进程&gt;0, 0代表阻塞</span></span><br><span class="line">              <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">              &#123;   </span><br><span class="line">                  <span class="keyword">pid_t</span> wpid = waitpid(<span class="number">-1</span>,&amp;status,WNOHANG);<span class="comment">//-1表示等待任意子进程，WNOHANG表示不阻塞</span></span><br><span class="line">                  <span class="comment">//printf(&quot;wpid==[%d]\n&quot;,wpid);</span></span><br><span class="line">                  <span class="keyword">if</span>(wpid&gt;<span class="number">0</span>)<span class="comment">//有子进程退出情况</span></span><br><span class="line">                  &#123;   </span><br><span class="line">                      <span class="keyword">if</span>(WIFEXITED(status))<span class="comment">//正常退出</span></span><br><span class="line">                      &#123;   </span><br><span class="line">                          <span class="built_in">printf</span>(<span class="string">&quot;child normal exit,status==[%d]\n&quot;</span>,WEXITSTATUS(status));</span><br><span class="line">                      &#125;   </span><br><span class="line">                      <span class="keyword">else</span> <span class="keyword">if</span>(WIFSIGNALED(status))<span class="comment">//信号被杀死</span></span><br><span class="line">                      &#123;   </span><br><span class="line">                          <span class="built_in">printf</span>(<span class="string">&quot;child killed by signal,signo==[%d]\n&quot;</span>,WTERMSIG(status));</span><br><span class="line">                      &#125;   </span><br><span class="line">                  &#125;   </span><br><span class="line">                  <span class="keyword">else</span> <span class="keyword">if</span>(wpid==<span class="number">0</span>)<span class="comment">//子进程还活着</span></span><br><span class="line">                  &#123;   </span><br><span class="line">                      <span class="comment">//printf(&quot;child is living,wpid==[%d]\n&quot;,wpid);</span></span><br><span class="line">                  &#125;   </span><br><span class="line">                  <span class="keyword">else</span> <span class="keyword">if</span>(wpid==<span class="number">-1</span>)<span class="comment">//没有子进程了</span></span><br><span class="line">                  &#123;   </span><br><span class="line">                      <span class="built_in">printf</span>(<span class="string">&quot;no child is living,wpid==[%d]\n&quot;</span>,wpid);</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  &#125;   </span><br><span class="line">              &#125;   </span><br><span class="line">              sleep(<span class="number">100</span>);</span><br><span class="line">          &#125;   </span><br><span class="line">          <span class="keyword">else</span> <span class="keyword">if</span>(pid==<span class="number">0</span>)<span class="comment">//子进程</span></span><br><span class="line">          &#123;   </span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">&quot;child:pid==[%d],fpid==[%d]\n&quot;</span>,getpid(),getppid());</span><br><span class="line">              sleep(<span class="number">1</span>);</span><br><span class="line">              <span class="keyword">return</span> <span class="number">9</span>;</span><br><span class="line">          &#125;   </span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125;   </span><br></pre></td></tr></table></figure></li>
+<li>IPC，InterProcess Communication 进程间通信 inter什么什么之间的意思<br>两个进程要想完成数据交换(通讯)，必须通过内核；<br>一个进程将数据写到内核，然后另一个进程从内核中读走数据<br>现今常用的进程间通信方式有：<br>1管道 (使用最简单)<br>2信号 (开销最小)<br>3共享映射区 (无血缘关系)<br>4本地套接字 (最稳定)<br><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B24.png" alt="avatar"></li>
+<li>pipe用于父子进程间通信：<ul>
+<li>父进程创建pipe</li>
+<li>父进程调用fork函数创建子进程</li>
+<li>父进程关闭一端</li>
+<li>子进程关闭一端</li>
+<li>父进程和子进程分别值执行read和write操作</li>
+</ul>
+</li>
+<li>父子进程间完成：<code>ps aux | grep bash</code><br>需要用到两次重定向dup2函数<ol>
+<li>创建管道pipe</li>
+<li>创建子进程fork</li>
+<li>在父进程中关闭读端fd[0]</li>
+<li>在子进程中关闭写端fd[1]</li>
+<li>在父进程中将标准输出重定向到管道的写端</li>
+<li>在子进程中将标准输入重定向到管道的读端</li>
+<li>在父进程中用execl函数执行ps aux命令</li>
+<li>在子进程中用execl函数执行grep bash命令</li>
+<li>在父进程中回收子进程wait函数</li>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B25.png" alt="avatar"></li>
+</ol>
+</li>
+<li>管道的读写行为：<br>-读操作：<br>有数据：read正常读，返回读出的字节数<br>无数据：写端全部关闭：read解除阻塞，返回0, 相当于读文件读到了尾部<br>没有全部关闭：read阻塞<br>-写操作：<br>读端全部关闭：管道破裂，进程终止, 内核给当前进程发SIGPIPE信号<br>读端没全部关闭：<ul>
+<li>缓冲区写满了  write阻塞</li>
+<li>缓冲区没有满  继续write  </li>
+</ul>
+</li>
+</ol>
+<p>   如何查看管道缓冲区大小：<br>   命令<br>   <code>ulimit -a  pipe size    (512 bytes, -p) 8   ==4M  </code><br>   <code>ulimit -c unlimited 改变core文件大小为无限大小  </code><br>   函数<br>   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;pipe size==[%ld]\n&quot;</span>, fpathconf(fd[<span class="number">0</span>], _PC_PIPE_BUF));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;pipe size==[%ld]\n&quot;</span>, fpathconf(fd[<span class="number">1</span>], _PC_PIPE_BUF));</span><br></pre></td></tr></table></figure><br>   <img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B26.png" alt="avatar"><br>14. 管道（pipe）： 在fork之前创建管道</p>
+<ul>
+<li>1，管道的本质是一块内核缓冲区 内部使用环形队列实现</li>
+<li>管道有读写两端，读写两端是两个文件描述符</li>
+<li>数据的流向是从管道的写端流到数据的读端（数据的流向是单向的）</li>
+<li>数据读走之后，在管道中就消失了。</li>
+<li>pipe只能用于有血缘关系的进程间通讯</li>
+<li>管道的读写两端是阻塞的。 read没有数据阻塞 write写满了阻塞</li>
+<li>管道的大小默认为4K，但是会根据实际情况做适当调整  pipe函数：<br>函数原型：<code>int pipe(int fd[2]);</code>      整型数组<br><code>int pipe(int fd[2])；int pipe(int *fd); sizeof(fd)的值 8  4  </code><br>函数返回值：<br>若函数调用成功，fd[0]存放管道的读端，fd[1]存放管道的写端<br>返回 int fd[2]，因为返回值只有一个，所以返回数组。<br>其中参数可以数组或者指针，因为数组名就是首元素地址 也是指针<br>读写管道的实质是操作内核缓冲区<br>个人理解：创建管道就是创建两个文件描述符<ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B27.png" alt="avatar"></li>
+</ul>
+</li>
+</ul>
+<ol start="15">
+<li><p>fifo完成两个进程之间通信的思路：<br>进程A:</p>
+<ul>
+<li>创建一个fifo文件：mkfifo命令或者使用mkfifo函数</li>
+<li>open fifo文件，获得一个文件描述符fd</li>
+<li>写fifo文件 —write(fd,”xxx”,…)</li>
+<li>关闭fifo文件 —close(fd)；最新显示write中不能close</li>
+</ul>
+<p>进程B：</p>
+<ul>
+<li>打开fifo文件，获得文件描述符fd</li>
+<li>读fifo文件—read(fd,buf,sizeof(buf));</li>
+<li>关闭fifo文件 — close(fd);</li>
+</ul>
+<p>access函数：<br>可以检查文件是否存在  还有可以判断文件权限 R_OK W_OK X_OK  这权限如果不指定 应该是当前用户的<br>函数原型：<code>int access(const char *pathname, int mode);  </code><br>比如：<code>int ret=access(&quot;./myfifo&quot;,F_OK); </code><br>返回值：如果是0 文件存在 如果 不等于0 文件不存在<br>个人理解：至少需要一个文件，一个管道文件，七种系统类型文件之一p</p>
+<ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B28.png" alt="avatar"></li>
+</ul>
+</li>
+<li><p>getchar(); //等待一个回车 马上结束<br>#if 0<br>……<br>#endif   //注释的方法<br>内存操作函数：memcpy memset malloc<br>获取文件大小：  </p>
+<ul>
+<li>lseek返回值  文件打开用这个</li>
+<li>stat函数  文件没有打开用这个</li>
+</ul>
+<p>给一个没有读端的管道写数据会产生SIGPIPE信号  kill -l   第十三条</p>
+</li>
+<li><p>共享映射区：存储映射I/O (Memory-mapped I/O)<br>mmap函数：<br>函数原型：void <em>mmap(void <em>addr, size_t length, int prot, int flags, int fd, off_t offset);<br>参数：<br>addr：一般传NULL，表示让内核去指定一个内存起始地址<br>length：文件大小&gt;0 文件大小=0 不能创建映射区<br>方法：lseek或者stat函数<br>prot：映射区的保护方式 PROT_READ PROT_WRITE  PROT_READ | PROT_WRITE<br>这个权限小于open函数权限<br>flags：映射区的特性<br>MAP_SHARED：对映射区的修改会反映到文件中（可以对文件进行修改）</em>*</em>这个修改是指通过内存修改文件<br>MAP_PRIVATE：对映射区的修改不会对文件产生影响<br>fd：打开的文件描述符 不是管道的文件描述符fd[1] 因为管道文件描述符是阻塞的<br>fd=open()；<br>offset：从文件的哪个位置开始映射，一般传0 。一般是0或者4k的整数倍<br>返回值：成功返回映射区的首地址（有可能是addr系统指定的起始位置）<br>munmap函数：<br>函数作用：释放由mmap函数建立的存储映射区<br>函数原型：int munmap(void *addr, size_t length);<br>函数参数：addr 是mmap返回的指针(映射区首地址)  length：映射区大小<br>使用mmap函数建立匿名映射：  应用于有血缘关系的进程间通信</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">void</span> * addr = mmap(<span class="literal">NULL</span>, <span class="number">4096</span>, PROT_READ|PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, <span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line">  MAP_ANONYMOUS与MAP_SHARED一起使用，而且fd指定为<span class="number">-1</span></span><br><span class="line">  ```     </span><br><span class="line">  个人理解：通过<span class="built_in">memcpy</span>将<span class="built_in">string</span>写到addr的文件中，在通过<span class="built_in">memcpy</span>把buf从addr中读出来，addr空间是根据文件len大小开辟的</span><br><span class="line">  代码实现：</span><br><span class="line">  ```c</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">  <span class="comment">//使用mmap函数建立共享映射区</span></span><br><span class="line">  <span class="keyword">int</span> fd =open(<span class="string">&quot;./test.log&quot;</span>,O_RDWR);</span><br><span class="line">  <span class="keyword">if</span>(fd&lt;<span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">      perror(<span class="string">&quot;open error&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> len=lseek(fd,<span class="number">0</span>,SEEK_END);</span><br><span class="line">  <span class="keyword">void</span> *addr=mmap(<span class="literal">NULL</span>,len,PROT_READ|PROT_WRITE,MAP_PRIVATE,fd,<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">if</span>(addr==MAP_FAILED)</span><br><span class="line">  &#123;</span><br><span class="line">      perror(<span class="string">&quot;mmap error&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//创建子进程</span></span><br><span class="line">  <span class="keyword">pid_t</span> pid=fork();</span><br><span class="line">  <span class="keyword">if</span>(pid&lt;<span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">      perror(<span class="string">&quot;fork error&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(pid&gt;<span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line"><span class="built_in">memcpy</span>(addr,<span class="string">&quot;hello world&quot;</span>,<span class="built_in">strlen</span>(<span class="string">&quot;hello world&quot;</span>));</span><br><span class="line">      wait(<span class="literal">NULL</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(pid==<span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">      sleep(<span class="number">1</span>);</span><br><span class="line">      <span class="keyword">char</span> *p=(<span class="keyword">char</span> *)addr;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;[%s]&quot;</span>,p);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>！！！addr相当于全局变量、堆、栈，不能共享。<br>！！！但是对于这些addr，我们只用它的地址，它的值，可以共享<br>！！！可以共享文件描述符<br>实现原理：那个图的含义<br>目的就是把文件映射到内存，这样A进程可以读内存 B进程也可以读内存，实现两个进程之间通讯<br>实际上两个进程之间通讯是借助了这个文件。<br>如果A进程和B进程想使用mmap进程通讯过程是：<br>A进程打开那个文件映射到内存，B进程也打开那个文件映射到内存，因为是相同文件，所以内存是相同一块，然后可以操作了  </p>
+<ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B29.png" alt="avatar"></li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/" data-id="ckp3biliu000c4suehppvhdbl" data-title="Linux系统编程" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          守护进程-线程-网络基本概念
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/24/C++/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">C++</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

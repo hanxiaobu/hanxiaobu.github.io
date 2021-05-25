@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux基础知识 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux基础知识Linux基础知识1 linux 常用压缩工具 gzip和bzip2 不能压缩目录，只能每个文件进行压缩，压缩之后会使原文件消失 gzip *    压缩当前目录下所有的文件, 但是目录不能压缩 gunzip *  解压当前目录下所有的.gz文件 bzip2 *   压缩当前目录下所有的文件, 但是目录不能压缩 bunzip2 * 解压当前目录下所有的. bz2文件   tar工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础知识">
+<meta property="og:url" content="http://example.com/2021/04/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux基础知识Linux基础知识1 linux 常用压缩工具 gzip和bzip2 不能压缩目录，只能每个文件进行压缩，压缩之后会使原文件消失 gzip *    压缩当前目录下所有的文件, 但是目录不能压缩 gunzip *  解压当前目录下所有的.gz文件 bzip2 *   压缩当前目录下所有的文件, 但是目录不能压缩 bunzip2 * 解压当前目录下所有的. bz2文件   tar工">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/Linux%E5%9F%BA%E7%A1%801.png">
+<meta property="article:published_time" content="2021-04-18T04:49:11.092Z">
+<meta property="article:modified_time" content="2021-05-16T07:09:59.349Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/Linux%E5%9F%BA%E7%A1%801.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux基础知识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time class="dt-published" datetime="2021-04-18T04:49:11.092Z" itemprop="datePublished">2021-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux基础知识
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux基础知识"><a href="#Linux基础知识" class="headerlink" title="Linux基础知识"></a>Linux基础知识</h1><h2 id="Linux基础知识1"><a href="#Linux基础知识1" class="headerlink" title="Linux基础知识1"></a>Linux基础知识1</h2><ol>
+<li>linux 常用压缩工具<ul>
+<li>gzip和bzip2 不能压缩目录，只能每个文件进行压缩，压缩之后会使原文件消失</li>
+<li>gzip *    压缩当前目录下所有的文件, 但是目录不能压缩</li>
+<li>gunzip *  解压当前目录下所有的.gz文件</li>
+<li>bzip2 *   压缩当前目录下所有的文件, 但是目录不能压缩</li>
+<li>bunzip2 * 解压当前目录下所有的. bz2文件</li>
+</ul>
+</li>
+<li>tar工具(重点) 相关参数说明   <ul>
+<li>z：用gzip来压缩/解压缩文件</li>
+<li>j：用bzip2来压缩/解压缩文件</li>
+<li>c：create, 创建新的压缩文件, 与x互斥使用</li>
+<li>x：从压缩文件中释放文件, 与c互斥使用</li>
+<li>v：详细报告tar处理的文件信息</li>
+<li>f：指定压缩文件的名字</li>
+<li>t:  查看压缩包中有哪些文件</li>
+<li>```c<br> tar -cvf my.tar file dir<br> tar -xvf my.tar -C myidr<br> tar -zcvf my.tar.gz file dir<br> tar -zxvf my.tar.gz -C mydir<br> tar -jcvf my.tar.bz2 file dir<br> tar -jxvf my.tar.bz2 -C mydir<br> zip：<br>  zip -r xxx file dir<br> unzip<br>  unzip xxx.zip -d /home/xiaobu/test/day01 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">3. usr目录代表unix system resource</span><br><span class="line">   -  若系统没有其他用户, 可以使用sudo adduser 用户名 创建一个新用户.sudo 可以临时获得root用户权限  </span><br><span class="line">   -  shell命令解析器 就是翻译官 将应用层翻译到内核层 比如ls命令，或者自己写的exe应用程序,Xshell输入命令是要看好空格比如 su - root  </span><br><span class="line">   -  python就是shell脚本,一个字符(代表变量)类型变量占一个字节(代表内存大小)</span><br><span class="line">   -  bin目录 bin是binary 二进制文件</span><br><span class="line">   -  xiaobu@ubuntu:~&#x2F;Music$  其中xiaobu代表用户 ubuntu代表主机名;~代表当前用户所在目录&#x3D;&#x3D;pwd，最后的$代表普通用户 如果是#代表超级用户</span><br><span class="line">   -  新建文件最好用touch 因为这个是普通空文件，如果用mkdir新建文件是目录文件history命令 敲过的命令 &#x2F;sbin: s是Super User的意思，这里存放的是系统管理员使用的系统管理程序 init可以切换单用户模式命令(现在是多用户操作模式) </span><br><span class="line">4. 软件安装和卸载</span><br><span class="line">   -  在线安装</span><br><span class="line">      1. 软件安装：sudo apt-get install 软件名</span><br><span class="line">      2. 安装小火车 sudo apt-get install sl</span><br><span class="line">      3. 软件卸载：sudo apt-get remove 软件名</span><br><span class="line">      4. 更新软件列表：sudo apt-get update</span><br><span class="line">      5. 清理安装包：sudo apt-get clean</span><br><span class="line">      6. 清理的是缓存路径：&#x2F;var&#x2F;cache&#x2F;apt&#x2F;archives</span><br><span class="line">   -  软件包安装</span><br><span class="line">      1. &#x2F;var&#x2F;cache&#x2F;apt&#x2F;archives路径下</span><br><span class="line">      2. sl_3.03-17build1_amd64.deb</span><br><span class="line">      3. 在Ubuntu系统下必须有deb格式的安装包</span><br><span class="line">   -  软件安装</span><br><span class="line">      1. sudo dpkg -i xxx.deb  (i代表install)</span><br><span class="line">      2. 软件卸载 (d代表deb，pkg代表package)</span><br><span class="line">      3. sudo dpkg -r 软件名   (r代表remove)</span><br><span class="line">      4. rar工具安装sudo apt-get install rar </span><br><span class="line">5. ubuntu的常规操作</span><br><span class="line">   - 快捷键 vim编辑config配置文件 :q 退出:q!强制退出</span><br><span class="line">   - 首先下载安装xshell5和xftp检查是否运行apache2 systemctl status apache2</span><br><span class="line">   - 远程连接阿里云ubuntu 实现桌面化 https:&#x2F;&#x2F;blog.csdn.net&#x2F;smart_potato_&#x2F;article&#x2F;details&#x2F;79139324</span><br><span class="line">   - 服务器ubuntu下如何搭建个人网站 https:&#x2F;&#x2F;jingyan.baidu.com&#x2F;article&#x2F;fc07f989ba1fc212ffe51935.html</span><br><span class="line">   https:&#x2F;&#x2F;blog.csdn.net&#x2F;holly_Z_P_F&#x2F;article&#x2F;details&#x2F;87082056</span><br><span class="line">   - 安装lamp的环境 https:&#x2F;&#x2F;www.linuxidc.com&#x2F;Linux&#x2F;2016-12&#x2F;138758p2.htm</span><br><span class="line">6. find命令  前边都是 find + 路径</span><br><span class="line">   -  按文件名查询：使用参数 -name 可以模糊查找</span><br><span class="line">      1. 命令：find  路径  -name   &quot;文件名&quot;</span><br><span class="line">      2. 示例：find &#x2F;home -name &quot;*.c&quot;</span><br><span class="line">   -  按文件类型查询：使用参数 -type</span><br><span class="line">      1. 命令：find 路径 -type 类型</span><br><span class="line">      2. 普通文件类型用f表示而不是 -</span><br><span class="line">      3. 查找指定目录下的普通文件： find 路径 -type f</span><br><span class="line">   -  按文件大小查询：使用参数 -size</span><br><span class="line">      1. 命令：find  路径  -size  范围</span><br><span class="line">      2. 大于50k, 小于100k的文件:  find ~&#x2F; -size +50k -size -100k</span><br><span class="line">   -  按文件日期 modify</span><br><span class="line">      1. 创建日期：-ctime -n&#x2F;+ n</span><br><span class="line">      2. -n: n天以内</span><br><span class="line">      3. +n: n天以外</span><br><span class="line">      4. 修改日期：-mtime -n&#x2F;+n (m代表modify)</span><br><span class="line">      5. 访问日期：-atime -n&#x2F;+n	(a代表access)</span><br><span class="line">   -  按深度</span><br><span class="line">      1. -maxdepth n(层数)</span><br><span class="line">      2. 搜索n层以下的目录, 搜索的层数不超过n层</span><br><span class="line">      3. -mindepth n(层数)</span><br><span class="line">      4. 搜搜n层以上的目录,搜索的层数不能小于n层</span><br><span class="line">   -  高级查找</span><br><span class="line">      1. 例：查找指定目录下所有目录，并列出目录中文件详细信息</span><br><span class="line">      2. &#96;&#96;&#96;c</span><br><span class="line">         	find .&#x2F; -type d -exec shell命令 &#123;&#125; \;</span><br><span class="line">         	find .&#x2F; -type d -ok shell命令 &#123;&#125; \;</span><br><span class="line">         	find .&#x2F; -type d -ok ls -l &#123;&#125; \;</span><br><span class="line">         	注意: &#123;&#125;中间不能有空格</span><br><span class="line">         	find .&#x2F; -type d | xargs shell命令</span><br><span class="line">         	find .&#x2F; -type d | xargs ls -l</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>xargs比-exec 效率高 -exec会放到缓存中 ，xargs会分段不存在放不下的问题,如果文件比较大 建议用xargs</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>ls命令(list)用法： <ul>
+<li>ls显示当前目录里的信息<ol>
+<li>```c<br>drwxr-xr-x 2 xiaobu xiaobu 4096 May 18 21:12 Desktop<br>-rw-r–r– 1 xiaobu xiaobu 8980 Nov 10  2018 examples.desktop<br>drwxr-xr-x<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">      2. 第一个字母 代表文件类型 目前有七种</span><br><span class="line">      3. d代表目录 l代表软连接文件 -代表普通文件 c代表字符 b代表块文件 p管道文件 s是socket文件</span><br><span class="line">      4. 第234字母代表文件所有者所拥有的权限 rwx 可读可写可执行 换成8进制 111</span><br><span class="line">      5. 第567字母代表用户所属组的权限</span><br><span class="line">      6. 第8910字母代表其他人所拥有的权限</span><br><span class="line">      7. 2 对于目录来说代表 里边目录的个数包括 . .. 两个  目录没有硬链接;1 对于普通文件来说代表 硬链接计数</span><br><span class="line">      8. 对于目录来说 4096代表自己的大小 对于普通文件8980代表文件实际大小 按字节来计算</span><br><span class="line">   -  ls -l 列举文件信息</span><br><span class="line">   -  ls -la 显示隐藏并列举出来 </span><br><span class="line">   -  ls -li 显示文件的inode</span><br><span class="line">   -  ls -ltr 按时间逆向列表显示 t-&gt;time r-&gt;reverse</span><br><span class="line">   -  !!!ls -l以上这些都是shell命令</span><br><span class="line">   -  !!!ls -R 等同于tree</span><br><span class="line">8. cd命令(change directory)</span><br><span class="line">   -  cd+路径 如果cd不加路径 就回到了家目录</span><br><span class="line">   -  “.”和“.&#x2F;”代表当前目录 “..”和“..&#x2F;”代表上一级目录  </span><br><span class="line">   -  cd &#x2F;etc&#x2F;passwd  “&#x2F;”代表根目录  “~&#x2F;”中的“~”代表home目录</span><br><span class="line">   -  cd- 回到上一次所在目录</span><br><span class="line">   -  pwd命令(printf working directory)查看当前用户所在目录 </span><br><span class="line">   -  which命令 查看命令所在的目录 which ls </span><br><span class="line">   -  touch命令 创建出来的是一个空文件 如果文件不存在 则创建 如果存在则更改文件最后修改时间</span><br><span class="line">   -  mkdir命令(make directory)创建目录或者文件  mkdir +目录名(文件名) </span><br><span class="line">   -  创建多级目录 需要加 -p(parent) mkdir -p aa&#x2F;bb&#x2F;cc&#x2F;dd</span><br><span class="line">   -  rmdir命令(remove directory)删除空目录 后来被rm取代</span><br><span class="line">   -  rm命令 可以删文件和目录 </span><br><span class="line">      -  rm 文件名,2，rm -r 目录名 其中 -r 代表递归删除 -f代表强制删除 一般都是 rm -rf</span><br><span class="line">      -  删除目录时 不加-r 会提示  </span><br><span class="line">      -  删除目录下的所有文件 rm -r mytar&#x2F;*</span><br><span class="line">   - tree命令只能查看目录内容不能操作	 tree +查看指定文件</span><br><span class="line">9. grep命令</span><br><span class="line">	- grep -r(有目录) “查找的内容” 搜索的路径</span><br><span class="line">	- -r参数, 若是目录, 则可以递归搜索</span><br><span class="line">	- -n参数可以显示该查找内容所在的行号</span><br><span class="line">	- -i参数可以忽略大小写进行查找</span><br><span class="line">	- -v参数不显示含有某字符串  </span><br><span class="line">	- find和grep命令结合使用</span><br><span class="line">    	- 先使用find命令查找文件, 然后使用grep命令查找哪些文件包含某个字符串</span><br><span class="line">    	- find . -name &quot;*.c&quot; | xargs grep -n &quot;main&quot;</span><br><span class="line">  	- linux系统的管道是从写端流向读端 管道符 “|”，</span><br><span class="line">10. cp命令： cp 源文件 目标文件  --分为几种情况</span><br><span class="line">   - cp file1 file2(不存在)</span><br><span class="line">   - cp file1 file2(存在)</span><br><span class="line">   - cp file1 dir(必须存在)</span><br><span class="line">   - cp -r dir1 dir2(不存在)</span><br><span class="line">   - cp -r dir1 dir2(存在)&#x2F;&#x2F;将dir1作为dir2的子目录</span><br><span class="line">   - 其中-r代表操作目录用的递归(因为只有目录涉及到还有子文件)</span><br><span class="line">   - cp -a file1 file2 将属性信息也拷贝过去 包括时间</span><br><span class="line">   - mv命令： mv 源文件 目标文件</span><br><span class="line">   - 改名：</span><br><span class="line">     - mv file1 file2(不存在) </span><br><span class="line">     - mv file1 file2(存在) </span><br><span class="line">     - mv dir1 dir2(不存在)</span><br><span class="line">   - 移动：</span><br><span class="line">     - mv file dir(必须存在，不存在相当于第一种情况改名)</span><br><span class="line">     - mv dir1 dir2(存在)  mv mkdir_bak&#x2F; mkdir  加&#x2F;可读性更高，知道是个目录</span><br><span class="line">11. 查看文件内容的命令</span><br><span class="line">   - cat命令 将文件内容一次性输出到终端 cat 文件名</span><br><span class="line">   - cat file1&gt;file2 文件重新定向 相当于 cp file1 file2</span><br><span class="line">   - 文件重定向：cat &#x2F;etc&#x2F;passwd&gt;passwd &#x2F;&#x2F;将文件保存到passwd中</span><br><span class="line">   - more命令 分页显示到终端 空格翻页 回车下一行 q或者ctrl+c 退出 more只能下</span><br><span class="line">   - less命令 分页显示到终端 可以上下翻页  上下键 代表上下翻 q退出 </span><br><span class="line">   - head命令 从头开始看 默认看10行  head -5 &#x2F;etc&#x2F;passwd 看5行</span><br><span class="line">   - wc命令(word count)</span><br><span class="line">     - wc aa.log 只查看行 wc -l aa.log  -w 单词 -c 字符 -l行 </span><br><span class="line">     - xiaobu@ubuntu:~&#x2F;test&#x2F;mkdir1$ wc aa.log</span><br><span class="line">     - 5  9 67 aa.log  5行 9个单词 67个字符</span><br><span class="line">     - whoami 显示当前的用户名</span><br><span class="line">   - tail命令 从尾开始看 默认看后10行 tail -5 &#x2F;etx&#x2F;passwd 看后5行  ctrl+c退出</span><br><span class="line">   - 一个比较重要的应用：实时显示日志 tail -f test.log </span><br><span class="line">   - 一个终端 输入 tail -f aa.log 等待另一个终端文件重定向 ，结果在第一个终端中出现helloworld</span><br><span class="line">   - 另一个终端文件重定向：&#96;&#96;echo &quot;hello world&quot;&gt;aa.log(touch出来的空文件)(&gt;覆盖)echo &quot;hello world&quot;&gt;&gt;aa.log(&gt;&gt;追加)&#96;&#96;</span><br><span class="line">12. 软链接(link)类似windows下的快捷方式</span><br><span class="line">    - &#96;&#96;&#96;c</span><br><span class="line">      ln -s 源文件 链接名字 s代表soft，6代表文件名字的个数“aa.log”</span><br><span class="line">      ln -s aa.log aa.log.s</span><br><span class="line">      ln -s ~&#x2F;test&#x2F;mkdir1&#x2F;aa.log aa.log.s</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>注意点：创建软链接文件我们一定要使用绝对路径，否则当软链接文件移动位置之后，就会找不到指向的文件了</li>
+<li>软链接大小=路径+文件名的总字节数<ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/Linux%E5%9F%BA%E7%A1%801.png" alt="avatar">  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>硬链接<ul>
+<li>ln 源文件 硬链接名字 </li>
+<li>ln file file.</li>
+<li>硬链接和源文件指向相同的inode节点可以通过 ls -li 查看 或者stat aa.log</li>
+<li>不同文件有不同的inode节点</li>
+<li>作用：同步和保护</li>
+<li>不准许将硬链接指向目录</li>
+<li>创建一个硬链接文件，硬链接计数+1，删除一个-1；</li>
+</ul>
+</li>
+<li>echo $PATH可以查看PATH环境变量的值 其中$后边大写的都是环境变量<ul>
+<li>echo $HOME 查看家目录 $HOME是自带的环境变量</li>
+<li>echo $SHELL 查询当前系统所使用的shell，其中sh不支持补全功能</li>
+<li>大写的都叫环境变量</li>
+<li>cat /etc/shells 查询系统所有支持的shell</li>
+</ul>
+</li>
+<li>用户权限 用户 用户组<ul>
+<li>–修改文件权限 chmod命令(change Mode(权限的意思))</li>
+<li>文字设定法  chmod ug+wr file.txt</li>
+<li>chmod [who] [+|-|=] [mode] 文件名   ([]代表可选，可有可无)</li>
+<li>操作对象[who](u g o a)操作符[+-=](+ - =)权限[mode](r w x)文件名 </li>
+<li>其中 chmod 后边不写 默认是所有人 等价于a，最好用a 因为默认会报错</li>
+<li>chmod =wx aa.log  结果就是 –wx-wx–x</li>
+<li>数字设定法  chmod [+|-|=][mode] 文件名 </li>
+<li>操作符[+-=]    数字表示的含义 一定要使用3位的8进制  664 755 用的比较多</li>
+<li>0 – 没有权限(-)1 – 执行权限(x)2 – 写权限(w)4 – 读权限(r)给file.txt文件设置 rw-rw-r–  ：chmod 664 file.txt </li>
+<li>比如要所有权限全加x 可以chmod +111 aa.log</li>
+<li>比如要把组中的wx去掉 chmod -030 aa.log</li>
+<li>–修改文件所有者chown  用法：sudo chown mytest file.txt</li>
+<li>chown 文件所有者 文件名</li>
+<li>xiaobu@ubuntu:~/test/mkdir1$ ls -l</li>
+<li>total 4 //总量4</li>
+<li>-rwxr–r-x 1 xiaobu xiaobu 67 Sep  5 03:11 aa.log //第一个代表用户 第二个代表用户组</li>
+<li>sudo 可以临时获得root用户权限</li>
+<li>修改文件所有者和所属组chown</li>
+<li>用法：chown 文件所有者:文件所属组 文件名 “.”和“:”都可以</li>
+<li>sudo chown mytest:mytest file.txt</li>
+<li>sudo chown mytest.mytest file.txt</li>
+<li>chgrp命令 sudo chgrp mytest file.txt<h2 id="Linux基础知识2"><a href="#Linux基础知识2" class="headerlink" title="Linux基础知识2"></a>Linux基础知识2</h2></li>
+</ul>
+</li>
+<li>gcc的工作流程：<ul>
+<li>预处理：cpp预处理器，去掉注释，展开头文件，宏替换。处理成源代码文件<br><code>gcc -E test.c -o test.i</code></li>
+<li>编译：gcc编译器，将源代码文件编译成汇编语言代码<br><code>gcc -S test.i -o test.s</code></li>
+<li>汇编：as汇编器，将汇编语言代码编译成了二进制文件（目标代码）<br><code>gcc -c test.s (-o test.o)     //括号中不写 默认也会生成.o文件</code></li>
+<li>链接：ld链接器（ldd），链接test.c代码中调用的库函数<br><code>gcc -o test test.o   //gcc test.o -o test </code></li>
+<li>一步到位：<br><code>gcc -o test test.c</code></li>
+<li>记忆：ESc  ios</li>
+</ul>
+</li>
+<li>gcc常用参数<ul>
+<li>-v  查看gcc版本号, –version也可以</li>
+<li>-E  生成预处理文件</li>
+<li>-S  生成汇编文件</li>
+<li>-c  只编译, 生成.o文件, 通常称为目标文件</li>
+<li>-I   指定头文件所在的路径</li>
+<li>-L   指定库文件所在的路径</li>
+<li>-l    指定库的名字</li>
+<li>-o   指定生成的目标文件的名字</li>
+<li>-g   包含调试信息, 使用gdb调试需要添加-g参数</li>
+<li>-On n=0∼3 编译优化,n越大优化得越多     </li>
+<li>-Wall 提示更多警告信息</li>
+<li>-D  编译时定义宏</li>
+<li>test.c文件中的代码片段: </li>
+<li>printf(“MAX==[%d]\n”, MAX);</li>
+<li>gcc -o test test.c -D MAX=10</li>
+<li>gcc -o test test.c -DMAX=10</li>
+</ul>
+</li>
+<li>vi有三种模式：命令模式、编辑模式、末行模式<br>vi打开默认是命令模式，”i”,”a”进入编辑模式。”ESC”退出编辑模式回到命令模式，”：”进入末行模式</li>
+<li>命令模式下的操作：<ul>
+<li>命令模式”ZZ”保存退出，”gg=G”代码对其</li>
+<li>“hjkl”左上右下，”w”移动一个单词，”gg”光标移动到文件开头</li>
+<li>“G”光标移动到文件末尾，”0”光标移到到行首，”$”光标移到到行尾</li>
+<li>“nG”行跳转, 例12G, 跳到12行处，”10G”等同于”：10”</li>
+<li>“x”删除光标后一个字符,相当于 Del</li>
+<li>“X”删除光标前一个字符,相当于 Backspace</li>
+<li>“dw”删除光标开始位置的字,包含光标所在字符</li>
+<li>“d0”删除光标前本行所有内容,不包含光标所在字符</li>
+<li>“D[d$]”删除光标后本行所有内容,包含光标所在字符</li>
+<li>“dd”删除光标所在行(本质其实是剪切)</li>
+<li>“ndd”从光标当前行向下删除指定的行数, 如15dd</li>
+<li>“v/ctrl+v”使用h、j、k、l移动选择内容, 然后按d删除其中ctrl+v是列模式, v为非列模     式</li>
+<li>“u”一步一步撤销, 相当于word文档的ctrl+z   u相当于undo撤销的意思</li>
+<li>“ctrl-r”反撤销, 相当于word文档的ctrl+y，”yy”复制当前行，”nyy “复制n行, 如10yy</li>
+<li>“p”在光标所在位置向下新开辟一行, 粘贴，”P”在光标所在位置向下新开辟一行, 粘贴</li>
+<li>剪切操作 按dd或者ndd删除, 将删除的行保存到剪贴板中, 然后按p/P就可以粘贴了</li>
+<li>v/ctrl+v    使用h、j、k、l移动选择内容;</li>
+<li>使用d删除 使用y复制 使用p粘贴到光标的后面 使用P粘贴到光标的前面</li>
+<li>“/“ /xxxx, 从光标所在的位置开始搜索, 按n向下搜索, 按N向上搜索</li>
+<li>“?” ?xxxx, 从光标所在的位置开始搜索, 按n向上搜索, 按N向下搜索</li>
+<li>“#” 将光标移动到待搜索的字符串上, 然后按n向上搜索,但N向下搜索</li>
+<li>“shift+k” 在待搜索的字符串上按shift+k或者K, 可以查看相关的帮助文档 或者man      read</li>
+<li>“r”替换当前字符，”R”替换当前行光标后的字符</li>
+</ul>
+</li>
+<li>末行模式下的操作：<ul>
+<li>“q”退出 “q!”强制退出，不保存修改内容</li>
+<li>“w”保存修改内容, 不退出</li>
+<li>“wq”保存并退出 “x”相当于wq</li>
+<li>替换操作：</li>
+<li>“:s/old/new/“或者”:s/old/new” 光标所在行的所有old替换为new</li>
+<li>“:s/old/new/g”光标所在行的第一个old替换为new g代表首元素单词的意思</li>
+<li>我的vim和正常vim 相反</li>
+<li>“:m, ns/old/new/(不能加g)”将第m行至第n行之间的old全部替换成new</li>
+<li>“:%s/old/new/(g)”当前文件的所有old替换为new</li>
+<li>“:1,$s/old/new/(g)”当前文件的所有old替换为new</li>
+<li>“:%s/old/new/c(gc问每一行的第一个单词)”同上，但是每次替换需要用户确认</li>
+<li>快速翻屏：</li>
+<li>ctrl + u    向下翻半屏(up)–光标向上移动</li>
+<li>ctrl + d    向上翻半屏(down)–光标向下移动</li>
+<li>ctrl + f    向上翻一屏(front)</li>
+<li>ctrl + b    向后翻一屏(back)</li>
+<li>:.!shell命令</li>
+<li>按下两次esc可以回到命令模式</li>
+<li>分屏操作：</li>
+<li>“sp”当前文件水平分屏</li>
+<li>“vsp”当前文件垂直分屏</li>
+<li>“sp”文件名    当前文件和另一个文件水平分屏</li>
+<li>“vsp”文件名    当前文件和另一个文件垂直分屏</li>
+<li>“ctrl-w-w”在多个窗口切换光标</li>
+<li>“wall/wqall/xall/qall/qall!”保存/保存退出/保存退出/退出/强制退出分屏窗口</li>
+<li>退出当前的分屏 :q</li>
+<li>***在打开文件之前分屏:</li>
+<li>分屏: vim -on file1 file2 …  </li>
+<li>垂直分屏: vim -On file1 file2…  </li>
+<li>注意: n可以省略, 有几个文件就分几屏</li>
+<li>—从末行模式切换回命令模式</li>
+<li>按两次ESC, 退格(backspace)或者回车键</li>
+</ul>
+</li>
+<li>切换到文本输入模式：<ul>
+<li>“i”在光标前插入，”a”在光标后插入</li>
+<li>“I”在光标所在行的行首插入，”A”在光标所在行的行尾插入</li>
+<li>“o”在光标所在的行的下面新创建一行, 行首插入，”O”在光标所在的行的上面新创建一行, 行   - 首插入</li>
+<li>“s”删除光标后边的字符, 从光标当前位置插入，”S”删除光标所在当前行, 从行首插入</li>
+<li>***按列模式插入：先按ctrl+v进入列模式, 按hjkl移动选定某列,按I或者shift+i向前插   - 入, 然后插入字符, 最后按两次esc.</li>
+</ul>
+</li>
+<li>静态库和共享(动态)库  windows上(.lib .dll)  linux上(.a .so)<ul>
+<li>库制作完成后, 给用户头文件和库文件，不能给源文件</li>
+<li>注意: 库不能单独使用, 只能作为其他执行程序的一部分完成某些功能, 也</li>
+<li>就是说只能被其他程序调用才能使用.</li>
+<li>静态库是在可执行程序运行前就已经加入到执行码中, 成为执行程序的一部分。.a库文件删除之后，代码还是可用的</li>
+<li>一个.o的库文件是库文件的特例，库文件是由好多.o文件(目标代码)组合而成  –day02-15</li>
+</ul>
+</li>
+<li>静态库（static library）的制作：<ol>
+<li>将.c文件编译成.o文件<br><code>gcc -c fun1.c fun2.c</code></li>
+<li>使用ar命令将.o文件打包成.a文件<br><code>ar rcs libtest1.a fun1.o fun2.o</code></li>
+<li>静态库的使用：<pre><code>- main.c与head.h和libtest.a在同一级目录的情况  
+</code></pre>
+<code>gcc -o main1 main.c -I./ -L./ -ltest1</code><pre><code>- main.c与head.h和libtest.a不在同一级目录的情况  
+</code></pre>
+<code>gcc -o main1 main.c -I./include -L./lib -ltest1</code></li>
+</ol>
+</li>
+<li>共享库（shared library）动态库<br>共享库在程序编译时并不会被连接到目标代码中, 而是在程序运行是才被载入<ol>
+<li>动态库的制作：<ul>
+<li>将.c文件编译成.o文件<br><code>gcc -fpic -c fun1.c fun2.c</code></li>
+<li>使用gcc命令将.o文件打包成.so文件<br><code>gcc -shared fun1.o fun2.o -o libtest2.so</code></li>
+<li>动态库的使用：<br><code>gcc -o main2 main.c -I./include -L./lib -ltest2 （-L和./lib之间可以有空格）</code></li>
+<li>然后运行：./main2，发现竟然报错了.<br><code>./main2: error while loading shared libraries: libtest2.so: cannot open shared object file: No such file or directory</code> //系统找不到库文件<br>对于elf格式的可执行程序，是由<code>ld-linux.so*</code>来完成的, 它先后搜索elf文件的 DT_RPATH段（可执行文件中写死不能更改） — 环境变量LD_LIBRARY_PATH — /etc/ld.so.cache文件列表 — /lib/, /usr/lib目录找到库文件后将其载入内存。<br>查看so库中函数”nm libtest2.so”</li>
+</ul>
+<ol>
+<li>ldd命令可以查看可执行文件依赖的库文件，执行ldd main2</li>
+<li>使用file命令可以查看文件的类型: file main2</li>
+<li>exit退出当前xshell连接 退出登录</li>
+<li>env 查看环境变量</li>
+</ol>
+</li>
+<li>如何让系统找到共享库：<code>LD_LIBRARY_PATH</code> 其中LD代表<code>link Dynamic</code>动态链接,例如：<code>LD_LIBRARY_PATH=：/home/xiaobu/lib：../mylib</code>  //表示两个路<ol>
+<li>一、拷贝自己制作的共享库到/lib或者/usr/lib</li>
+<li>二、临时设置：<code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:库路径</code>//<code>$取LD_LIBRARY_PATH的值然后&quot;:&quot;分割</code>，后边添加新的路径~/lib，类似于windows中的环境变量配置，所以这行的意思是在末尾添加，不会覆盖原值  </li>
+<li>三、永久设置：把export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:库路径, 设置到∼/.bashrc文件中, 然后在执行下列三种办法之一:<pre><code>- 执行. ~/.bashrc使配置文件生效(第一个.后面有一个空格)
+- 执行source ~/.bashrc配置文件生效
+- 退出当前终端, 然后再次登陆也可以使配置文件生效
+</code></pre>
+</li>
+<li>四、永久设置：把export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:库路径，设置到/etc/profile文件中</li>
+<li>五、将其添加到 /etc/ld.so.cache文件中<ul>
+<li>编辑/etc/ld.so.conf文件, 加入库文件所在目录的路径</li>
+<li>运行sudo ldconfig -v, 该命令会重建/etc/ld.so.cache文件</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>一 四 五 都是修改系统级别的 不建议改</li>
+<li>动态库文件在编译的时候，“链接器ld”需要使用参数-L找到库文件所在的路径；在执行的时候，是“加载器ldd”根据动态库的路径进行加载的，与编译的时候用的-L指定的路径无关。</li>
+<li>上边指定和执行时再指定路径无关，ldd加载路径有几种方式 一二三四五</li>
+</ol>
+</li>
+<li>比较静态库和动态库的优缺点：<br>由于由静态库生成的可执行文件是把静态库加载到了其内部, 所以静态库生成的可执行文件一般会比动态库大</li>
+<li>用户级别配置文件<ul>
+<li> ~/.vimrc, 修改用户级别的配置文件只会影响当前用户, 不会影响其他的用户.</li>
+<li> 例如: 在用户的家目录下的.vimrc文件中添加</li>
+<li>set tabstop=4  —-设置缩进4个空格</li>
+<li>set nu        —-设置行号</li>
+<li>set shiftwidth=4  —设置gg=G缩进4个空格, 默认是缩进8个空格</li>
+<li>系统级别配置文件</li>
+<li>/etc/vim/vimrc, 修改了系统级别的配置文件将影响系统下的所有用户.<br>说明: 由于linux是多用户操作系统, 建议只在用户级别的配置文件下进行修改, 不要影响其他用户.</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="ckp3bilio00064sue56hj6exi" data-title="Linux基础知识" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/18/UnityAR_VR_IOS_UI/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          UnityAR_VR_IOS_UI
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/17/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">过往学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Linux基础知识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time class="dt-published" datetime="2021-04-18T04:49:11.092Z" itemprop="datePublished">2021-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Linux基础知识</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux基础知识"><a href="#Linux基础知识" class="headerlink" title="Linux基础知识"></a>Linux基础知识</h1><h2 id="Linux基础知识1"><a href="#Linux基础知识1" class="headerlink" title="Linux基础知识1"></a>Linux基础知识1</h2><ol>
+<li>linux 常用压缩工具<ul>
+<li>gzip和bzip2 不能压缩目录，只能每个文件进行压缩，压缩之后会使原文件消失</li>
+<li>gzip *    压缩当前目录下所有的文件, 但是目录不能压缩</li>
+<li>gunzip *  解压当前目录下所有的.gz文件</li>
+<li>bzip2 *   压缩当前目录下所有的文件, 但是目录不能压缩</li>
+<li>bunzip2 * 解压当前目录下所有的. bz2文件</li>
+</ul>
+</li>
+<li>tar工具(重点) 相关参数说明   <ul>
+<li>z：用gzip来压缩/解压缩文件</li>
+<li>j：用bzip2来压缩/解压缩文件</li>
+<li>c：create, 创建新的压缩文件, 与x互斥使用</li>
+<li>x：从压缩文件中释放文件, 与c互斥使用</li>
+<li>v：详细报告tar处理的文件信息</li>
+<li>f：指定压缩文件的名字</li>
+<li>t:  查看压缩包中有哪些文件</li>
+<li>```c<br> tar -cvf my.tar file dir<br> tar -xvf my.tar -C myidr<br> tar -zcvf my.tar.gz file dir<br> tar -zxvf my.tar.gz -C mydir<br> tar -jcvf my.tar.bz2 file dir<br> tar -jxvf my.tar.bz2 -C mydir<br> zip：<br>  zip -r xxx file dir<br> unzip<br>  unzip xxx.zip -d /home/xiaobu/test/day01 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">3. usr目录代表unix system resource</span><br><span class="line">   -  若系统没有其他用户, 可以使用sudo adduser 用户名 创建一个新用户.sudo 可以临时获得root用户权限  </span><br><span class="line">   -  shell命令解析器 就是翻译官 将应用层翻译到内核层 比如ls命令，或者自己写的exe应用程序,Xshell输入命令是要看好空格比如 su - root  </span><br><span class="line">   -  python就是shell脚本,一个字符(代表变量)类型变量占一个字节(代表内存大小)</span><br><span class="line">   -  bin目录 bin是binary 二进制文件</span><br><span class="line">   -  xiaobu@ubuntu:~&#x2F;Music$  其中xiaobu代表用户 ubuntu代表主机名;~代表当前用户所在目录&#x3D;&#x3D;pwd，最后的$代表普通用户 如果是#代表超级用户</span><br><span class="line">   -  新建文件最好用touch 因为这个是普通空文件，如果用mkdir新建文件是目录文件history命令 敲过的命令 &#x2F;sbin: s是Super User的意思，这里存放的是系统管理员使用的系统管理程序 init可以切换单用户模式命令(现在是多用户操作模式) </span><br><span class="line">4. 软件安装和卸载</span><br><span class="line">   -  在线安装</span><br><span class="line">      1. 软件安装：sudo apt-get install 软件名</span><br><span class="line">      2. 安装小火车 sudo apt-get install sl</span><br><span class="line">      3. 软件卸载：sudo apt-get remove 软件名</span><br><span class="line">      4. 更新软件列表：sudo apt-get update</span><br><span class="line">      5. 清理安装包：sudo apt-get clean</span><br><span class="line">      6. 清理的是缓存路径：&#x2F;var&#x2F;cache&#x2F;apt&#x2F;archives</span><br><span class="line">   -  软件包安装</span><br><span class="line">      1. &#x2F;var&#x2F;cache&#x2F;apt&#x2F;archives路径下</span><br><span class="line">      2. sl_3.03-17build1_amd64.deb</span><br><span class="line">      3. 在Ubuntu系统下必须有deb格式的安装包</span><br><span class="line">   -  软件安装</span><br><span class="line">      1. sudo dpkg -i xxx.deb  (i代表install)</span><br><span class="line">      2. 软件卸载 (d代表deb，pkg代表package)</span><br><span class="line">      3. sudo dpkg -r 软件名   (r代表remove)</span><br><span class="line">      4. rar工具安装sudo apt-get install rar </span><br><span class="line">5. ubuntu的常规操作</span><br><span class="line">   - 快捷键 vim编辑config配置文件 :q 退出:q!强制退出</span><br><span class="line">   - 首先下载安装xshell5和xftp检查是否运行apache2 systemctl status apache2</span><br><span class="line">   - 远程连接阿里云ubuntu 实现桌面化 https:&#x2F;&#x2F;blog.csdn.net&#x2F;smart_potato_&#x2F;article&#x2F;details&#x2F;79139324</span><br><span class="line">   - 服务器ubuntu下如何搭建个人网站 https:&#x2F;&#x2F;jingyan.baidu.com&#x2F;article&#x2F;fc07f989ba1fc212ffe51935.html</span><br><span class="line">   https:&#x2F;&#x2F;blog.csdn.net&#x2F;holly_Z_P_F&#x2F;article&#x2F;details&#x2F;87082056</span><br><span class="line">   - 安装lamp的环境 https:&#x2F;&#x2F;www.linuxidc.com&#x2F;Linux&#x2F;2016-12&#x2F;138758p2.htm</span><br><span class="line">6. find命令  前边都是 find + 路径</span><br><span class="line">   -  按文件名查询：使用参数 -name 可以模糊查找</span><br><span class="line">      1. 命令：find  路径  -name   &quot;文件名&quot;</span><br><span class="line">      2. 示例：find &#x2F;home -name &quot;*.c&quot;</span><br><span class="line">   -  按文件类型查询：使用参数 -type</span><br><span class="line">      1. 命令：find 路径 -type 类型</span><br><span class="line">      2. 普通文件类型用f表示而不是 -</span><br><span class="line">      3. 查找指定目录下的普通文件： find 路径 -type f</span><br><span class="line">   -  按文件大小查询：使用参数 -size</span><br><span class="line">      1. 命令：find  路径  -size  范围</span><br><span class="line">      2. 大于50k, 小于100k的文件:  find ~&#x2F; -size +50k -size -100k</span><br><span class="line">   -  按文件日期 modify</span><br><span class="line">      1. 创建日期：-ctime -n&#x2F;+ n</span><br><span class="line">      2. -n: n天以内</span><br><span class="line">      3. +n: n天以外</span><br><span class="line">      4. 修改日期：-mtime -n&#x2F;+n (m代表modify)</span><br><span class="line">      5. 访问日期：-atime -n&#x2F;+n	(a代表access)</span><br><span class="line">   -  按深度</span><br><span class="line">      1. -maxdepth n(层数)</span><br><span class="line">      2. 搜索n层以下的目录, 搜索的层数不超过n层</span><br><span class="line">      3. -mindepth n(层数)</span><br><span class="line">      4. 搜搜n层以上的目录,搜索的层数不能小于n层</span><br><span class="line">   -  高级查找</span><br><span class="line">      1. 例：查找指定目录下所有目录，并列出目录中文件详细信息</span><br><span class="line">      2. &#96;&#96;&#96;c</span><br><span class="line">         	find .&#x2F; -type d -exec shell命令 &#123;&#125; \;</span><br><span class="line">         	find .&#x2F; -type d -ok shell命令 &#123;&#125; \;</span><br><span class="line">         	find .&#x2F; -type d -ok ls -l &#123;&#125; \;</span><br><span class="line">         	注意: &#123;&#125;中间不能有空格</span><br><span class="line">         	find .&#x2F; -type d | xargs shell命令</span><br><span class="line">         	find .&#x2F; -type d | xargs ls -l</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>xargs比-exec 效率高 -exec会放到缓存中 ，xargs会分段不存在放不下的问题,如果文件比较大 建议用xargs</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>ls命令(list)用法： <ul>
+<li>ls显示当前目录里的信息<ol>
+<li>```c<br>drwxr-xr-x 2 xiaobu xiaobu 4096 May 18 21:12 Desktop<br>-rw-r–r– 1 xiaobu xiaobu 8980 Nov 10  2018 examples.desktop<br>drwxr-xr-x<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">      2. 第一个字母 代表文件类型 目前有七种</span><br><span class="line">      3. d代表目录 l代表软连接文件 -代表普通文件 c代表字符 b代表块文件 p管道文件 s是socket文件</span><br><span class="line">      4. 第234字母代表文件所有者所拥有的权限 rwx 可读可写可执行 换成8进制 111</span><br><span class="line">      5. 第567字母代表用户所属组的权限</span><br><span class="line">      6. 第8910字母代表其他人所拥有的权限</span><br><span class="line">      7. 2 对于目录来说代表 里边目录的个数包括 . .. 两个  目录没有硬链接;1 对于普通文件来说代表 硬链接计数</span><br><span class="line">      8. 对于目录来说 4096代表自己的大小 对于普通文件8980代表文件实际大小 按字节来计算</span><br><span class="line">   -  ls -l 列举文件信息</span><br><span class="line">   -  ls -la 显示隐藏并列举出来 </span><br><span class="line">   -  ls -li 显示文件的inode</span><br><span class="line">   -  ls -ltr 按时间逆向列表显示 t-&gt;time r-&gt;reverse</span><br><span class="line">   -  !!!ls -l以上这些都是shell命令</span><br><span class="line">   -  !!!ls -R 等同于tree</span><br><span class="line">8. cd命令(change directory)</span><br><span class="line">   -  cd+路径 如果cd不加路径 就回到了家目录</span><br><span class="line">   -  “.”和“.&#x2F;”代表当前目录 “..”和“..&#x2F;”代表上一级目录  </span><br><span class="line">   -  cd &#x2F;etc&#x2F;passwd  “&#x2F;”代表根目录  “~&#x2F;”中的“~”代表home目录</span><br><span class="line">   -  cd- 回到上一次所在目录</span><br><span class="line">   -  pwd命令(printf working directory)查看当前用户所在目录 </span><br><span class="line">   -  which命令 查看命令所在的目录 which ls </span><br><span class="line">   -  touch命令 创建出来的是一个空文件 如果文件不存在 则创建 如果存在则更改文件最后修改时间</span><br><span class="line">   -  mkdir命令(make directory)创建目录或者文件  mkdir +目录名(文件名) </span><br><span class="line">   -  创建多级目录 需要加 -p(parent) mkdir -p aa&#x2F;bb&#x2F;cc&#x2F;dd</span><br><span class="line">   -  rmdir命令(remove directory)删除空目录 后来被rm取代</span><br><span class="line">   -  rm命令 可以删文件和目录 </span><br><span class="line">      -  rm 文件名,2，rm -r 目录名 其中 -r 代表递归删除 -f代表强制删除 一般都是 rm -rf</span><br><span class="line">      -  删除目录时 不加-r 会提示  </span><br><span class="line">      -  删除目录下的所有文件 rm -r mytar&#x2F;*</span><br><span class="line">   - tree命令只能查看目录内容不能操作	 tree +查看指定文件</span><br><span class="line">9. grep命令</span><br><span class="line">	- grep -r(有目录) “查找的内容” 搜索的路径</span><br><span class="line">	- -r参数, 若是目录, 则可以递归搜索</span><br><span class="line">	- -n参数可以显示该查找内容所在的行号</span><br><span class="line">	- -i参数可以忽略大小写进行查找</span><br><span class="line">	- -v参数不显示含有某字符串  </span><br><span class="line">	- find和grep命令结合使用</span><br><span class="line">    	- 先使用find命令查找文件, 然后使用grep命令查找哪些文件包含某个字符串</span><br><span class="line">    	- find . -name &quot;*.c&quot; | xargs grep -n &quot;main&quot;</span><br><span class="line">  	- linux系统的管道是从写端流向读端 管道符 “|”，</span><br><span class="line">10. cp命令： cp 源文件 目标文件  --分为几种情况</span><br><span class="line">   - cp file1 file2(不存在)</span><br><span class="line">   - cp file1 file2(存在)</span><br><span class="line">   - cp file1 dir(必须存在)</span><br><span class="line">   - cp -r dir1 dir2(不存在)</span><br><span class="line">   - cp -r dir1 dir2(存在)&#x2F;&#x2F;将dir1作为dir2的子目录</span><br><span class="line">   - 其中-r代表操作目录用的递归(因为只有目录涉及到还有子文件)</span><br><span class="line">   - cp -a file1 file2 将属性信息也拷贝过去 包括时间</span><br><span class="line">   - mv命令： mv 源文件 目标文件</span><br><span class="line">   - 改名：</span><br><span class="line">     - mv file1 file2(不存在) </span><br><span class="line">     - mv file1 file2(存在) </span><br><span class="line">     - mv dir1 dir2(不存在)</span><br><span class="line">   - 移动：</span><br><span class="line">     - mv file dir(必须存在，不存在相当于第一种情况改名)</span><br><span class="line">     - mv dir1 dir2(存在)  mv mkdir_bak&#x2F; mkdir  加&#x2F;可读性更高，知道是个目录</span><br><span class="line">11. 查看文件内容的命令</span><br><span class="line">   - cat命令 将文件内容一次性输出到终端 cat 文件名</span><br><span class="line">   - cat file1&gt;file2 文件重新定向 相当于 cp file1 file2</span><br><span class="line">   - 文件重定向：cat &#x2F;etc&#x2F;passwd&gt;passwd &#x2F;&#x2F;将文件保存到passwd中</span><br><span class="line">   - more命令 分页显示到终端 空格翻页 回车下一行 q或者ctrl+c 退出 more只能下</span><br><span class="line">   - less命令 分页显示到终端 可以上下翻页  上下键 代表上下翻 q退出 </span><br><span class="line">   - head命令 从头开始看 默认看10行  head -5 &#x2F;etc&#x2F;passwd 看5行</span><br><span class="line">   - wc命令(word count)</span><br><span class="line">     - wc aa.log 只查看行 wc -l aa.log  -w 单词 -c 字符 -l行 </span><br><span class="line">     - xiaobu@ubuntu:~&#x2F;test&#x2F;mkdir1$ wc aa.log</span><br><span class="line">     - 5  9 67 aa.log  5行 9个单词 67个字符</span><br><span class="line">     - whoami 显示当前的用户名</span><br><span class="line">   - tail命令 从尾开始看 默认看后10行 tail -5 &#x2F;etx&#x2F;passwd 看后5行  ctrl+c退出</span><br><span class="line">   - 一个比较重要的应用：实时显示日志 tail -f test.log </span><br><span class="line">   - 一个终端 输入 tail -f aa.log 等待另一个终端文件重定向 ，结果在第一个终端中出现helloworld</span><br><span class="line">   - 另一个终端文件重定向：&#96;&#96;echo &quot;hello world&quot;&gt;aa.log(touch出来的空文件)(&gt;覆盖)echo &quot;hello world&quot;&gt;&gt;aa.log(&gt;&gt;追加)&#96;&#96;</span><br><span class="line">12. 软链接(link)类似windows下的快捷方式</span><br><span class="line">    - &#96;&#96;&#96;c</span><br><span class="line">      ln -s 源文件 链接名字 s代表soft，6代表文件名字的个数“aa.log”</span><br><span class="line">      ln -s aa.log aa.log.s</span><br><span class="line">      ln -s ~&#x2F;test&#x2F;mkdir1&#x2F;aa.log aa.log.s</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>注意点：创建软链接文件我们一定要使用绝对路径，否则当软链接文件移动位置之后，就会找不到指向的文件了</li>
+<li>软链接大小=路径+文件名的总字节数<ul>
+<li><img src="/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/Linux%E5%9F%BA%E7%A1%801.png" alt="avatar">  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>硬链接<ul>
+<li>ln 源文件 硬链接名字 </li>
+<li>ln file file.</li>
+<li>硬链接和源文件指向相同的inode节点可以通过 ls -li 查看 或者stat aa.log</li>
+<li>不同文件有不同的inode节点</li>
+<li>作用：同步和保护</li>
+<li>不准许将硬链接指向目录</li>
+<li>创建一个硬链接文件，硬链接计数+1，删除一个-1；</li>
+</ul>
+</li>
+<li>echo $PATH可以查看PATH环境变量的值 其中$后边大写的都是环境变量<ul>
+<li>echo $HOME 查看家目录 $HOME是自带的环境变量</li>
+<li>echo $SHELL 查询当前系统所使用的shell，其中sh不支持补全功能</li>
+<li>大写的都叫环境变量</li>
+<li>cat /etc/shells 查询系统所有支持的shell</li>
+</ul>
+</li>
+<li>用户权限 用户 用户组<ul>
+<li>–修改文件权限 chmod命令(change Mode(权限的意思))</li>
+<li>文字设定法  chmod ug+wr file.txt</li>
+<li>chmod [who] [+|-|=] [mode] 文件名   ([]代表可选，可有可无)</li>
+<li>操作对象[who](u g o a)操作符[+-=](+ - =)权限[mode](r w x)文件名 </li>
+<li>其中 chmod 后边不写 默认是所有人 等价于a，最好用a 因为默认会报错</li>
+<li>chmod =wx aa.log  结果就是 –wx-wx–x</li>
+<li>数字设定法  chmod [+|-|=][mode] 文件名 </li>
+<li>操作符[+-=]    数字表示的含义 一定要使用3位的8进制  664 755 用的比较多</li>
+<li>0 – 没有权限(-)1 – 执行权限(x)2 – 写权限(w)4 – 读权限(r)给file.txt文件设置 rw-rw-r–  ：chmod 664 file.txt </li>
+<li>比如要所有权限全加x 可以chmod +111 aa.log</li>
+<li>比如要把组中的wx去掉 chmod -030 aa.log</li>
+<li>–修改文件所有者chown  用法：sudo chown mytest file.txt</li>
+<li>chown 文件所有者 文件名</li>
+<li>xiaobu@ubuntu:~/test/mkdir1$ ls -l</li>
+<li>total 4 //总量4</li>
+<li>-rwxr–r-x 1 xiaobu xiaobu 67 Sep  5 03:11 aa.log //第一个代表用户 第二个代表用户组</li>
+<li>sudo 可以临时获得root用户权限</li>
+<li>修改文件所有者和所属组chown</li>
+<li>用法：chown 文件所有者:文件所属组 文件名 “.”和“:”都可以</li>
+<li>sudo chown mytest:mytest file.txt</li>
+<li>sudo chown mytest.mytest file.txt</li>
+<li>chgrp命令 sudo chgrp mytest file.txt<h2 id="Linux基础知识2"><a href="#Linux基础知识2" class="headerlink" title="Linux基础知识2"></a>Linux基础知识2</h2></li>
+</ul>
+</li>
+<li>gcc的工作流程：<ul>
+<li>预处理：cpp预处理器，去掉注释，展开头文件，宏替换。处理成源代码文件<br><code>gcc -E test.c -o test.i</code></li>
+<li>编译：gcc编译器，将源代码文件编译成汇编语言代码<br><code>gcc -S test.i -o test.s</code></li>
+<li>汇编：as汇编器，将汇编语言代码编译成了二进制文件（目标代码）<br><code>gcc -c test.s (-o test.o)     //括号中不写 默认也会生成.o文件</code></li>
+<li>链接：ld链接器（ldd），链接test.c代码中调用的库函数<br><code>gcc -o test test.o   //gcc test.o -o test </code></li>
+<li>一步到位：<br><code>gcc -o test test.c</code></li>
+<li>记忆：ESc  ios</li>
+</ul>
+</li>
+<li>gcc常用参数<ul>
+<li>-v  查看gcc版本号, –version也可以</li>
+<li>-E  生成预处理文件</li>
+<li>-S  生成汇编文件</li>
+<li>-c  只编译, 生成.o文件, 通常称为目标文件</li>
+<li>-I   指定头文件所在的路径</li>
+<li>-L   指定库文件所在的路径</li>
+<li>-l    指定库的名字</li>
+<li>-o   指定生成的目标文件的名字</li>
+<li>-g   包含调试信息, 使用gdb调试需要添加-g参数</li>
+<li>-On n=0∼3 编译优化,n越大优化得越多     </li>
+<li>-Wall 提示更多警告信息</li>
+<li>-D  编译时定义宏</li>
+<li>test.c文件中的代码片段: </li>
+<li>printf(“MAX==[%d]\n”, MAX);</li>
+<li>gcc -o test test.c -D MAX=10</li>
+<li>gcc -o test test.c -DMAX=10</li>
+</ul>
+</li>
+<li>vi有三种模式：命令模式、编辑模式、末行模式<br>vi打开默认是命令模式，”i”,”a”进入编辑模式。”ESC”退出编辑模式回到命令模式，”：”进入末行模式</li>
+<li>命令模式下的操作：<ul>
+<li>命令模式”ZZ”保存退出，”gg=G”代码对其</li>
+<li>“hjkl”左上右下，”w”移动一个单词，”gg”光标移动到文件开头</li>
+<li>“G”光标移动到文件末尾，”0”光标移到到行首，”$”光标移到到行尾</li>
+<li>“nG”行跳转, 例12G, 跳到12行处，”10G”等同于”：10”</li>
+<li>“x”删除光标后一个字符,相当于 Del</li>
+<li>“X”删除光标前一个字符,相当于 Backspace</li>
+<li>“dw”删除光标开始位置的字,包含光标所在字符</li>
+<li>“d0”删除光标前本行所有内容,不包含光标所在字符</li>
+<li>“D[d$]”删除光标后本行所有内容,包含光标所在字符</li>
+<li>“dd”删除光标所在行(本质其实是剪切)</li>
+<li>“ndd”从光标当前行向下删除指定的行数, 如15dd</li>
+<li>“v/ctrl+v”使用h、j、k、l移动选择内容, 然后按d删除其中ctrl+v是列模式, v为非列模     式</li>
+<li>“u”一步一步撤销, 相当于word文档的ctrl+z   u相当于undo撤销的意思</li>
+<li>“ctrl-r”反撤销, 相当于word文档的ctrl+y，”yy”复制当前行，”nyy “复制n行, 如10yy</li>
+<li>“p”在光标所在位置向下新开辟一行, 粘贴，”P”在光标所在位置向下新开辟一行, 粘贴</li>
+<li>剪切操作 按dd或者ndd删除, 将删除的行保存到剪贴板中, 然后按p/P就可以粘贴了</li>
+<li>v/ctrl+v    使用h、j、k、l移动选择内容;</li>
+<li>使用d删除 使用y复制 使用p粘贴到光标的后面 使用P粘贴到光标的前面</li>
+<li>“/“ /xxxx, 从光标所在的位置开始搜索, 按n向下搜索, 按N向上搜索</li>
+<li>“?” ?xxxx, 从光标所在的位置开始搜索, 按n向上搜索, 按N向下搜索</li>
+<li>“#” 将光标移动到待搜索的字符串上, 然后按n向上搜索,但N向下搜索</li>
+<li>“shift+k” 在待搜索的字符串上按shift+k或者K, 可以查看相关的帮助文档 或者man      read</li>
+<li>“r”替换当前字符，”R”替换当前行光标后的字符</li>
+</ul>
+</li>
+<li>末行模式下的操作：<ul>
+<li>“q”退出 “q!”强制退出，不保存修改内容</li>
+<li>“w”保存修改内容, 不退出</li>
+<li>“wq”保存并退出 “x”相当于wq</li>
+<li>替换操作：</li>
+<li>“:s/old/new/“或者”:s/old/new” 光标所在行的所有old替换为new</li>
+<li>“:s/old/new/g”光标所在行的第一个old替换为new g代表首元素单词的意思</li>
+<li>我的vim和正常vim 相反</li>
+<li>“:m, ns/old/new/(不能加g)”将第m行至第n行之间的old全部替换成new</li>
+<li>“:%s/old/new/(g)”当前文件的所有old替换为new</li>
+<li>“:1,$s/old/new/(g)”当前文件的所有old替换为new</li>
+<li>“:%s/old/new/c(gc问每一行的第一个单词)”同上，但是每次替换需要用户确认</li>
+<li>快速翻屏：</li>
+<li>ctrl + u    向下翻半屏(up)–光标向上移动</li>
+<li>ctrl + d    向上翻半屏(down)–光标向下移动</li>
+<li>ctrl + f    向上翻一屏(front)</li>
+<li>ctrl + b    向后翻一屏(back)</li>
+<li>:.!shell命令</li>
+<li>按下两次esc可以回到命令模式</li>
+<li>分屏操作：</li>
+<li>“sp”当前文件水平分屏</li>
+<li>“vsp”当前文件垂直分屏</li>
+<li>“sp”文件名    当前文件和另一个文件水平分屏</li>
+<li>“vsp”文件名    当前文件和另一个文件垂直分屏</li>
+<li>“ctrl-w-w”在多个窗口切换光标</li>
+<li>“wall/wqall/xall/qall/qall!”保存/保存退出/保存退出/退出/强制退出分屏窗口</li>
+<li>退出当前的分屏 :q</li>
+<li>***在打开文件之前分屏:</li>
+<li>分屏: vim -on file1 file2 …  </li>
+<li>垂直分屏: vim -On file1 file2…  </li>
+<li>注意: n可以省略, 有几个文件就分几屏</li>
+<li>—从末行模式切换回命令模式</li>
+<li>按两次ESC, 退格(backspace)或者回车键</li>
+</ul>
+</li>
+<li>切换到文本输入模式：<ul>
+<li>“i”在光标前插入，”a”在光标后插入</li>
+<li>“I”在光标所在行的行首插入，”A”在光标所在行的行尾插入</li>
+<li>“o”在光标所在的行的下面新创建一行, 行首插入，”O”在光标所在的行的上面新创建一行, 行   - 首插入</li>
+<li>“s”删除光标后边的字符, 从光标当前位置插入，”S”删除光标所在当前行, 从行首插入</li>
+<li>***按列模式插入：先按ctrl+v进入列模式, 按hjkl移动选定某列,按I或者shift+i向前插   - 入, 然后插入字符, 最后按两次esc.</li>
+</ul>
+</li>
+<li>静态库和共享(动态)库  windows上(.lib .dll)  linux上(.a .so)<ul>
+<li>库制作完成后, 给用户头文件和库文件，不能给源文件</li>
+<li>注意: 库不能单独使用, 只能作为其他执行程序的一部分完成某些功能, 也</li>
+<li>就是说只能被其他程序调用才能使用.</li>
+<li>静态库是在可执行程序运行前就已经加入到执行码中, 成为执行程序的一部分。.a库文件删除之后，代码还是可用的</li>
+<li>一个.o的库文件是库文件的特例，库文件是由好多.o文件(目标代码)组合而成  –day02-15</li>
+</ul>
+</li>
+<li>静态库（static library）的制作：<ol>
+<li>将.c文件编译成.o文件<br><code>gcc -c fun1.c fun2.c</code></li>
+<li>使用ar命令将.o文件打包成.a文件<br><code>ar rcs libtest1.a fun1.o fun2.o</code></li>
+<li>静态库的使用：<pre><code>- main.c与head.h和libtest.a在同一级目录的情况  
+</code></pre>
+<code>gcc -o main1 main.c -I./ -L./ -ltest1</code><pre><code>- main.c与head.h和libtest.a不在同一级目录的情况  
+</code></pre>
+<code>gcc -o main1 main.c -I./include -L./lib -ltest1</code></li>
+</ol>
+</li>
+<li>共享库（shared library）动态库<br>共享库在程序编译时并不会被连接到目标代码中, 而是在程序运行是才被载入<ol>
+<li>动态库的制作：<ul>
+<li>将.c文件编译成.o文件<br><code>gcc -fpic -c fun1.c fun2.c</code></li>
+<li>使用gcc命令将.o文件打包成.so文件<br><code>gcc -shared fun1.o fun2.o -o libtest2.so</code></li>
+<li>动态库的使用：<br><code>gcc -o main2 main.c -I./include -L./lib -ltest2 （-L和./lib之间可以有空格）</code></li>
+<li>然后运行：./main2，发现竟然报错了.<br><code>./main2: error while loading shared libraries: libtest2.so: cannot open shared object file: No such file or directory</code> //系统找不到库文件<br>对于elf格式的可执行程序，是由<code>ld-linux.so*</code>来完成的, 它先后搜索elf文件的 DT_RPATH段（可执行文件中写死不能更改） — 环境变量LD_LIBRARY_PATH — /etc/ld.so.cache文件列表 — /lib/, /usr/lib目录找到库文件后将其载入内存。<br>查看so库中函数”nm libtest2.so”</li>
+</ul>
+<ol>
+<li>ldd命令可以查看可执行文件依赖的库文件，执行ldd main2</li>
+<li>使用file命令可以查看文件的类型: file main2</li>
+<li>exit退出当前xshell连接 退出登录</li>
+<li>env 查看环境变量</li>
+</ol>
+</li>
+<li>如何让系统找到共享库：<code>LD_LIBRARY_PATH</code> 其中LD代表<code>link Dynamic</code>动态链接,例如：<code>LD_LIBRARY_PATH=：/home/xiaobu/lib：../mylib</code>  //表示两个路<ol>
+<li>一、拷贝自己制作的共享库到/lib或者/usr/lib</li>
+<li>二、临时设置：<code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:库路径</code>//<code>$取LD_LIBRARY_PATH的值然后&quot;:&quot;分割</code>，后边添加新的路径~/lib，类似于windows中的环境变量配置，所以这行的意思是在末尾添加，不会覆盖原值  </li>
+<li>三、永久设置：把export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:库路径, 设置到∼/.bashrc文件中, 然后在执行下列三种办法之一:<pre><code>- 执行. ~/.bashrc使配置文件生效(第一个.后面有一个空格)
+- 执行source ~/.bashrc配置文件生效
+- 退出当前终端, 然后再次登陆也可以使配置文件生效
+</code></pre>
+</li>
+<li>四、永久设置：把export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:库路径，设置到/etc/profile文件中</li>
+<li>五、将其添加到 /etc/ld.so.cache文件中<ul>
+<li>编辑/etc/ld.so.conf文件, 加入库文件所在目录的路径</li>
+<li>运行sudo ldconfig -v, 该命令会重建/etc/ld.so.cache文件</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>一 四 五 都是修改系统级别的 不建议改</li>
+<li>动态库文件在编译的时候，“链接器ld”需要使用参数-L找到库文件所在的路径；在执行的时候，是“加载器ldd”根据动态库的路径进行加载的，与编译的时候用的-L指定的路径无关。</li>
+<li>上边指定和执行时再指定路径无关，ldd加载路径有几种方式 一二三四五</li>
+</ol>
+</li>
+<li>比较静态库和动态库的优缺点：<br>由于由静态库生成的可执行文件是把静态库加载到了其内部, 所以静态库生成的可执行文件一般会比动态库大</li>
+<li>用户级别配置文件<ul>
+<li> ~/.vimrc, 修改用户级别的配置文件只会影响当前用户, 不会影响其他的用户.</li>
+<li> 例如: 在用户的家目录下的.vimrc文件中添加</li>
+<li>set tabstop=4  —-设置缩进4个空格</li>
+<li>set nu        —-设置行号</li>
+<li>set shiftwidth=4  —设置gg=G缩进4个空格, 默认是缩进8个空格</li>
+<li>系统级别配置文件</li>
+<li>/etc/vim/vimrc, 修改了系统级别的配置文件将影响系统下的所有用户.<br>说明: 由于linux是多用户操作系统, 建议只在用户级别的配置文件下进行修改, 不要影响其他用户.</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="ckp3bilio00064sue56hj6exi" data-title="Linux基础知识" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-过往学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/17/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2021-04-17T15:58:12.037Z" itemprop="datePublished">2021-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/17/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/">过往学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="三维模型处理细节"><a href="#三维模型处理细节" class="headerlink" title="三维模型处理细节"></a>三维模型处理细节</h2><ol>
+<li>3Dmax相机渲染视频<ul>
+<li>卡关键帧时，自动关键点（快捷键N）必须开着，否则所有帧都变了</li>
+<li>F5，F6，F7，分别是XYZ轴约束，C快捷键是相机视角，F9渲染上一帧，shift+q渲染当前帧，空格是锁定当前视角</li>
+<li>shift+F 显示渲染的区域（黄色框内），在右下角右键选择布局，选择左右两个的布局</li>
+<li>相机约束，先建立多边线指定路径，然后选择动画-约束-路径约束，将相机指到路径上</li>
+<li>需要相机旋转的时候不能用K键，需要点击右键，在帧位置设置空的旋转帧，然后在帧的位置相机旋转，右键设置第二个旋转帧，前一千帧可以运行是因为只有一种变化（平移）</li>
+<li>模型UV在mudbox中与贴图是严丝合缝，而实际中贴图需要在max中烘焙一下，模型对烘导出溢出值，尽量设置大一点(7~8)左右</li>
+</ul>
+</li>
+<li>四边面通过Zbrush减面可以变成三角面，WebGl可以加载三角面，模型中只要有部分三角面就可以，其他的都是四边面</li>
+<li>zbrush减面和3dmax减面的区别：<br>zbrush减面过程UVW不变，max中减面（就是专业优化）其中的uvw会变化。其中zbrush支持obj。</li>
+<li>用Crazybump软件生成法线贴图</li>
+</ol>
+<h2 id="软件破解和系统安装安装细节"><a href="#软件破解和系统安装安装细节" class="headerlink" title="软件破解和系统安装安装细节"></a>软件破解和系统安装安装细节</h2><ol>
+<li>AndroidStudio到3.0后遇到一个编译问题Error: java.util.concurrent.ExecutionException: com.android.tools.aapt2，因为用户名是中文名，大多数软件不识别中文用户名路径eg：韩阳阳，需要用Administrator改成HYY英文然后注册表也改，文件夹命名还要加空格</li>
+<li>Xmind8破解<ul>
+<li>下载地址： <a target="_blank" rel="noopener" href="https://www.xmind.cn/download/xmind8">https://www.xmind.cn/download/xmind8</a></li>
+<li>破解连接： <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35911589/article/details/81901868">https://blog.csdn.net/qq_35911589/article/details/81901868</a></li>
+<li>激活：破解补丁下载地址： <ul>
+<li><a target="_blank" rel="noopener" href="https://stormxing.oss-cn-beijing.aliyuncs.com/files/XMindCrack.jar">https://stormxing.oss-cn-beijing.aliyuncs.com/files/XMindCrack.jar</a> </li>
+<li>在XMind安装目录下, 如: C:\Program Files (x86)\XMind，将下载的破解补丁复制到这个目录中。</li>
+</ul>
+</li>
+<li>以文本格式打开安装目录中 XMind.ini在 XMind.ini 最后追加一个字段-javaagent，然后加上XMindCrack.jar的绝对路径。例如:     -javaagent:E:\XMind\XMindCrack.jar</li>
+<li>打开 XMind, 点击帮助-&gt;序列号，然后输入以下序列号 ，邮箱随便填<ul>
+<li><code>XAka34A2rVRYJ4XBIU35UZMUEEF64CMMIYZCK2FZZUQNODEKUHGJLFMSLIQMQUCUBXRENLK6NZL37JXP4PZXQFILMQ2RG5R7G4QNDO3PSOEUBOCDRYSSXZGRARV6MGA33TN2AMUBHEL4FXMWYTTJDEINJXUAV4BAYKBDCZQWVF3LWYXSDCXY546U3NBGOI3ZPAP2SO3CSQFNB7VVIY123456789012345</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>uefi/legacy boot不能修改 <a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/c1a3101e8bf3c2de656debfb.html">http://jingyan.baidu.com/article/c1a3101e8bf3c2de656debfb.html</a></li>
+<li>做系统的两个网站：电脑店U盘，系统之家(大白菜)。小马KMS 10破解系统和office工具</li>
+<li>当文件大于4G时，可以分卷压缩，然后解压时都下载，然后只要解压一个就可以。<h2 id="教程地址"><a href="#教程地址" class="headerlink" title="教程地址"></a>教程地址</h2></li>
+<li> 学习openGL（51cto类似于CSDN，其中有OpenGL教程）</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/">https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/</a></li>
+</ul>
+<ol start="2">
+<li><p>AE模版  <a target="_blank" rel="noopener" href="http://www.adobeae.com/logo/">http://www.adobeae.com/logo/</a></p>
+</li>
+<li><p>vr脚本 <a target="_blank" rel="noopener" href="http://www.52vr.com/article-665-1.html">http://www.52vr.com/article-665-1.html</a></p>
+</li>
+<li><p>国内视频一概拖沓，浪费时间去学习，学习曲线存在的,基本超过10-20小时如果还不进入正规的话，就会有一个下滑期,每次看视频浪费时间，特别是这种拖沓式的，要想真正学习，看国外专业教育网站 (<a target="_blank" rel="noopener" href="https://www.pluralsight.com/)%E8%BF%99%E7%A7%8D%EF%BC%8C%E6%95%99%E7%A8%8B%E4%B8%8D%E8%A6%81%E5%A4%AA%E5%A4%9A%EF%BC%8C%E5%BD%93%E7%84%B6%E6%98%AF%E6%94%B6%E8%B4%B9%E7%9A%84,%E5%A6%82%E6%9E%9C%E7%9C%8B%E5%85%A5%E9%97%A8%E8%A7%86%E9%A2%91%E8%A6%81%E6%83%B3%E8%BF%99%E7%A7%8D2h">https://www.pluralsight.com/)这种，教程不要太多，当然是收费的,如果看入门视频要想这种2h</a> 13分的课程，涵盖了几乎所有内2h 也就看个国内吹水的视频时间吧，更多的学习是要靠思考的</p>
+</li>
+<li><p>高质量的视频教程真的可以让你事半功倍：lynda, Udacity, Udemy，edx</p>
+</li>
+<li><p>jQuery插件库 <a target="_blank" rel="noopener" href="http://www.mobanwang.com/">http://www.mobanwang.com/</a></p>
+</li>
+<li><p>全球最大的3dMax脚本分享网站：<a target="_blank" rel="noopener" href="http://www.scriptspot.com/">http://www.scriptspot.com</a></p>
+</li>
+<li><p>AE模版  大众脸 <a target="_blank" rel="noopener" href="http://www.lookae.com/">http://www.lookae.com/</a> 以及Element3D V2.2插件学习</p>
+</li>
+<li><p>风云工作室<a target="_blank" rel="noopener" href="https://blog.codingnow.com/">https://blog.codingnow.com/</a></p>
+</li>
+<li><p>最漂亮的问卷网：wenjuan.net/</p>
+</li>
+<li><p>视频GIF转换器：<a target="_blank" rel="noopener" href="https://ezgif.com/video-to-gif">https://ezgif.com/video-to-gif</a></p>
+</li>
+<li><p>最专业的H5制作工具：<a target="_blank" rel="noopener" href="http://www.ih5.cn/teach/videos">http://www.ih5.cn/teach/videos</a></p>
+</li>
+<li><p>最漂亮的二维码工具：第九工厂</p>
+</li>
+<li><p>各种苹果系统 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1bptBH9P">https://pan.baidu.com/s/1bptBH9P</a></p>
+</li>
+<li><p>各种Windows系统相关 <a target="_blank" rel="noopener" href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></p>
+</li>
+<li><p>用谷歌翻译比有道好 </p>
+</li>
+<li><p>关于就业：多刷题，牛客网题库，leetcode算法很不错，陈皓（左耳朵耗子）、阮一峰、沈剑、云风、章文嵩、王小川、Boss等招聘网站都会有大量软件开发工程师招聘信息，可以结合自己技术方向，拟定关键字进行搜索，然后看看企业对某个岗位都是什么要求，通过不断分析，就可以列出一张知识、技能清单来，拿着这个清单，就可以去有针对性的发展自己技能，该自学的自学，该培训的培训，该参加开源项目的参加开源项目……</p>
+<h2 id="前端学习技术细节"><a href="#前端学习技术细节" class="headerlink" title="前端学习技术细节"></a>前端学习技术细节</h2></li>
+<li><p>微信编辑器：<a target="_blank" rel="noopener" href="http://bj.96weixin.com/">http://bj.96weixin.com/</a>  微信发布前后，其链接发生变化 </p>
+</li>
+<li><p>草料网址二维码生成器，PPT模板大全：<a target="_blank" rel="noopener" href="http://www.51pptmoban.com/">http://www.51pptmoban.com/</a></p>
+</li>
+<li><p>webpack打包发布项目 IIS网页发布需要设置MINI命令和设置默认文档，上传阿里云，后台需要添加drc和mtl的mimi类型 ubantu系统不用</p>
+</li>
+<li><p>!!!meta标签的作用就是让移动端运行流畅</p>
+</li>
+<li><p>阿里云部署时默认网站右下角出现“?”是因为绑定的端口过多，有可能造成其他网站端口占用，会影响其他网站的访问。如果没有默认网页的话，需要双击浏览目录</p>
+</li>
+<li><p>IIS默认网站可以挂多个Web应用程序，根据虚拟目录来区分 通过“http://域名+虚拟路径名称+起始页”访问，设置默认文档将不同web应用程序路径简化为“http://域名+虚拟路径名称”。如果需设置默认网站，即输入“http://域名”访问默认Web应用程序，可通过Http重定向方式：打开默认网站–&gt;打开http重定向–&gt;在【将请求重定向到此目标】一栏输入“http://域名+默认Web应用程序虚拟路径名称</p>
+<h2 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h2></li>
+<li><p>公用80端口</p>
+<ul>
+<li>路由器默认占用外网80端口，其中80端口被占用分为两种：路由端口，就是外部端口；内部端口，应该是iis中的应用程序的端口。一般默认的80端口都是内部端口</li>
+<li>访问服务器上的网站时，域名（外网ip）+端口（这个端口一定是外部端口）</li>
+<li>一个物理机只有一个内部ip，但是如果有几个虚拟机就有几个内部ip。所以说一个服务器上可以有一个内部ip，也可以有几个内部ip。</li>
+<li>一个服务器上可以发布多个网站，同时也都可以设置为80端口，主机名换成域名(主机头就是域名)</li>
+<li>单电话线进来直接连服务器，直接就是80外部端口，在里边只可以建一个内部端口，然后进行虚拟目录，类似于只能建一个网站，可以发布很多应用程序</li>
+<li>如果映射80端口外网访问是路由器不是需要映射服务器，这也就是Web远程管理。找到安全功能—远程web管理，把远程Web管理关掉，或者修改其他端口</li>
+<li>外部80端口只能调节路由器，联系电信商，或者用阿里云服务器没有80端口限制</li>
+<li>ip绑定域名或者使用80端口解决微信提示继续访问。</li>
+<li>网站发布顺序，iis添加网站端口，无论是共用80，还是不一样的端口，对外发布，对外发布都需要传到路由器，端口映射，在通过外部端口。</li>
+<li>DNS域名系统中有个字典可以将域名绑定到公网ip</li>
+<li>DHCP是指由服务器控制一段IP地址范围，客户机登录服务器时就可以自动获得服务器分配的IP地址和子网掩码。</li>
+<li>在一个服务器中（没有虚拟机，只有一个内部ip）发布多个网站（不是在一个网站里发布多个应用程序），想要共用80端口，需要绑定不同主机名（自己注册的域名），做映射时，绑定不同的外部端口就ok了。</li>
+<li>所谓共用80端口，是指内部80端口共用，其外部端口不同，不同域名对应不同的外部端口。因为访问程序地址，可以通过不同端口或者不同ip访问</li>
+<li>服务器不能粘贴时：在服务器上打开任务管理器，查看进程，有 rdpclip.exe 进程。通常，只要存在该进程，就可以在本机和远程服务器之间粘贴文本了。关闭此进程，然后 开始-&gt;运行-&gt;rdpclip.exe 重新运行此程序，恢复正常。</li>
+<li>交换机处理细节<ul>
+<li>1，交换机连接交换机组成回路，造成网络拥塞,用户端看到的现象是网速延迟很高很不稳定或者无法正常通信</li>
+<li>2，部门内部最好是进线先接路由，再接交换机，这样就不会涉及到同一网段虚拟ip占用问题，这就是做好上下级局域网</li>
+<li><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%92%8C%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB.png" alt="avatar"> </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>域名解析和绑定问题</p>
+<ul>
+<li>如果是内网服务器，防火墙就夹在外网和服务器之间，结构是外网-防火墙-交换机-服务器</li>
+<li><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.png" alt="avatar"> </li>
+<li>站头三种标识</li>
+<li> <img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E7%AB%99%E7%82%B9%E4%B8%89%E7%A7%8D%E6%A0%87%E8%AF%86.png" alt="avatar"> </li>
+<li>域名必须对应一个IP地址，一个IP地址可以有多个域名，而IP地址不一定有域名。域名映射为IP地址的过程就称为“域名解析”。反过来网站主机头绑定域名</li>
+</ul>
+</li>
+<li><p>Hosts文件主要作用</p>
+<ul>
+<li>是定义IP地址和主机名的映射关系，是一个映射IP地址和主机名的规定。可以用文本文件打开！当用户在浏览器中输入一个需要登录的网址时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，浏览器会立即打开对应网页，如果没有找到，则浏览器会将网址提交DNS服务器进行IP地址解析。这也是提高快速打开网页的方法！ </li>
+<li><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/hosts%E6%96%87%E4%BB%B6.png" alt="avatar"></li>
+</ul>
+</li>
+<li><p>网关是一个IP地址。是一个网络连接到另一个网络的“关口”,公司用的拨号路由=家里用的猫，他下边连的交换机。路由器是做端口映射工作</p>
+<h2 id="OpenCV局部-自适应快速二值化提取线稿图"><a href="#OpenCV局部-自适应快速二值化提取线稿图" class="headerlink" title="OpenCV局部 自适应快速二值化提取线稿图"></a>OpenCV局部 自适应快速二值化提取线稿图</h2></li>
+<li><p>OpenCV提取连接</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17550379/article/details/78358047">https://blog.csdn.net/qq_17550379/article/details/78358047</a> </li>
+<li><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/a948d65136dcd80a2dcd2e88.html">https://jingyan.baidu.com/article/a948d65136dcd80a2dcd2e88.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/ae97a646fc3ff0bbfd461d09.html">https://jingyan.baidu.com/article/ae97a646fc3ff0bbfd461d09.html</a></li>
+</ul>
+</li>
+<li><p>OpenCV自适应二值化连接</p>
+<ul>
+<li>文字：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/begoogatprogram/p/6071304.html">https://www.cnblogs.com/begoogatprogram/p/6071304.html</a></li>
+<li>图片：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangfuliang123/article/details/77568464">https://blog.csdn.net/zhangfuliang123/article/details/77568464</a></li>
+</ul>
+</li>
+</ol>
+<p> <img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/OpenCV%E8%A7%A3%E5%86%B3%E5%9B%BE%E7%89%87%E9%97%AA%E9%80%80%E9%97%AE%E9%A2%98.png" alt="avatar"></p>
+<h2 id="ThreeJS实现原理"><a href="#ThreeJS实现原理" class="headerlink" title="ThreeJS实现原理"></a>ThreeJS实现原理</h2><ol>
+<li>创建场景</li>
+</ol>
+<p><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/ThreeJS%E5%88%9B%E5%BB%BA%E5%9C%BA%E6%99%AF.png" alt="avatar"></p>
+<ol start="2">
+<li>draco源代码<br><a target="_blank" rel="noopener" href="https://github.com/google/draco/blob/master/javascript/example/webgl_loader_draco_advanced.html">https://github.com/google/draco/blob/master/javascript/example/webgl_loader_draco_advanced.html</a></li>
+<li>ThreeJS代码结构<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/renguoqing1001/article/details/51374600">http://blog.csdn.net/renguoqing1001/article/details/51374600</a></li>
+<li>draco例子<br><a target="_blank" rel="noopener" href="https://storage.googleapis.com/demos.webmproject.org/draco/draco_loader_throw.html">https://storage.googleapis.com/demos.webmproject.org/draco/draco_loader_throw.html</a></li>
+<li>Google利用draco压缩<ul>
+<li>用chrome加载okay.js所在的网页，可以反编译okay.js</li>
+<li><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/Google%E5%8F%8D%E7%BC%96%E8%AF%91.png" alt="avatar"></li>
+</ul>
+</li>
+<li>Potree和Three.js加载海量点云<ul>
+<li>使用Potree进行点云可视化(ubuntu) <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f8dd84651526">https://www.jianshu.com/p/f8dd84651526</a></li>
+<li>Potree学习总结 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/marblemm/p/9242239.html">https://www.cnblogs.com/marblemm/p/9242239.html</a><h2 id="MySQL数据库"><a href="#MySQL数据库" class="headerlink" title="MySQL数据库"></a>MySQL数据库</h2></li>
+</ul>
+</li>
+<li>DDL(Data Definition Language)对库、表、列(字段)进行操作<br>DML(Data Manipulation language)对表中数据进行操作insert updata delete<br>DQL(Data Query Language)用来查询记录(数据)</li>
+<li>delete from mytable1报错1175 是因为安全模式 需要跑一遍<ul>
+<li><code>set sql_safe_updates=0;</code>相当于关掉安全模式，然后再删</li>
+</ul>
+</li>
+<li>select *from new_table;之后有的表可以双击添加数据是因为这个表是右键创建的 不是create的。</li>
+<li>安条件搜索 and左右两边需要有个空格<ul>
+<li><code>select*from mytable1 where id=3 and name=&#39;历史12&#39;;</code></li>
+</ul>
+</li>
+<li>‘_’’%’分别代表一个和无数个字符<br>去除重复记录deptnosal+ifnull(comm,0) as总金额 ，其中ifnull中代表不为空，as是改变列名(可以用空格代替)<ul>
+<li><code>order by id asc 升序 desc 降序</code></li>
+<li><code>order by id desc,name desc; 两个条件</code></li>
+<li><code>sum avg max min count 聚合函数 都是指定列操作</code></li>
+</ul>
+</li>
+<li>DQL分组查询<ul>
+<li><code>select min(id),max(id)from mytable1; 两列</code></li>
+<li><code>select money,count(*)from mytable22 group by money;根据money分类 count(*)前边不可以加money,但是后边有group by就可以了</code></li>
+<li><code>having sum(id)追加在最后 用虚拟表进行条件查询</code></li>
+<li><code>where后边不能用聚合函数</code></li>
+</ul>
+</li>
+<li>LIMIT限定查询<ul>
+<li><code>select money from mytable22 limit 0,3;从0开始查3行</code></li>
+</ul>
+</li>
+<li>实体完整性中的主键约束(primary key)3种方法,唯一约束(unique)自动增长列(auto_increment)主键唯一键的区别是 主键不能为null自动增长键是根据主键一起用的</li>
+<li>域完整性 只检测一个单元格数据，实体完整性是根据列检测非空约束 not null 默认值约束<ul>
+<li><code>default insert into student values(&#39;1001&#39;,&#39;aa&#39;);是因为编码的原因，然‘aa’不可以是汉字</code></li>
+</ul>
+</li>
+<li>引用完整性 就是两个表拥有共同的id，通过名字-&gt;id-&gt;成绩需要外键起约束作用</li>
+</ol>
+<ul>
+<li><code>方法一：constraint fk_stu_sco Foreign key(stuid) references student(stuid)  fk_stu_sco中stu引用表的名字，当前表的名字。</code></li>
+<li><code>方法二:Alter table score add constraint(约束) fk_stu_score foreign key(sid) references(参照) stu(id);</code><h2 id="JAVA相关"><a href="#JAVA相关" class="headerlink" title="JAVA相关"></a>JAVA相关</h2></li>
+</ul>
+<ol>
+<li>java反射机制：根据类的信息，动态创建对象并调用相关方法<br>Class对象：用来记录类的信息 比如类的名称 类的方法还有属性<br>1、Class clz=NameUtil.Class;<br>clz是对象，拥有NameUtil类中的方法属性<br>2、Class clx=Class.forName(“”);需要try起来，有可能””中的类不存在</li>
+<li>快捷键操作<ol>
+<li>快捷键 ctrl+shift+o 导入引用空间</li>
+<li>doGet函数 Alt+/ 补全函数</li>
+<li>在函数上按住ctrl 会显示子类继承信息 </li>
+<li>跟目录的文件右键选择buildpath 添加库</li>
+<li>Alt+shift+s自动生成set get代码 </li>
+<li>ctrl+shift+f 代码规整</li>
+</ol>
+</li>
+<li>先执行@WebFilter(“/rand”)过滤器再执行@WebServlet(“/rand”)<br>integer类是对int类型的封装，初始值为null</li>
+<li>一种机制：只需要考虑程序能从头走到尾这一种逻辑 ，其他都是报错，最后对错误进行统一管理 可以少掉一些头发</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/17/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/" data-id="ckp3bilil00034sue19gu8qwr" data-title="过往学习" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/16/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2021-04-16T13:27:16.122Z" itemprop="datePublished">2021-04-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/16/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/16/hello-world/" data-id="ckp3bilih00024suefu8vc16f" data-title="Hello World" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

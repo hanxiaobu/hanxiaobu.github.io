@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>过往学习 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="三维模型处理细节 3Dmax相机渲染视频 卡关键帧时，自动关键点（快捷键N）必须开着，否则所有帧都变了 F5，F6，F7，分别是XYZ轴约束，C快捷键是相机视角，F9渲染上一帧，shift+q渲染当前帧，空格是锁定当前视角 shift+F 显示渲染的区域（黄色框内），在右下角右键选择布局，选择左右两个的布局 相机约束，先建立多边线指定路径，然后选择动画-约束-路径约束，将相机指到路径上 需要相机旋">
+<meta property="og:type" content="article">
+<meta property="og:title" content="过往学习">
+<meta property="og:url" content="http://example.com/2021/04/17/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="三维模型处理细节 3Dmax相机渲染视频 卡关键帧时，自动关键点（快捷键N）必须开着，否则所有帧都变了 F5，F6，F7，分别是XYZ轴约束，C快捷键是相机视角，F9渲染上一帧，shift+q渲染当前帧，空格是锁定当前视角 shift+F 显示渲染的区域（黄色框内），在右下角右键选择布局，选择左右两个的布局 相机约束，先建立多边线指定路径，然后选择动画-约束-路径约束，将相机指到路径上 需要相机旋">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%92%8C%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB.png">
+<meta property="og:image" content="http://example.com/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://example.com/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E7%AB%99%E7%82%B9%E4%B8%89%E7%A7%8D%E6%A0%87%E8%AF%86.png">
+<meta property="og:image" content="http://example.com/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/hosts%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://example.com/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/OpenCV%E8%A7%A3%E5%86%B3%E5%9B%BE%E7%89%87%E9%97%AA%E9%80%80%E9%97%AE%E9%A2%98.png">
+<meta property="og:image" content="http://example.com/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/ThreeJS%E5%88%9B%E5%BB%BA%E5%9C%BA%E6%99%AF.png">
+<meta property="og:image" content="http://example.com/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/Google%E5%8F%8D%E7%BC%96%E8%AF%91.png">
+<meta property="article:published_time" content="2021-04-17T15:58:12.037Z">
+<meta property="article:modified_time" content="2021-04-26T17:08:01.813Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%92%8C%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-过往学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/17/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2021-04-17T15:58:12.037Z" itemprop="datePublished">2021-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      过往学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="三维模型处理细节"><a href="#三维模型处理细节" class="headerlink" title="三维模型处理细节"></a>三维模型处理细节</h2><ol>
+<li>3Dmax相机渲染视频<ul>
+<li>卡关键帧时，自动关键点（快捷键N）必须开着，否则所有帧都变了</li>
+<li>F5，F6，F7，分别是XYZ轴约束，C快捷键是相机视角，F9渲染上一帧，shift+q渲染当前帧，空格是锁定当前视角</li>
+<li>shift+F 显示渲染的区域（黄色框内），在右下角右键选择布局，选择左右两个的布局</li>
+<li>相机约束，先建立多边线指定路径，然后选择动画-约束-路径约束，将相机指到路径上</li>
+<li>需要相机旋转的时候不能用K键，需要点击右键，在帧位置设置空的旋转帧，然后在帧的位置相机旋转，右键设置第二个旋转帧，前一千帧可以运行是因为只有一种变化（平移）</li>
+<li>模型UV在mudbox中与贴图是严丝合缝，而实际中贴图需要在max中烘焙一下，模型对烘导出溢出值，尽量设置大一点(7~8)左右</li>
+</ul>
+</li>
+<li>四边面通过Zbrush减面可以变成三角面，WebGl可以加载三角面，模型中只要有部分三角面就可以，其他的都是四边面</li>
+<li>zbrush减面和3dmax减面的区别：<br>zbrush减面过程UVW不变，max中减面（就是专业优化）其中的uvw会变化。其中zbrush支持obj。</li>
+<li>用Crazybump软件生成法线贴图</li>
+</ol>
+<h2 id="软件破解和系统安装安装细节"><a href="#软件破解和系统安装安装细节" class="headerlink" title="软件破解和系统安装安装细节"></a>软件破解和系统安装安装细节</h2><ol>
+<li>AndroidStudio到3.0后遇到一个编译问题Error: java.util.concurrent.ExecutionException: com.android.tools.aapt2，因为用户名是中文名，大多数软件不识别中文用户名路径eg：韩阳阳，需要用Administrator改成HYY英文然后注册表也改，文件夹命名还要加空格</li>
+<li>Xmind8破解<ul>
+<li>下载地址： <a target="_blank" rel="noopener" href="https://www.xmind.cn/download/xmind8">https://www.xmind.cn/download/xmind8</a></li>
+<li>破解连接： <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35911589/article/details/81901868">https://blog.csdn.net/qq_35911589/article/details/81901868</a></li>
+<li>激活：破解补丁下载地址： <ul>
+<li><a target="_blank" rel="noopener" href="https://stormxing.oss-cn-beijing.aliyuncs.com/files/XMindCrack.jar">https://stormxing.oss-cn-beijing.aliyuncs.com/files/XMindCrack.jar</a> </li>
+<li>在XMind安装目录下, 如: C:\Program Files (x86)\XMind，将下载的破解补丁复制到这个目录中。</li>
+</ul>
+</li>
+<li>以文本格式打开安装目录中 XMind.ini在 XMind.ini 最后追加一个字段-javaagent，然后加上XMindCrack.jar的绝对路径。例如:     -javaagent:E:\XMind\XMindCrack.jar</li>
+<li>打开 XMind, 点击帮助-&gt;序列号，然后输入以下序列号 ，邮箱随便填<ul>
+<li><code>XAka34A2rVRYJ4XBIU35UZMUEEF64CMMIYZCK2FZZUQNODEKUHGJLFMSLIQMQUCUBXRENLK6NZL37JXP4PZXQFILMQ2RG5R7G4QNDO3PSOEUBOCDRYSSXZGRARV6MGA33TN2AMUBHEL4FXMWYTTJDEINJXUAV4BAYKBDCZQWVF3LWYXSDCXY546U3NBGOI3ZPAP2SO3CSQFNB7VVIY123456789012345</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>uefi/legacy boot不能修改 <a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/c1a3101e8bf3c2de656debfb.html">http://jingyan.baidu.com/article/c1a3101e8bf3c2de656debfb.html</a></li>
+<li>做系统的两个网站：电脑店U盘，系统之家(大白菜)。小马KMS 10破解系统和office工具</li>
+<li>当文件大于4G时，可以分卷压缩，然后解压时都下载，然后只要解压一个就可以。<h2 id="教程地址"><a href="#教程地址" class="headerlink" title="教程地址"></a>教程地址</h2></li>
+<li> 学习openGL（51cto类似于CSDN，其中有OpenGL教程）</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/">https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/</a></li>
+</ul>
+<ol start="2">
+<li><p>AE模版  <a target="_blank" rel="noopener" href="http://www.adobeae.com/logo/">http://www.adobeae.com/logo/</a></p>
+</li>
+<li><p>vr脚本 <a target="_blank" rel="noopener" href="http://www.52vr.com/article-665-1.html">http://www.52vr.com/article-665-1.html</a></p>
+</li>
+<li><p>国内视频一概拖沓，浪费时间去学习，学习曲线存在的,基本超过10-20小时如果还不进入正规的话，就会有一个下滑期,每次看视频浪费时间，特别是这种拖沓式的，要想真正学习，看国外专业教育网站 (<a target="_blank" rel="noopener" href="https://www.pluralsight.com/)%E8%BF%99%E7%A7%8D%EF%BC%8C%E6%95%99%E7%A8%8B%E4%B8%8D%E8%A6%81%E5%A4%AA%E5%A4%9A%EF%BC%8C%E5%BD%93%E7%84%B6%E6%98%AF%E6%94%B6%E8%B4%B9%E7%9A%84,%E5%A6%82%E6%9E%9C%E7%9C%8B%E5%85%A5%E9%97%A8%E8%A7%86%E9%A2%91%E8%A6%81%E6%83%B3%E8%BF%99%E7%A7%8D2h">https://www.pluralsight.com/)这种，教程不要太多，当然是收费的,如果看入门视频要想这种2h</a> 13分的课程，涵盖了几乎所有内2h 也就看个国内吹水的视频时间吧，更多的学习是要靠思考的</p>
+</li>
+<li><p>高质量的视频教程真的可以让你事半功倍：lynda, Udacity, Udemy，edx</p>
+</li>
+<li><p>jQuery插件库 <a target="_blank" rel="noopener" href="http://www.mobanwang.com/">http://www.mobanwang.com/</a></p>
+</li>
+<li><p>全球最大的3dMax脚本分享网站：<a target="_blank" rel="noopener" href="http://www.scriptspot.com/">http://www.scriptspot.com</a></p>
+</li>
+<li><p>AE模版  大众脸 <a target="_blank" rel="noopener" href="http://www.lookae.com/">http://www.lookae.com/</a> 以及Element3D V2.2插件学习</p>
+</li>
+<li><p>风云工作室<a target="_blank" rel="noopener" href="https://blog.codingnow.com/">https://blog.codingnow.com/</a></p>
+</li>
+<li><p>最漂亮的问卷网：wenjuan.net/</p>
+</li>
+<li><p>视频GIF转换器：<a target="_blank" rel="noopener" href="https://ezgif.com/video-to-gif">https://ezgif.com/video-to-gif</a></p>
+</li>
+<li><p>最专业的H5制作工具：<a target="_blank" rel="noopener" href="http://www.ih5.cn/teach/videos">http://www.ih5.cn/teach/videos</a></p>
+</li>
+<li><p>最漂亮的二维码工具：第九工厂</p>
+</li>
+<li><p>各种苹果系统 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1bptBH9P">https://pan.baidu.com/s/1bptBH9P</a></p>
+</li>
+<li><p>各种Windows系统相关 <a target="_blank" rel="noopener" href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></p>
+</li>
+<li><p>用谷歌翻译比有道好 </p>
+</li>
+<li><p>关于就业：多刷题，牛客网题库，leetcode算法很不错，陈皓（左耳朵耗子）、阮一峰、沈剑、云风、章文嵩、王小川、Boss等招聘网站都会有大量软件开发工程师招聘信息，可以结合自己技术方向，拟定关键字进行搜索，然后看看企业对某个岗位都是什么要求，通过不断分析，就可以列出一张知识、技能清单来，拿着这个清单，就可以去有针对性的发展自己技能，该自学的自学，该培训的培训，该参加开源项目的参加开源项目……</p>
+<h2 id="前端学习技术细节"><a href="#前端学习技术细节" class="headerlink" title="前端学习技术细节"></a>前端学习技术细节</h2></li>
+<li><p>微信编辑器：<a target="_blank" rel="noopener" href="http://bj.96weixin.com/">http://bj.96weixin.com/</a>  微信发布前后，其链接发生变化 </p>
+</li>
+<li><p>草料网址二维码生成器，PPT模板大全：<a target="_blank" rel="noopener" href="http://www.51pptmoban.com/">http://www.51pptmoban.com/</a></p>
+</li>
+<li><p>webpack打包发布项目 IIS网页发布需要设置MINI命令和设置默认文档，上传阿里云，后台需要添加drc和mtl的mimi类型 ubantu系统不用</p>
+</li>
+<li><p>!!!meta标签的作用就是让移动端运行流畅</p>
+</li>
+<li><p>阿里云部署时默认网站右下角出现“?”是因为绑定的端口过多，有可能造成其他网站端口占用，会影响其他网站的访问。如果没有默认网页的话，需要双击浏览目录</p>
+</li>
+<li><p>IIS默认网站可以挂多个Web应用程序，根据虚拟目录来区分 通过“http://域名+虚拟路径名称+起始页”访问，设置默认文档将不同web应用程序路径简化为“http://域名+虚拟路径名称”。如果需设置默认网站，即输入“http://域名”访问默认Web应用程序，可通过Http重定向方式：打开默认网站–&gt;打开http重定向–&gt;在【将请求重定向到此目标】一栏输入“http://域名+默认Web应用程序虚拟路径名称</p>
+<h2 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h2></li>
+<li><p>公用80端口</p>
+<ul>
+<li>路由器默认占用外网80端口，其中80端口被占用分为两种：路由端口，就是外部端口；内部端口，应该是iis中的应用程序的端口。一般默认的80端口都是内部端口</li>
+<li>访问服务器上的网站时，域名（外网ip）+端口（这个端口一定是外部端口）</li>
+<li>一个物理机只有一个内部ip，但是如果有几个虚拟机就有几个内部ip。所以说一个服务器上可以有一个内部ip，也可以有几个内部ip。</li>
+<li>一个服务器上可以发布多个网站，同时也都可以设置为80端口，主机名换成域名(主机头就是域名)</li>
+<li>单电话线进来直接连服务器，直接就是80外部端口，在里边只可以建一个内部端口，然后进行虚拟目录，类似于只能建一个网站，可以发布很多应用程序</li>
+<li>如果映射80端口外网访问是路由器不是需要映射服务器，这也就是Web远程管理。找到安全功能—远程web管理，把远程Web管理关掉，或者修改其他端口</li>
+<li>外部80端口只能调节路由器，联系电信商，或者用阿里云服务器没有80端口限制</li>
+<li>ip绑定域名或者使用80端口解决微信提示继续访问。</li>
+<li>网站发布顺序，iis添加网站端口，无论是共用80，还是不一样的端口，对外发布，对外发布都需要传到路由器，端口映射，在通过外部端口。</li>
+<li>DNS域名系统中有个字典可以将域名绑定到公网ip</li>
+<li>DHCP是指由服务器控制一段IP地址范围，客户机登录服务器时就可以自动获得服务器分配的IP地址和子网掩码。</li>
+<li>在一个服务器中（没有虚拟机，只有一个内部ip）发布多个网站（不是在一个网站里发布多个应用程序），想要共用80端口，需要绑定不同主机名（自己注册的域名），做映射时，绑定不同的外部端口就ok了。</li>
+<li>所谓共用80端口，是指内部80端口共用，其外部端口不同，不同域名对应不同的外部端口。因为访问程序地址，可以通过不同端口或者不同ip访问</li>
+<li>服务器不能粘贴时：在服务器上打开任务管理器，查看进程，有 rdpclip.exe 进程。通常，只要存在该进程，就可以在本机和远程服务器之间粘贴文本了。关闭此进程，然后 开始-&gt;运行-&gt;rdpclip.exe 重新运行此程序，恢复正常。</li>
+<li>交换机处理细节<ul>
+<li>1，交换机连接交换机组成回路，造成网络拥塞,用户端看到的现象是网速延迟很高很不稳定或者无法正常通信</li>
+<li>2，部门内部最好是进线先接路由，再接交换机，这样就不会涉及到同一网段虚拟ip占用问题，这就是做好上下级局域网</li>
+<li><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%92%8C%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB.png" alt="avatar"> </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>域名解析和绑定问题</p>
+<ul>
+<li>如果是内网服务器，防火墙就夹在外网和服务器之间，结构是外网-防火墙-交换机-服务器</li>
+<li><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.png" alt="avatar"> </li>
+<li>站头三种标识</li>
+<li> <img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/%E7%AB%99%E7%82%B9%E4%B8%89%E7%A7%8D%E6%A0%87%E8%AF%86.png" alt="avatar"> </li>
+<li>域名必须对应一个IP地址，一个IP地址可以有多个域名，而IP地址不一定有域名。域名映射为IP地址的过程就称为“域名解析”。反过来网站主机头绑定域名</li>
+</ul>
+</li>
+<li><p>Hosts文件主要作用</p>
+<ul>
+<li>是定义IP地址和主机名的映射关系，是一个映射IP地址和主机名的规定。可以用文本文件打开！当用户在浏览器中输入一个需要登录的网址时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，浏览器会立即打开对应网页，如果没有找到，则浏览器会将网址提交DNS服务器进行IP地址解析。这也是提高快速打开网页的方法！ </li>
+<li><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/hosts%E6%96%87%E4%BB%B6.png" alt="avatar"></li>
+</ul>
+</li>
+<li><p>网关是一个IP地址。是一个网络连接到另一个网络的“关口”,公司用的拨号路由=家里用的猫，他下边连的交换机。路由器是做端口映射工作</p>
+<h2 id="OpenCV局部-自适应快速二值化提取线稿图"><a href="#OpenCV局部-自适应快速二值化提取线稿图" class="headerlink" title="OpenCV局部 自适应快速二值化提取线稿图"></a>OpenCV局部 自适应快速二值化提取线稿图</h2></li>
+<li><p>OpenCV提取连接</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17550379/article/details/78358047">https://blog.csdn.net/qq_17550379/article/details/78358047</a> </li>
+<li><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/a948d65136dcd80a2dcd2e88.html">https://jingyan.baidu.com/article/a948d65136dcd80a2dcd2e88.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/ae97a646fc3ff0bbfd461d09.html">https://jingyan.baidu.com/article/ae97a646fc3ff0bbfd461d09.html</a></li>
+</ul>
+</li>
+<li><p>OpenCV自适应二值化连接</p>
+<ul>
+<li>文字：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/begoogatprogram/p/6071304.html">https://www.cnblogs.com/begoogatprogram/p/6071304.html</a></li>
+<li>图片：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangfuliang123/article/details/77568464">https://blog.csdn.net/zhangfuliang123/article/details/77568464</a></li>
+</ul>
+</li>
+</ol>
+<p> <img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/OpenCV%E8%A7%A3%E5%86%B3%E5%9B%BE%E7%89%87%E9%97%AA%E9%80%80%E9%97%AE%E9%A2%98.png" alt="avatar"></p>
+<h2 id="ThreeJS实现原理"><a href="#ThreeJS实现原理" class="headerlink" title="ThreeJS实现原理"></a>ThreeJS实现原理</h2><ol>
+<li>创建场景</li>
+</ol>
+<p><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/ThreeJS%E5%88%9B%E5%BB%BA%E5%9C%BA%E6%99%AF.png" alt="avatar"></p>
+<ol start="2">
+<li>draco源代码<br><a target="_blank" rel="noopener" href="https://github.com/google/draco/blob/master/javascript/example/webgl_loader_draco_advanced.html">https://github.com/google/draco/blob/master/javascript/example/webgl_loader_draco_advanced.html</a></li>
+<li>ThreeJS代码结构<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/renguoqing1001/article/details/51374600">http://blog.csdn.net/renguoqing1001/article/details/51374600</a></li>
+<li>draco例子<br><a target="_blank" rel="noopener" href="https://storage.googleapis.com/demos.webmproject.org/draco/draco_loader_throw.html">https://storage.googleapis.com/demos.webmproject.org/draco/draco_loader_throw.html</a></li>
+<li>Google利用draco压缩<ul>
+<li>用chrome加载okay.js所在的网页，可以反编译okay.js</li>
+<li><img src="/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/Google%E5%8F%8D%E7%BC%96%E8%AF%91.png" alt="avatar"></li>
+</ul>
+</li>
+<li>Potree和Three.js加载海量点云<ul>
+<li>使用Potree进行点云可视化(ubuntu) <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f8dd84651526">https://www.jianshu.com/p/f8dd84651526</a></li>
+<li>Potree学习总结 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/marblemm/p/9242239.html">https://www.cnblogs.com/marblemm/p/9242239.html</a><h2 id="MySQL数据库"><a href="#MySQL数据库" class="headerlink" title="MySQL数据库"></a>MySQL数据库</h2></li>
+</ul>
+</li>
+<li>DDL(Data Definition Language)对库、表、列(字段)进行操作<br>DML(Data Manipulation language)对表中数据进行操作insert updata delete<br>DQL(Data Query Language)用来查询记录(数据)</li>
+<li>delete from mytable1报错1175 是因为安全模式 需要跑一遍<ul>
+<li><code>set sql_safe_updates=0;</code>相当于关掉安全模式，然后再删</li>
+</ul>
+</li>
+<li>select *from new_table;之后有的表可以双击添加数据是因为这个表是右键创建的 不是create的。</li>
+<li>安条件搜索 and左右两边需要有个空格<ul>
+<li><code>select*from mytable1 where id=3 and name=&#39;历史12&#39;;</code></li>
+</ul>
+</li>
+<li>‘_’’%’分别代表一个和无数个字符<br>去除重复记录deptnosal+ifnull(comm,0) as总金额 ，其中ifnull中代表不为空，as是改变列名(可以用空格代替)<ul>
+<li><code>order by id asc 升序 desc 降序</code></li>
+<li><code>order by id desc,name desc; 两个条件</code></li>
+<li><code>sum avg max min count 聚合函数 都是指定列操作</code></li>
+</ul>
+</li>
+<li>DQL分组查询<ul>
+<li><code>select min(id),max(id)from mytable1; 两列</code></li>
+<li><code>select money,count(*)from mytable22 group by money;根据money分类 count(*)前边不可以加money,但是后边有group by就可以了</code></li>
+<li><code>having sum(id)追加在最后 用虚拟表进行条件查询</code></li>
+<li><code>where后边不能用聚合函数</code></li>
+</ul>
+</li>
+<li>LIMIT限定查询<ul>
+<li><code>select money from mytable22 limit 0,3;从0开始查3行</code></li>
+</ul>
+</li>
+<li>实体完整性中的主键约束(primary key)3种方法,唯一约束(unique)自动增长列(auto_increment)主键唯一键的区别是 主键不能为null自动增长键是根据主键一起用的</li>
+<li>域完整性 只检测一个单元格数据，实体完整性是根据列检测非空约束 not null 默认值约束<ul>
+<li><code>default insert into student values(&#39;1001&#39;,&#39;aa&#39;);是因为编码的原因，然‘aa’不可以是汉字</code></li>
+</ul>
+</li>
+<li>引用完整性 就是两个表拥有共同的id，通过名字-&gt;id-&gt;成绩需要外键起约束作用</li>
+</ol>
+<ul>
+<li><code>方法一：constraint fk_stu_sco Foreign key(stuid) references student(stuid)  fk_stu_sco中stu引用表的名字，当前表的名字。</code></li>
+<li><code>方法二:Alter table score add constraint(约束) fk_stu_score foreign key(sid) references(参照) stu(id);</code><h2 id="JAVA相关"><a href="#JAVA相关" class="headerlink" title="JAVA相关"></a>JAVA相关</h2></li>
+</ul>
+<ol>
+<li>java反射机制：根据类的信息，动态创建对象并调用相关方法<br>Class对象：用来记录类的信息 比如类的名称 类的方法还有属性<br>1、Class clz=NameUtil.Class;<br>clz是对象，拥有NameUtil类中的方法属性<br>2、Class clx=Class.forName(“”);需要try起来，有可能””中的类不存在</li>
+<li>快捷键操作<ol>
+<li>快捷键 ctrl+shift+o 导入引用空间</li>
+<li>doGet函数 Alt+/ 补全函数</li>
+<li>在函数上按住ctrl 会显示子类继承信息 </li>
+<li>跟目录的文件右键选择buildpath 添加库</li>
+<li>Alt+shift+s自动生成set get代码 </li>
+<li>ctrl+shift+f 代码规整</li>
+</ol>
+</li>
+<li>先执行@WebFilter(“/rand”)过滤器再执行@WebServlet(“/rand”)<br>integer类是对int类型的封装，初始值为null</li>
+<li>一种机制：只需要考虑程序能从头走到尾这一种逻辑 ，其他都是报错，最后对错误进行统一管理 可以少掉一些头发</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/17/%E8%BF%87%E5%BE%80%E5%AD%A6%E4%B9%A0/" data-id="ckp3bilil00034sue19gu8qwr" data-title="过往学习" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux基础知识
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

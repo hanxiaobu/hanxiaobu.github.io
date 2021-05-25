@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>数据库学习 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Oracle Oracle数据库安装： win10本机安装Oracle(当做服务器&#x3D;&#x3D;自己装服务器)   虚拟机安装win7来链接本地oracle(当做客户端)本机需要启动OracleServiceORCL   home1TNSListener 虚拟机win7需要执行 在命令行窗口 sqlplus scott&#x2F;tiger 然后在sql窗口中执行：SQL&gt;select * from tab;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库学习">
+<meta property="og:url" content="http://example.com/2021/04/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Oracle Oracle数据库安装： win10本机安装Oracle(当做服务器&#x3D;&#x3D;自己装服务器)   虚拟机安装win7来链接本地oracle(当做客户端)本机需要启动OracleServiceORCL   home1TNSListener 虚拟机win7需要执行 在命令行窗口 sqlplus scott&#x2F;tiger 然后在sql窗口中执行：SQL&gt;select * from tab;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-24T12:40:10.182Z">
+<meta property="article:modified_time" content="2021-04-24T13:37:25.977Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-数据库学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2021-04-24T12:40:10.182Z" itemprop="datePublished">2021-04-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      数据库学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Oracle"><a href="#Oracle" class="headerlink" title="Oracle"></a>Oracle</h2><ol>
+<li>Oracle数据库安装：<ol>
+<li>win10本机安装Oracle(当做服务器==自己装服务器)   虚拟机安装win7来链接本地oracle(当做客户端)<br>本机需要启动OracleServiceORCL   home1TNSListener<br> 虚拟机win7需要执行 在命令行窗口 sqlplus scott/tiger<br> 然后在sql窗口中执行：SQL&gt;select * from tab;  然后出现四张表<br> 这种方式比较简单 本机启动oracle 虚拟机一连</li>
+<li>使用虚拟机：虚拟机需要安装oracle数据库<br>本机需要自己安装oracle客户端：一定要选管理员  然后使用plsqldevelop软件<br>需要使用linux下启动oracle数据库    让本机的oracle客户端去连</li>
+<li>oracle服务器 ：<br>SYSDBA账户：sys 密码sys     SYSDBA账户：system 密码：manager<br>Normal用户 ： scott    密码：tiger  Normal用户 ： hr   密码：hr</li>
+</ol>
+</li>
+<li>oracle安装注意事项：<ol>
+<li>路径里不要有中文和空格，ups系统 不间断电源系统</li>
+<li>我们通过操作实例(内存)来操作数据库(硬盘上),一旦SGA(System Global Area)提交数据，就不支持回滚了,</li>
+<li>客户端提交的请求都会进入到PGA(progrem Global Area)中处理</li>
+<li>实例：就是一组进程(服务==守护进程) ：比如查询订单是通过oracle服务查询订单</li>
+<li>逻辑概念：表空间，表空间由多个数据文件组成。位于实例上，在内存中。其中有个映射的操作类似map</li>
+<li>物理概念：数据文件，位于硬盘之上。(C:\app\Administrator\oradata\orcl目录内后缀为.DBF的文件)，一个表空间可以包含一个或者是多个数据文件。1：n（表空间：数据文件）</li>
+</ol>
+</li>
+<li>虚拟机(ubuntu和redhat)安装oracle辛酸史：<ol>
+<li>Ubuntu安装Oracle手册（简单版）：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/rogear/p/8075455.html">https://www.cnblogs.com/rogear/p/8075455.html</a></li>
+<li>史上最详细最全的CentOS(Linux)上安装Oracle的教程：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/binqq/articles/10907055.html">https://www.cnblogs.com/binqq/articles/10907055.html</a></li>
+<li>VMware下对Ubuntu进行扩充磁盘大小 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Timsley/article/details/50742755">https://blog.csdn.net/Timsley/article/details/50742755</a></li>
+<li>虚拟机中ubuntu的swap空间不足：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33911208/article/details/84578318">https://blog.csdn.net/qq_33911208/article/details/84578318</a></li>
+<li>oracle为hr用户解锁，添加scott用户：  <a target="_blank" rel="noopener" href="https://blog.csdn.net/u011521890/article/details/52202962">https://blog.csdn.net/u011521890/article/details/52202962</a></li>
+</ol>
+</li>
+<li>使用where进行过滤:<ul>
+<li>若在编写sql语句的时候, 书写错误, 则可以进行修改:   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * ffom</span><br><span class="line">SQL&gt; emp;</span><br><span class="line">先输入: 错误发生的那一行, 然后输入c /ffom/from,最后输入/执行sql语句.</span><br><span class="line">SQL&gt; <span class="number">2</span></span><br><span class="line">SQL&gt; c/ffom/from</span><br><span class="line">SQL&gt; /</span><br></pre></td></tr></table></figure></li>
+<li>基本结构: <code>select .... from  table  where  condtion;</code></li>
+<li>若编写的sql语句比较长, 可以使用edit打开一个记事本, 在记事本上编写:    <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">如: SQL&gt;edit , 然后按/执行sql语句</span><br><span class="line">保存查询结果:</span><br><span class="line">spool名的使用: </span><br><span class="line">spool d:\results</span><br><span class="line">select * from emp;</span><br><span class="line">spool off</span><br></pre></td></tr></table></figure>
+   这样会将查询结果保存到文件中.</li>
+</ul>
+</li>
+<li>使用比较运算符: &gt; &gt;= &lt; &lt;= != (&lt;&gt;) between and 案例:<ol>
+<li>查询10号部门的员工信息   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp where deptno=<span class="number">10</span>;</span><br></pre></td></tr></table></figure></li>
+<li>查询员工名字为king的员工信息   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">      select * from emp where ename = &#x27;KING&#x27;;		</span><br><span class="line">      ```     </span><br><span class="line">      结论: 表中的列的值是区分大小写的; 但是关键字不区分大小写 </span><br><span class="line"><span class="number">3.</span> 查找薪水不等于<span class="number">1250</span>员工的信息</span><br><span class="line">      ```c</span><br><span class="line">      select * from emp where sal!=<span class="number">1250</span>;</span><br><span class="line">      select * from emp where sal&lt;&gt;<span class="number">1250</span>;  </span><br></pre></td></tr></table></figure></li>
+<li>查询入职日期为1981年11月17日的员工信息   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">      select * from emp where hiredate=&#x27;1981-11-17&#x27;; --查询错误</span><br><span class="line">      select * from emp where hiredate=&#x27;17-11月-81&#x27;;  </span><br><span class="line">      ```				</span><br><span class="line"><span class="number">5.</span> 查询当前使用的日期格式: </span><br><span class="line">      ```c</span><br><span class="line">      select * from v$nls_parameters;</span><br></pre></td></tr></table></figure></li>
+<li>修改日期格式:    <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter session set NLS_DATE_FORMAT=&#x27;yyyy-mm-dd&#x27;;</span><br></pre></td></tr></table></figure></li>
+<li>修改成原有的格式:    <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">      alter session set NLS_DATE_FORMAT=&#x27;DD-MON-RR&#x27;;</span><br><span class="line">      说明: 需要注意日期格式, 默认是DD-MON-RR  		</span><br><span class="line">      ```	  </span><br><span class="line"><span class="number">9.</span> 查找工资介于<span class="number">1000</span><span class="number">-2000</span>之间的员工信息</span><br><span class="line">      ```c</span><br><span class="line">      select * from emp where sal&gt;=<span class="number">1000</span> <span class="keyword">and</span> sal&lt;=<span class="number">2000</span>;</span><br><span class="line">      select * from emp where sal between <span class="number">1000</span> <span class="keyword">and</span> <span class="number">2000</span>;</span><br></pre></td></tr></table></figure>
+   结论: between and是闭区间</li>
+</ol>
+</li>
+<li>linux下启动oracle数据库:<ul>
+<li>使用linux的oracle用户登陆:     <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlplus sys/sys as sysdba</span><br><span class="line">sqlplus / as sysdba	</span><br><span class="line">SQL&gt; startup   ---启动数据库服务</span><br><span class="line">需要先用系统账户启动然后 才能让普通账户去连接</span><br><span class="line">SQL&gt; shutdown immeidate   ----关闭数据库服务</span><br><span class="line">启动监听服务:    lsnrctl start</span><br></pre></td></tr></table></figure></li>
+<li>linux下停止oracle数据库: <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">关闭oracle：shutdown immediate</span><br><span class="line">其中退出数据库 ：<span class="built_in">exit</span>或者quit</span><br><span class="line">停止监听服务:    lsnrctl stop</span><br></pre></td></tr></table></figure></li>
+<li>使用sqlplus登陆oracle数据库:<ul>
+<li>普通用户登陆:  <code>sqlplus scott/tiger@192.168.233.128/orcl</code><br> <code>sqlplus scott/tiger@192.168.233.128:1521/orcl</code></li>
+<li>sys用户登陆:  <code>sqlplus sys/sys as sysdba</code></li>
+<li>解锁用户:<code>alter user scott account unlock;</code></li>
+<li>加锁用户:<code>alter user scott account lock;</code></li>
+<li>修改用户密码: <code>password scott</code><br> <code>alter user scott identified by xxxxx;</code></li>
+<li>查看当前的语言环境:<br> <code>select userenv(&#39;language&#39;) from dual; </code></li>
+</ul>
+</li>
+<li>qlplus的基本操作:<ul>
+<li>显示当前用户:show user</li>
+<li>查看当前用户下的表:select * from tab; </li>
+<li>查看表结构:desc emp;</li>
+<li>设置行宽:set linesize 140 </li>
+<li>设置页面显示的行数: set pagesize 100</li>
+<li>永久设置行宽和页面显示的行数:<br> D:\app\Administrator\product\11.2.0\client_1\sqlplus\admin </li>
+<li>设置员工名列宽:<br> col ename for a10  一个a代表一个英文宽度</li>
+<li>设置薪水列为4位数字：<br> col sal for 9999     一个9代表一个数字宽度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>select 和 from 关键字在数据库中不区分大小写,<br>Select语句的整体形式：select col1, col2…  <ol>
+<li><code>基本的from table_name //表示col1 col2列从 table name表中查出来  where condition //加条件 过滤数据</code></li>
+<li><code>分组的 group by col… //表示要对前边过滤出来的数据进行分组having condtion //对分组数据进行查询过滤</code></li>
+<li>排序的 order by col…//对前边的结果进行排序 写在最后边(对最后的结果排序)注意：oracle中select * oracle中有个将*转成具体列的过程</li>
+<li>基本的SELECT语句<br> <code>其语法格式为：SELECT *|&#123;[DISTINCT] column|expression [alias],...&#125;FROM    table;</code></li>
+<li>案例: <ul>
+<li>查询所有员工的所有记录<br>   <code>select * from emp;</code></li>
+<li>查询员工号，姓名，月薪，奖金，年薪<pre><code>``select empno, ename, sal, comm, sal*12 from emp;``
+使用select * 和 select 列名的区别: 使用select *会先查有哪些列, 影响效率
+</code></pre>
+</li>
+<li>对案例2使用别名:<br>   <code>select empno, ename, sal as 工资, comm 奖金, sal*12 &quot;年 薪&quot; from emp;</code><pre><code>关于别名的结论: 
+as可以省略
+如果别名中间有空格, 需要使用&quot;&quot;引起来
+</code></pre>
+</li>
+<li>查询员工号，姓名，月薪，奖金，年薪，年收入<pre><code>``select empno, ename, sal, comm, sal*12 年薪, sal*12+nvl(comm, 0) 年收入 from emp;``
+结论: 
+1 包含有null的表达式都为空
+2 nvl的用法: nvl(a, b): 如果a为空, 则取b的值.          
+</code></pre>
+</li>
+<li>查看员工表不同的部门编号<pre><code>``select distinct deptno from emp;``            
+</code></pre>
+</li>
+<li>查看不同部门的不同工种<pre><code>``select distinct detpno, job from emp; ``
+结论:distinct的作用范围??
+distinct作用于后面出现的所有的列.            
+</code></pre>
+</li>
+<li>输出计算表达式 3+20<em>5，显示当前日期  sysdate<br>   ``select 3+20</em>5, sysdate from dual;``<pre><code>注意: dual表是一个伪表, 主要是为了满足sql的语法规定    desc dual； 只有一条记录(字段)
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>SQL和sqlplus区别:<ol>
+<li>SQL → 语言，关键字不能缩写 ，一种语言，ANSI 标准，关键字不能缩写</li>
+<li>sqlplus → Oracle提供的工具，一种环境，关键字可以缩写，命令不能改变数据库中的数据的值</li>
+<li>cmd sql也是在sqlplus中</li>
+</ol>
+</li>
+<li>字符串相关函数:<ol>
+<li>lower 小写, upper 大写, initcap    单词的首字母大写<br>select lower(‘HELLO WORLD’) “小写”, upper(‘Hello world’) “大写”, initcap(‘hello world’) “首字母大写” from dual;</li>
+<li>concat(连接符||)<br>select concat(‘hello ‘,’world’) from dual;<br>**注意: concat函数只能连接两个字符串, 若想连接三个的话只能嵌套调用:<br>select concat(concat(‘hello ‘,’world’), ‘ nihao’) from dual;<br>select ‘hello ‘ || ‘world ‘ || ‘nihao’ from dual;<br>**注意: || 可以连接多个字符串, 建议使用||来连接字符串.<br>**总结: concat只能用于两个字符串的连接, ||可以用于多个字符串的连接, 在使用的使用建议尽量的使用||.</li>
+<li>substr(str,pos,len)截取字符串<br>select substr(‘helloworld’,1,3), substr(‘helloworld’,1), substr(‘helloworld’,-3) from dual;<br>**总结:pos是从1开始的, 若len为0表示从pos开始, 截取到最后, 若pos为负数, 表示从末尾倒数开始截取,</li>
+<li>instr(str, substr):判断substr是否在str中存在, 若存在返回第一次出现的位置, 若不存在则返回0<br>select instr(‘hello llo’, ‘llo’),  instr(‘hello llo’, ‘ow’)from dual;</li>
+<li>lpad和rpad–l(r)pad(str, len, ch):返回len长度的字符串, 如果str不够len的话, 在左(右)填充ch这个字符<br>select lpad(‘aaaa’, 10, ‘$’), rpad(‘aaaa’, 10, ‘#’) from dual;</li>
+<li>trim:去掉首部和尾部的空格,中间的空格不去掉<br>select ‘aaa’||trim(‘  hello world  ‘)||’bbb’ from dual;<br>trim(c from str):去掉str中的c字符<br>select trim(‘x’ from ‘xxxxxhello worldxxxxx’) from dual;</li>
+<li>replace(str, old, new):将str字符串中的old字符串替换成new字符串<br>select replace(‘hello world’,’llo’,’yy’) from dual;</li>
+<li>length和lengthb<br>select length(‘hello world’) 字符数, lengthb(‘hello world’) 字节数 from dual;<br>select length(‘哈喽我的’) 字符数, lengthb(‘哈喽我的’) 字节数 from dual;<br>注意:对于length函数一个汉字是一个字符, 对于lengthb函数,一个汉字占两个,<br>这两个函数对于普通字符串没有什么区别.</li>
+</ol>
+</li>
+<li>排序: <ul>
+<li>使用order by关键字, 基本格式:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select  ... from ... where condition order by colname|alias|expr|number(序号)</span><br><span class="line">order by有两种排序方法; 一种是升序, 一种是降序: 默认是升序的(asc), 降序为desc</span><br><span class="line">a 使用列名进行排序: </span><br></pre></td></tr></table></figure></li>
+<li>分组数据: 借助execl理解分组功能.<br>基本格式 : <code>select ..., count() from emp where ... group by .. </code><br>说明: 按照group by 后给定的表达式，将from后面的table进行分组, 针对每一组, 使用分组函数。</li>
+<li>转换函数:to_char和to_number、–to_char和to_date、oracle有隐式转换和显示转换</li>
+<li>在where条件中使用like–模糊查找, 其中: ‘%’匹配任意多个字符。’_’匹配一个字符</li>
+<li>在where条件中使用in–in后面是一个集合</li>
+<li>在where条件中使用逻辑运算符: or(或) and(与) not(非)</li>
+</ul>
+</li>
+<li>数据处理:sql语言的类型<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DML data manipulation language  数据操作语言，对应增删改查</span><br><span class="line">DDL  data definition language  数据定义语言 create, drop, truncate</span><br><span class="line">DCL  data control language 数据控制语言 grant, revoke, commit, rollback</span><br></pre></td></tr></table></figure></li>
+<li>from后边有多个表 必须加where条件 要不就变成了笛卡尔集<ul>
+<li>外连接 哪边少 加在哪一边</li>
+<li>select min(sal) from emp where deptno=30;</li>
+<li>先执行where条件 在执行分组函数</li>
+<li>group by 后边只能跟列</li>
+<li>distinct 去重复</li>
+</ul>
+</li>
+<li>表的约束:<ol>
+<li>表的约束（5种）：</li>
+<li>检查 (值是否符合预设的规则)</li>
+<li>非空 (not null)</li>
+<li>唯一 (不能重复)</li>
+<li>主键（非空+唯一）</li>
+<li>外键 (取值必须在另外一个表中存在)</li>
+</ol>
+</li>
+<li>表的创建和管理:<ul>
+<li>创建前提条件：表空间的使用权限和create table的权限</li>
+<li>表名的注意事项: 以字母开头, 长度不能超过30个字符, 不能是oracle的关键字或保留字, 不能与其他对象重名</li>
+<li>创建表的数据类型见讲义部分.</li>
+</ul>
+</li>
+<li>事物的概念:数据库事务, 是由有限的数据库操作序列组成的逻辑执行单元,<ul>
+<li>这一系列操作要么全部执行, 要么全部放弃执行.</li>
+<li>数据库事务由以下的部分组成:<ul>
+<li>一个或多个DML语句</li>
+<li>一个 DDL(Data Definition Language – 数据定义语言) 语句</li>
+<li>一个 DCL(Data Control Language – 数据控制语言) 语句</li>
+</ul>
+</li>
+<li>事务的特点：要么都成功，要么都失败。</li>
+<li>事物开始: 事物以DML语句开始, 执行一系列的数据插入或者是修改操作</li>
+<li>事物结束: <ul>
+<li>提交结束: commit;</li>
+<li>隐式提交: 执行了DDL语句(如create了一个表), 正常退出        </li>
+<li>显示回滚: rollback;</li>
+<li>隐式回滚: 断电, 宕机, 异常退出等</li>
+<li>事物的特性:原子性、一致性、隔离性、持久性&lt;具体概念见讲义部分&gt;</li>
+<li>事物的隔离级别: 了解oracle是读已提交数据, mysql是可重复读.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>索引也是数据库的一个对象, 索引主要是用于表, 目的是提高查询的效率,rownum 行号 rowid 存放这一行的行地址(类似于指针)</li>
+<li>序列:<ol>
+<li>序列的用处:<br>由于表的主键要求是非空且唯一的, 为了保证主键是非空和唯一的, 可以使用序列.</li>
+<li>如何创建序列<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create sequence seq_mytest;</span><br><span class="line">select xxxx_name from user_xxxxs;</span><br><span class="line">select sequence_name from user_sequences;</span><br></pre></td></tr></table></figure></li>
+<li>序列的属性<br>currval 和 nextval, 但是第一次使用的时候先要取nextval的值.</li>
+<li>如何删除序列    <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop sequence seq_mytest;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>视图:<ol>
+<li>什么是视图:<br>视图是用来查看数据的, 视图本身不存储数据, 数据来源于基础表.    </li>
+<li>如何创建视图:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">create <span class="keyword">or</span> replace view vw_emp as select * from emp;</span><br><span class="line">create <span class="keyword">or</span> replace view vw_emp as select empno, ename, job from emp</span><br><span class="line">where deptno=<span class="number">20</span>;</span><br><span class="line">create <span class="keyword">or</span> replace view vw_emp_dept as select e.deptno, d.dname, e.ename,</span><br><span class="line"> e.job from emp e,dept d where e.deptno=d.deptno;</span><br><span class="line">```		</span><br><span class="line"><span class="number">3.</span> 创建只读视图:</span><br><span class="line">```c</span><br><span class="line">create <span class="keyword">or</span> replace view vw_emp as select * from emp with read only;		</span><br><span class="line">view_name from user_views;</span><br></pre></td></tr></table></figure></li>
+<li>如何删除视图:<br><code>drop view vw_emp;</code></li>
+<li>使用视图的目的:<br>可以简化查询<br>可以限制用户对某些数据的访问</li>
+<li>注意点:<br>不要通过视图去修改表的数据。</li>
+</ol>
+</li>
+<li>复习：oracle<ol>
+<li>基本概念<br>select * | col from table where cond group by col having cond order by col;</li>
+<li>简单的select查询</li>
+<li>带有where条件的select查询<br>比较运算符 &lt; &gt; = != &lt;&gt; &lt;= &gt;=<br>集合运算符: in not int<br>逻辑表达式: and or<br>模糊查找: like _ % escape</li>
+<li>order by<br>列名  表达式  别名  序号</li>
+<li>distinct</li>
+<li>分组函数: max min avg count sum<br>分组数据: group by </li>
+<li>多表查询:<br>笛卡尔积<br>等值连接  不等值连接  外连接   自连接</li>
+<li>子查询:<br>可以在select from having where 后面跟子查询</li>
+<li>事务<br>DML: insert delete update select<br>DDL: drop create truncate grant revoke<br>DCL:commit rollback savepoint<br>事务的特点 ACID</li>
+<li>oracle对象<br>表<br>视图<br>索引<br>序列<br>同义词<h2 id="MYSQL"><a href="#MYSQL" class="headerlink" title="MYSQL"></a>MYSQL</h2></li>
+</ol>
+</li>
+<li>表的约束:<ul>
+<li>定义主键约束　primary key:    不允许为空，不允许重复</li>
+<li>定义主键自动增长　auto_increment</li>
+<li>定义唯一约束　unique</li>
+<li>定义非空约束　not null</li>
+<li>定义外键约束　constraint ordersid_FK foreign key(ordersid) references orders(id)</li>
+<li>删除主键：alter table tablename drop primary key ;</li>
+</ul>
+</li>
+<li>数据库CURD对数据库进行增(create)、删(delete)、改(update)、查(Retrieve)操作。<ol>
+<li>知识点补充: 介绍mysql数据库与oracle数据库的不同(图解说明)<ul>
+<li>mysql数据库: root用户 &gt; 库 &gt; 表</li>
+<li>oracle数据库: 数据库 &gt; 用户 &gt; 表    </li>
+</ul>
+</li>
+<li>创建数据库<ul>
+<li>创建数据库, 默认为latin1<br> create database mydb1;        </li>
+<li>指定字符集为utf8<br> create database mydb2 character set utf8;    </li>
+<li>指定字符集为utf8,并对插入的数据进行检查<br> create database mydb3 character set utf8 collate utf8_general_ci;    </li>
+</ul>
+</li>
+<li>查看数据库<ul>
+<li>显示所有数据库<br> show databases;</li>
+<li>显示创建数据库的语句信息<br> show create database mydb1;<br>注意 ：mysql默认语言集是latin1，每次在创建数据库的时候应指定字符集.</li>
+</ul>
+</li>
+<li>修改数据库<ul>
+<li>修改mydb1的字符集为utf8(不能修改数据库名)<br> alter database mydb1 character set utf8;</li>
+</ul>
+</li>
+<li>删除数据库<ul>
+<li>drop database mydb1;</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>表结构显示：五个字段就是代表5个列<ul>
+<li>十进制 100 转成八进制=64 ，反过来八进制的64=6*16+4=100</li>
+<li>status;查看当前用户信息</li>
+<li>mysql中的ifnull函数相当于oracle中的nvl函数</li>
+<li>RHEL系统就是Red Hat Enterprise Linux</li>
+</ul>
+</li>
+<li>多表查询:<ol>
+<li>准备测试数据<ul>
+<li>将scott_data.sql文件的数据导入到mysql中</li>
+<li>mysql&gt; source scott_data.sql        </li>
+</ul>
+</li>
+<li>交叉连接—相当于笛卡尔积<ul>
+<li>select e.<em>, d.</em> from emp e cross join dept d;</li>
+</ul>
+</li>
+<li>自连接</li>
+<li>查询emp表和dept表的所有信息: <ul>
+<li>SQL99: </li>
+<li>select e.<em>, d.</em> from emp e inner join dept d on e.deptno=d.deptno;其中inner可以省略</li>
+<li>oracle写法: select e.<em>, d.</em> from emp e, dept d where e.deptno=d.deptno;</li>
+<li>总结: <ul>
+<li>[,]—-&gt;[inner join]</li>
+<li>[where]—–&gt;[on]</li>
+<li>注意: 不能显示40号部门的信息, 此时需要使用外连接</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>外连接<ul>
+<li>左外连接:<ul>
+<li>select e.<em>, d.</em> from emp e right outer join dept d on e.deptno=d.deptno;</li>
+</ul>
+</li>
+<li>右外连接:<ul>
+<li>select e.<em>, d.</em> from dept d left outer join emp e on e.deptno=d.deptno;</li>
+</ul>
+</li>
+<li>[注意]SQL99中，外链接取值与关系表达式=号左右位置无关。取值跟from后表的书写顺序有关。 <ul>
+<li>“xxx left outer join yyy”  则为取出xxx的内容</li>
+<li>“xxx right outer join yyy” 则为取出yyy的内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>自连接:<ul>
+<li>查询员工、老板信息，显示: xxx的老板是yyy </li>
+<li>分析: 可以将emp表当成两个表来用, 一个是员工表 e, 一个是老板表 b</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>遇到问题查看Mysql数据库api文档<br>redHat7.0 linux安装mysql：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32223565/article/details/79894037">https://blog.csdn.net/qq_32223565/article/details/79894037</a></li>
+<li>locate命令 快速查找根据服务器里的小库 区别find -name <ul>
+<li>比如新建一个文件不会马上 存在小库中需要重启才能locate到</li>
+<li>nm命令可以查看库内包含的函数</li>
+</ul>
+</li>
+<li>复习：mysql<ul>
+<li>mysql基础知识:安装 版本 启动</li>
+<li>库的CURD</li>
+<li>表的CURD</li>
+<li>数据的CURD:<ul>
+<li>外连接的写法与oracle有区别.</li>
+</ul>
+</li>
+<li>中文乱码问题分析</li>
+<li>mysqlAPI编程:<ul>
+<li>mysql_init</li>
+<li>mysql_real_connect</li>
+<li>mysql_query</li>
+<li>mysql_store_result</li>
+<li>mysql_fetch_row</li>
+<li>mysql_affected_rows</li>
+<li>mysql_field_count</li>
+<li>mysql_num_fields</li>
+<li>mysql_fetch_fields</li>
+<li>mysql_free_result</li>
+<li>mysql_close</li>
+</ul>
+</li>
+<li>mysql事务:<ul>
+<li>start transaction;</li>
+<li>set autocommit=0;</li>
+<li>set autocommit=1;</li>
+<li>commit rollback  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改mysql为手工提交:<ol>
+<li>开启事务<br>start transaction;</li>
+<li>设置手工提交<br>set autocommit=0;</li>
+<li>开启事务<br>start transaction;</li>
+<li>设置自动提交<br>set autocommit=1;</li>
+</ol>
+</li>
+<li>mysql客户端编写思路分析:<ol>
+<li>mysql初始化–mysql_init</li>
+<li>连接mysql数据库—mysql_real_connect</li>
+<li>while(1)</li>
+<li>关闭连接: mysql_close();</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0/" data-id="ckp3bilit000b4sue97fg7h3f" data-title="数据库学习" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/24/C++/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          C++
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/21/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">C语言学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

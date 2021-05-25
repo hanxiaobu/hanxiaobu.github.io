@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>C++ | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="C++ Qt调用system()编译c文件时失败：system(“gcc D:\Qt\QtProjects\01IDE\hello12.c -o D:\Qt\QtProjects\01IDE\hello12”);原因：gcc环境配置之后，在cmd中可以直接gcc命令就可以生成exe，但是在Qt中输入全路径gcc，还是无法生成exe。解决办法：重启一下电脑 这他妈的！！！ ui-&gt;label(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++">
+<meta property="og:url" content="http://example.com/2021/04/24/C++/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="C++ Qt调用system()编译c文件时失败：system(“gcc D:\Qt\QtProjects\01IDE\hello12.c -o D:\Qt\QtProjects\01IDE\hello12”);原因：gcc环境配置之后，在cmd中可以直接gcc命令就可以生成exe，但是在Qt中输入全路径gcc，还是无法生成exe。解决办法：重启一下电脑 这他妈的！！！ ui-&gt;label(">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/C++/C++1.png">
+<meta property="og:image" content="http://example.com/C++/C++3.png">
+<meta property="og:image" content="http://example.com/C++/C++5.png">
+<meta property="og:image" content="http://example.com/C++/C++6.png">
+<meta property="og:image" content="http://example.com/C++/QT1.png">
+<meta property="og:image" content="http://example.com/C++/QT2.png">
+<meta property="og:image" content="http://example.com/C++/QT4.png">
+<meta property="og:image" content="http://example.com/C++/%E6%95%B0%E6%8D%AE5.png">
+<meta property="og:image" content="http://example.com/C++/%E6%95%B0%E6%8D%AE6.png">
+<meta property="article:published_time" content="2021-04-24T13:50:08.924Z">
+<meta property="article:modified_time" content="2021-04-26T17:07:59.342Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/C++/C++1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-C++" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/24/C++/" class="article-date">
+  <time class="dt-published" datetime="2021-04-24T13:50:08.924Z" itemprop="datePublished">2021-04-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      C++
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><ol>
+<li>Qt调用system()编译c文件时失败：<br>system(“gcc D:\Qt\QtProjects\01IDE\hello12.c -o D:\Qt\QtProjects\01IDE\hello12”);<br>原因：gcc环境配置之后，在cmd中可以直接gcc命令就可以生成exe，但是在Qt中输入全路径gcc，还是无法生成exe。<br>解决办法：重启一下电脑 这他妈的！！！</li>
+<li>ui-&gt;label(.)-&gt;setText();<br>ui是系统定义好的指针，指向label代表要操作label对象，然后实现label对象中的方法<br>在QT中”-&gt;”和”.”会自动匹配，只要按点就可以</li>
+<li>C++中分开定义函数时 结构体(类)中声明，类外定义函数，但是需要加上作用域 告诉编译器 函数属于结构体(类) void Test : : setA(){a=10;}<br>静态函数的调用方式有两种，类名或者对象名<br>Test : :fun();obj.fun(); “Test::”类名调用 静态函数的标志</li>
+<li>在调用QByteArray.data()之前，必须要先显示储存这个QByteArray。像这样<code>const char *buf = str.toString().data();</code>会使程序崩溃，因为QByteArray没有被储存，调用data()前是不存在的，必须先显式调用一次fromUnicode()，再调用data()。<br>把QString 转化为 char* 方法：<ol>
+<li>先把QString类型变为QByteArray类型</li>
+<li>从QByteArray类型再转为char* 类型 </li>
+<li>如果使用标准C函数，如果有中文必须是gbk编码 比如fopen()</li>
+<li><img src="/C++/C++1.png" alt="avatar"></li>
+</ol>
+</li>
+<li>两者不一样  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cchar *p1=<span class="string">&quot;hello world!&quot;</span>; </span><br><span class="line"><span class="keyword">char</span> str[]=<span class="string">&quot;hello world&quot;</span>; </span><br></pre></td></tr></table></figure>
+<ul>
+<li>p1 代表指针变量存的是字符串在字符常量区的地址  </li>
+<li>指针变量p1 里边存放地址，但是本身也有地址</li>
+<li>str 字符数组 里边存放的是字符 如果存的是指针，就是指针数组  </li>
+<li>str本身地址就是元素的首地址 然后每个子元素都有自己地址  </li>
+<li>一般指针指向的都是数组的首元素地址</li>
+<li><img src="/C++/C++3.png" alt="avatar"></li>
+</ul>
+</li>
+<li>前置++返回的是引用，后置++返回的是值。  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;++(++a)&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//允许前置++</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;(a++)++&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//不允许后置++</span></span><br><span class="line"><span class="keyword">int</span> b=<span class="number">0</span>；<span class="built_in">cout</span>&lt;&lt;（b++）++&lt;&lt;<span class="built_in">endl</span>；<span class="comment">//err,因为b++返回的已经不是b了，  </span></span><br><span class="line">只能是值的形式返回。局部对象引用形式返回会操作非法内存</span><br></pre></td></tr></table></figure></li>
+<li>前置和后置性能对比：前置效率更高，因为前置少创建一个临时对象。后置用值的形式返回会创建一个新的对象，调用拷贝构造</li>
+<li>函数参数传递分为值传递和地址传递（指针）还有引用传递（实际上也是指针传递），地址传递也可以是间接赋值，可以改变main函数中变量（属性）值<br>值传递会产生一个拷贝的工作，为了提高效率使用引用传递或者地址传递，所以拷贝构造函数不能用值传递，会变成递归。值传递的本质就是调用拷贝构造函数</li>
+<li>调用拷贝构造函数的方式 值传递 Person p =p1<br>不要返回一个局部对象的引用，因为引用会被释放掉，而值不会，会根据值创建出来一个新的值</li>
+<li>函数参数中int *p，代表指针 形参中是指针，实参中是&amp;取地址<br>函数参数中int &amp;p，代表引用 &amp;在函数形参中不是取地址<br>引用只能引用变量（栈上合法） int &amp;a=10；//10存在符号表，以键值对的形式存储（堆区）<br>但是coust int &amp;a=10；//coust 在栈区 int temp=10，int&amp;a=temp;<br>加coust防止修改a<br>函数调用的时候只要函数名和参数类型一样，至于参数是值传递还是地址传递还是引用传递无所谓，因为函数的重载就是函数的返回值类型和函数名一样，只是参数的类型和个数或者是否有coust决定重载，C语言中函数可以没有return，C++中必须有</li>
+<li>```c<br>Struct Person<br>{<br>  int age；<br>  void func()<br>  {age++;}<br>}//C++中结构体可以有函数，<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">    int age是结构体Person的一个属性 函数可以修改属性，c语言中不能在结构体中创建函数，所以没办法修改属性</span><br><span class="line">12. 1. 三目运算符在C语言下返回的是值，在C++语言下返回的是变量</span><br><span class="line">    2. C语言下coust是伪常量，不可以初始化数组</span><br><span class="line">    3. C++coust修饰的变量是常量，可以用来初始化数组</span><br><span class="line">    4. C语言中coust修饰全局变量默认的是外部链接属性</span><br><span class="line">    5. C++coust修饰全局变量默认的是内部”链接属性“（可以添加一个关键字extern提高作用域，c中默认添加extern，c++中不添加）</span><br><span class="line">    6. 局部变量中coust int b&#x3D;10；（只有这种不分配内存）b放在常量区（C++中符号表以键值对形式存储），int temp&#x3D;b取地址的时候编译器会临时分配空间temp，p指向的是temp，int *p&#x3D;&amp;temp ，*p&#x3D;200；结果不会变</span><br><span class="line">    7. coust使用普通变量初始化，b分配在栈上不是常量区，是可以修改b的值，int a&#x3D;10；coust int b&#x3D;a；int*p&#x3D;（int*）&amp;b；</span><br><span class="line">    8. int a&#x3D;10；coust int b&#x3D;a；分配内存</span><br><span class="line">    9. 分配内存是分配到栈上</span><br><span class="line">    10. coust int &amp;ref&#x3D;10；不加coust报错，有coust相当于写成 int temp&#x3D;10   </span><br><span class="line">    coust int &amp;ref&#x3D;temp； 开辟临时内存,常量引用的使用场景 修饰函数中的形参 防止误操作</span><br><span class="line">    11. coust修饰指针 int *p 和coust int *P不一样，第二个是只读</span><br><span class="line">13. 构造函数调用方法：</span><br><span class="line">    1. 1括号法 Person p(10)；</span><br><span class="line">    2. 2显示法 Person p1&#x3D;Person(10); </span><br><span class="line">    3. Person(10);匿名对象 特点：当前行执行完后 立即释放不要用拷贝构造函数初始化 匿名对象 Person(p1); 编译器认为Person p1 是对象实例化 如果有p1 p1就重定义了</span><br><span class="line">14. 如果在cpp文件中 extern “C”void show（）；则不需要#include“test.h”头文件，因为可以找到show函数  </span><br><span class="line">    如果在test.h文件中添加extern “C”，在cpp文件中需要添加#include“test.h”头文件</span><br><span class="line">C++函数有重载，会对函数名称做修饰，导致调用c语言函数链接失败</span><br><span class="line">15. 引用的目的就是起别名(外号),但是都是指向一块内存  </span><br><span class="line">    int a&#x3D;10；int &amp;b&#x3D;a； b&#x3D;100；(在b&#x3D;100的时候，b已经是引用类型int&amp;)  </span><br><span class="line">    输出a&#x3D;100，b&#x3D;100；  </span><br><span class="line">    &amp;在等号左边就是引用，等号右边就是取地址,引用的基本语法 类型 &amp;别名&#x3D;原名 别名就是引用  </span><br><span class="line">    引用的本质在C++中实现是一个指针变量</span><br><span class="line">    &#96;&#96;&#96;c</span><br><span class="line">    Type&amp;ref&#x3D;val；</span><br><span class="line">    &#x2F;&#x2F;Type* const ref&#x3D;&amp;val;&#x2F;&#x2F;指针常量必须初始化，而且ref的值不可以修改</span><br><span class="line">    !!!ref的值就是指针指向，即地址（指针）</span><br><span class="line">    &#x2F;&#x2F;Type* const ref&#x3D;&amp;val;  ref&#x3D;NULL；&#x2F;&#x2F;err，指针的值，只读</span><br><span class="line">    &#x2F;&#x2F;const Type* ref&#x3D;&amp;val;&#x2F;&#x2F;指针指向的内存不可以修改</span><br><span class="line">    !!!const修饰* 类似于解引用*ref，指针指向的值（内存）</span><br><span class="line">    ref&#x3D;20；&#x2F;&#x2F;内部发现ref是引用之后，自动转换*ref&#x3D;20；</span><br></pre></td></tr></table></figure>
+<img src="/C++/C++5.png" alt="avatar"></li>
+<li><ol>
+<li>ostream&amp; cout对象全局也只有一个，所以cout作为参数时要用应用的形式传入进来，返回值是ostream的引用实现链式操作  </li>
+<li>out可以改成out，因为是引用 可以起别名  </li>
+<li>通过类创建对象过程   称为 实例化对象（自动调用构造函数初始化对象）动态对象创建 new 类似于C语言中malloc方法 在堆上开辟空间对象创建之后 默认调用构造函数和析构函数</li>
+<li>在写拷贝构造函数的时候，不用判断，因为构造就是从无到有。</li>
+<li>=赋值释放空间的时候，发生浅拷贝，重复释放同一块内存。深拷贝重新new一块内存</li>
+<li>Person p；和Person *p=new Person；区别就是一个是对象一个是指针对象</li>
+<li>空指针访问成员函数_this用法：<ol>
+<li>如果成员函数中没有用到this指针，可以用空指针调用成员函数</li>
+<li>如果成员函数中用到了this，那么这个this需要加判断，防止代码down掉</li>
+<li>this指针 指向 被调用的成员函数 所属的对象</li>
+<li>this指针可以解决名称冲突</li>
+<li>this指针 隐式加在每个成员函数中</li>
+<li>*this 就是本体 ==Person p1；中的p1</li>
+<li>p1.personAddPerson(p2).personAddPerson(p2).personAddPerson(p2);//链式编程</li>
+</ol>
+</li>
+<li>值传递就是调用拷贝构造函数，<code>Person p=p1；&lt;=&gt;Person p(p1);&lt;=&gt;Person p=Person(p1);</code></li>
+</ol>
+</li>
+<li>重写函数调用符号“（）”，myPrint(“hello world”);<br>当myPrint调用小括号的时候就相当于调用operator()函数了，传的参数hello world就是string text<br>仿函数 本质是一个对象 函数对象<br>运算符重载不要重载&amp;&amp;、||，没办法模拟短路特性<br>重写“==”符号时，operator==后边（）中的参数就是调用者==右边的数<br>重写“（）”符号时，operator()后边（）中的参数就是调用者（）中的数<br>重写“-&gt;”符号时，operator-&gt;后边（）中没有参数，所以调用者只重写-&gt;sp-&gt;showAge();//本质sp-&gt;-&gt;showAge();编译器简化为sp-&gt;showAge();</li>
+<li>静态成员的访问方式有两种(非静态只有第一种):<ol>
+<li>通过对象进行访问（自动调用构造函数初始化对象）</li>
+<li>通过类名直接访问（静态成员不属于某个对象）</li>
+<li>“静态成员变量”也是有访问权限的，私有变量类外访问不到</li>
+<li>静态成员初始化不受访问权限影响，但是创建对象访问的时候会受到影响</li>
+<li>单例模式中“静态成员（指针）”写在private中，但是在类外实例化（区别m_A是在类上，而new Person不在类对象上）</li>
+<li>static <em>Printer</em>printer；编译阶段就分配内存</li>
+<li>静态变量是在编译阶段就分配空间，对象还没创建时就已经分配空间</li>
+</ol>
+</li>
+<li><ol>
+<li>写文件是 o –输出 ofstream  输出到文件中</li>
+<li>读文件是 i  –输入 ifstream   输入到文件中</li>
+<li>cin&gt;&gt;buf  将缓冲区的字符存到buf中</li>
+</ol>
+</li>
+<li>char类型可以转化成int类型,char引用不能转成int类型引用，引用不能转换<br>多态实现原理，父类引用指向子类对像<br>利用cin.get获取字符串的时候，换行符留在缓冲区中<br>案例1中判断用户输入内容是数字还是字符串，从缓冲区中读取</li>
+<li>利用初始化列表语法  显示调用父类中的其他构造函数<br>Son2：和Son2()：区别，前者是继承 后者 初始化列表<br>Son2（int a =2000）：Base2(a)在QT中默认生成的代码，相当于用一个参数传给父类做初始化,最后子类继承打印m_A<br><img src="/C++/C++6.png" alt="avatar"></li>
+<li>继承优点：<ol>
+<li>减少重复的代码，提高代码复用性</li>
+<li>重复的代码写到抽象类里</li>
+<li>父类中 构造、析构、拷贝构造 、operator=  是不会被子类继承下去的</li>
+<li>子类可以继承成员函数和成员变量，private的属性也会继承，由于访问权限会被编译器隐藏（但是内存不变）</li>
+<li>通过类名的方式 访问 父类作用域下是m_A静态成员变量<code>cout&lt;&lt;&quot;Base中的m_A=&quot;&lt;&lt;Son::Base::m_A&lt;&lt;endl;</code></li>
+<li>```C<br>template&lt;class T1,class T2&gt;<br>//告诉下边有T1 T2不要报错<br>//方便用户传入，当子类继承父类的类模板时<br>template&lt;class T1,class T2&gt;<br>class Son2：Public Base2<T2><br>{<br>public::<br>T1 obj;<br>}//T2传给父类 T1传给自己<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">23. 类对象作为类中成员：</span><br><span class="line">    1. 当其他类对象 作为本类成员，先构造其他类对象，再构造自身，析构的顺序和构造相反</span><br><span class="line">    2. 图中的传递方式为：Person p中的张三-&gt;Person有参构造函数中的string name-&gt;m_Name(name)中从m_Name&#x3D;name,然后string m_Name&#x3D;name，调用有参构造函数（因为赋初值了）</span><br><span class="line">    3. Phone m__Phone是phone数据类型，赋初值的时候调用的是string类型，所以调用phone的有参构造函数</span><br><span class="line">    4. ![AVATAR](&#x2F;C++&#x2F;C++7.png)</span><br><span class="line">24. 当发生&quot;虚继承&quot;后，sheep和tuo类中 继承了一个  vbptr指针   虚基类指针   指向的是一个 虚基类表  vbtable </span><br><span class="line">    - 虚函数内部工作原理中：</span><br><span class="line">    - &#96;&#96;&#96;C</span><br><span class="line">      SheepTuo st; 	st.m_Age&#x3D;10;</span><br><span class="line">      &amp;st取对象地址 *（int*）&amp;st 代表地址传成int*步长，然后解引用到虚基类表中， </span><br><span class="line">      但是虚基类表是个数组，数组名代表首元素地址，</span><br><span class="line">      所以*（int*）&amp;st还是个地址 </span><br><span class="line">      &#x2F;&#x2F;通过Sheep找到 偏移量 在多态中找到的不是偏移量而是地址</span><br><span class="line">      *（（int*）*（int*）&amp;st+1）&#x3D;&#x3D;8 </span><br><span class="line">      &#x2F;&#x2F;通过偏移量访问m_Age</span><br><span class="line">      ((Animal)(char*)&amp;st+*（（int*）*（int*）&amp;st+1）)-&gt;m_Age</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>多态中：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> doSpeak（Animal&amp; animal）</span><br><span class="line"><span class="comment">//Animal&amp;animal =cat；父类引用指向子类对象 </span></span><br><span class="line">AbstractCalculater *calculater =<span class="keyword">new</span> AddCalculator；</span><br><span class="line"><span class="comment">//1建立父类和子类关系 2是用父类指针调用子类对象，实现父类的多态</span></span><br></pre></td></tr></table></figure>
+函数名就是函数地址<br>C\C++默认调用惯例 __cdecl<br>多态的调用惯例是 _stdcall<br>纯虚函数不能创建对象，所在的类是抽象类，如果子类继承纯虚函数不实现，那么子类也是抽象类不能创建对象<br>子类在堆区开辟空间需要调用析构函数，所以父类中需要写虚析构函数或者纯虚构函数</li>
+<li>异常变量的生命周期<ol>
+<li>抛出的是 throw MyException();  catch (MyException e) 调用拷贝构造函数 效率低（会创建一个临时对象）</li>
+<li>抛出的是 throw MyException();  catch (MyException &amp;e) 只调用默认构造函数 效率高 推荐</li>
+<li>抛出的是 throw &amp;MyException(); catch (MyException *e) 对象会提前释放掉，不能在非法操作</li>
+<li>抛出的是 new MyException();   catch (MyException *e) 只调用默认构造函数 自己要管理释放</li>
+<li>异常变量的生命周期中使用指针会提前释放掉，而使用引用不会，因为会发生赋值，会提高引用生命周期，提高到等号左边<h2 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h2></li>
+</ol>
+</li>
+<li><ol>
+<li>List容器排序默认时升序，改变成降序需要在sort函数中添加回调函数或者仿函数对象（匿名对象）sort（v.begin（），v.end（），MyCompare（））；参考C提高06-12</li>
+<li>set容器排序默认时升序，改变成降序在插入之前改变容器，因为它是只读，set&lt;int，myCompareint&gt;s；myCompareint是仿函数数据类型</li>
+<li>map容器排序默认时升序，改变成降序在插入之前改变容器，因为它是只读，set&lt;int，int，myCompareint&gt;m；myCompareint是仿函数数据类型</li>
+<li>find_if(v.begin(),v.end(),GreaterThan20())；中GreaterThan20（）是匿名对象</li>
+<li>for_each(v.begin(),v.end(),myPrintInt);//myPrintInt代表函数指针或者回调函数名，或者匿名对象</li>
+</ol>
+</li>
+<li>原生指针也是迭代器,所以迭代器可以理解为指针(为了让我们访问到容器中的元素)<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v;<span class="comment">//创建一个vector容器 容器中存放元素类型是int类型  类似于显示指定类型 </span></span><br><span class="line">Person&lt;string,int&gt; p1(&quot;孙悟空&quot;，100)；</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator itBegin=v.begin();</span><br><span class="line"><span class="comment">//vector&lt;int&gt;::iterator代表在vector&lt;int&gt;容器作用域下的迭代器 迭代器就是指针</span></span><br><span class="line">v.begin()起始迭代器 “指向”容器中第一个数据</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;*itBegin&lt;&lt;<span class="built_in">endl</span>;<span class="comment">// *itBegin代表&lt;&gt;中的内容（解引用）</span></span><br><span class="line"><span class="comment">//在for_each(v.begin(),v.end(),myPrintInt);</span></span><br><span class="line"><span class="comment">//lambda表达式 匿名函数 []代表lambda表达式标志 []（）&#123;&#125;</span></span><br><span class="line">for_each(v.begin(),v.end(),[](<span class="keyword">int</span> val)&#123;<span class="built_in">cout</span>&lt;&lt;val&lt;&lt;“”；&#125;);</span><br><span class="line"><span class="keyword">void</span> myPrintInt（<span class="keyword">int</span> val）</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;val&lt;&lt;“”；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+v.begin()代表起始迭代器，其中myPrintInt代表函数指针或者回调函数名（函数名就是函数指针），其中for_each函数系统底层类似于以前C中打印函数（封装了这个桥梁），我们只需要写回调函数和底层填写回调函数即可，不用写桥梁</li>
+<li>自定义数据类型Person（class Person）的对象模型初探<br>“&lt;&lt;”代表写“ &gt;&gt;”代表读，读和写都是从文件和缓冲区角度考虑，读代表从缓冲区（文件）读到屏幕中<br>arr[5]其中arr这个数组名除了sizeof和取地址，其他情况都是数组的首地址</li>
+<li><ol>
+<li>循环创建对象“数据”，但是每个对象数据尾插到v容器中都是有地址的，然后player对象和worker对象多次被重写,push_back尾插只插数据，是一种数据结构</li>
+<li>将字符串转成const char* 需要用到”c_str()”<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *str=<span class="string">&quot;abcd&quot;</span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s</span><span class="params">(str)</span></span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* str2=s.c_str();</span><br></pre></td></tr></table></figure></li>
+<li>```c<br>coust char* 转string 利用string的有参构造<br>coust char* 可以隐式类型转换为 string<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">4. 高阶排序只需要在回调函数中添加一个if语句</span><br><span class="line">5. find_if-&gt;_Find_if源码 返回是一个迭代器参数,其中参数是两个迭代器和一个匿名对象 v.begin()-&gt;_InIt _First  GreaterThan20()-&gt;_Pr _Pred  </span><br><span class="line">_Find_if本质就是一个for循环，底层如果满足val&gt;20条件就break；返回当前迭代器，不满足返回end迭代器</span><br><span class="line">6. &#96;&#96;&#96;c</span><br><span class="line">   &#x2F;&#x2F;函数对象 又叫仿函数 本质就是对象 </span><br><span class="line">   void test01（）</span><br><span class="line">   &#123;</span><br><span class="line">     Person p（100）；&#x2F;&#x2F;开辟在栈上</span><br><span class="line">     Person *p&#x3D;new Person；&#x2F;&#x2F;开辟咋堆区</span><br><span class="line">   &#125;</span><br><span class="line">   &#x2F;&#x2F;有时候仿函数也充当一种数据类型</span><br><span class="line">   class MyPrint</span><br><span class="line">   &#123;</span><br><span class="line">   public：</span><br><span class="line">   void operator（）（int num）</span><br><span class="line">   &#123;</span><br><span class="line">     cout &lt;&lt;num&lt;&lt;endl;</span><br><span class="line">     m_Count++;	</span><br><span class="line">   &#125;</span><br><span class="line">   int m_Count&#x3D;0;</span><br><span class="line">   &#125;</span><br><span class="line">   void doPrint（MyPrint myprint，int num）</span><br><span class="line">   &#123;</span><br><span class="line">     myPrint（num）；&#x2F;&#x2F;函数对象作为参数传递，因为本质是一个数据类型</span><br><span class="line">   &#125;</span><br><span class="line">   void test03（）</span><br><span class="line">   &#123;</span><br><span class="line">     doPrint（MyPrint（），1000）；&#x2F;&#x2F;匿名对象</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol>
+<li>set的成员函数find和string中的find返回值不一样，set返回值是迭代器，string返回值是int类型 除了string是int类型 其他返回的都是迭代器  </li>
+<li>set迭代器只读 一旦插入不能修改  </li>
+<li>set&lt;int，仿函数&gt;s是set&lt;&gt;s的重载，int是个数据类型，所以必须放仿函数，因为类算是自定义数据类型，回调函数不是数据类型   </li>
+<li>仿函数本质是类，其中重载“（）”运算符  </li>
+<li>set&lt;int，compare&gt;s中只需要传入仿函数就可以实现从大到小排序，是因为set底层调用仿函数  类似于list中的remove删除自定义类型数据，需要重写”==”运算符，因为底层用到了== </li>
+</ol>
+</li>
+<li>stl中主要用到类模板和函数模板，都是泛型编程<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">reverse反转 reserve（<span class="keyword">int</span> len） 预留</span><br><span class="line"><span class="comment">//逆序遍历</span></span><br><span class="line"><span class="keyword">for</span>（<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;：：reverse_iterator it=v.rbegin()；it!=v.rend()；it++）&#123;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;*it&lt;&lt;<span class="built_in">endl</span>；&#125;</span><br><span class="line"><span class="comment">//类名加小括号 代表匿名vector&lt;int&gt;(v).swap(v); </span></span><br><span class="line"><span class="comment">//巧用swap指针交换和匿名函数特点，实现内存收缩//实际上是写了一个匿名对象和自身互换</span></span><br></pre></td></tr></table></figure></li>
+<li><ol>
+<li>STL的六大组件：容器（container）、算法（Algorithm）、迭代器（iterator）、仿函数（函数对象C++06-03）、适配器（将多个参数返回一个参数）、空间配置器（管理空间）</li>
+<li>容器分为：String容器 、Vector容器（类似动态数组） Deque容器 List容器</li>
+<li>常用的数据结构有：数组（array）、链表（list）、tree（树）、栈（stack）、队列（queue）、集合（set）、映射表（map）</li>
+<li>这些数据分为序列式容器（string vector deque 栈 队列 ilst）和关联式容器（set map）</li>
+<li>关联式容器特点：<ol>
+<li>插入时就做好排序了 </li>
+<li>键值对<br>iterator 普通迭代器;reverse_iterator 反转迭代器;coust_iterator 指针迭代器<br>定义迭代器类似于定义指针 也类似自定义类型（person）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>lambda表达式     <a href=""></a>{} </li>
+<li>如果想强制调用函数模板，可以使用空模板参数列表 例如：sort源码中默认升序less&lt;&gt;()&lt;=&gt;”&lt;”</li>
+<li>char*  转 int atoi string 转char* .c_str()<br>所以string转int this-&gt;baseDamage=atoi(WeaponData[id][“weaponAtk”].c_str())<br>int转string类型 to_string()<br>%s打印char*类型的字符串<br>getchar（）；从缓冲区取走换行符 等价于cin.get()<br>getchar（）让用户等待，停留 需要用户在输入一下值 才会进入下一个界面</li>
+</ol>
+</li>
+<li>ret返回值 ref引用 coust防止被修改<ul>
+<li>随机种子 头文件 #include <ctime></li>
+<li>srand((unsigned int )time(NULL));</li>
+<li>Swap()本质就是指针交换</li>
+<li>vector<int> ::iterator it=v1.begin()……</li>
+<li>其中*it 代表<int>中int,map&lt;int,string&gt;::iterator mit=m.begin()……</li>
+<li>其中mit-&gt;first或者(*mit).second,赋值操作有m.insert(make_pair(2, 20));   m[4] = 40;</li>
+</ul>
+</li>
+<li><ol>
+<li>内建函数对象 大于 greater<int> 头文件 functional</li>
+<li>类模板Person&lt;string,int&gt;p1(“孙悟空”,100)；//显示指定类型</li>
+<li>函数模板mySwap<int>（a，b）;//显示指定类型</li>
+<li>template<class T>T plus<T>//加法函数 二元运算，其中template<class T>T中最后的T代表类模板对象 plus<T>代表函数模板，plus代表函数 内部自动重写”()”</li>
+<li>template<class T>T negate<T>//取反函数 一元运算<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> test01（）</span><br><span class="line">&#123;</span><br><span class="line">	negate&lt;<span class="keyword">int</span>&gt; n; <span class="built_in">cout</span> &lt;&lt;n(<span class="number">10</span>)&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//结果-10</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>template<class T>bool greater<T>//大于  greater<T>函数 greater<T>()函数对象==大于号<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sort（v.begin()，v.end()，greater&lt;<span class="keyword">int</span>&gt;()）；</span><br><span class="line">for_each(v.begin()，v.end()，[](<span class="keyword">int</span> val)&#123;<span class="built_in">cout</span>&lt;&lt;val&lt;&lt;<span class="string">&quot; &quot;</span>;&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="QT实战编程"><a href="#QT实战编程" class="headerlink" title="QT实战编程"></a>QT实战编程</h2></li>
+</ol>
+</li>
+<li>实例化对象两种方式：<ul>
+<li>一种是在栈上Person p；//调用默认构造函数</li>
+<li>Person p（this）；//调用有参构造函数指定父类</li>
+<li>一种是在堆区 Person *p =new person；</li>
+</ul>
+</li>
+<li>成员函数需要写作用域<ol>
+<li>connect( myBtn , &amp;MyPushButton::clicked ,this, &amp;MyWidget::close);<br>其中四个参数代表四个指针 myBtn对象指针，clicked函数地址代表函数指针，this对象指针，函数地址代表函数指针  </li>
+<li>&amp;MyPushButton::clicked找成员函数地址的方法 调用非静态成员函数必须用对象 </li>
+<li>函数名本质就是一个函数指针  函数指针可以指向函数地址 函数指针==函数地址  </li>
+<li>this可以省略</li>
+</ol>
+</li>
+<li>h文件中：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MyWidget(QWidget *parent = <span class="number">0</span>);<span class="comment">//调用有参构造初始化父类指针</span></span><br><span class="line">teacher(QObject *parent = <span class="literal">nullptr</span>);  <span class="comment">//nullptr 代表NULL Printor 空指针 </span></span><br><span class="line"><span class="comment">//QObject 对象数的根 代表实体</span></span><br></pre></td></tr></table></figure>
+需要用户传一个parent值来初始化 如果不传值，默认为0来初始化父类的一些属性 parent属性<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cpp文件中：MyWidget::MyWidget(QWidget *parent): QWidget(parent)</span><br><span class="line">teacher::teacher(QObject *parent) : QObject(parent)</span><br><span class="line"><span class="comment">//初始化列表 将参数交给父类 父类进行初始化操作</span></span><br><span class="line">（继承关系，先初始化父类，然后再初始化子类）</span><br></pre></td></tr></table></figure>
+父类初始化之后，子类构造会调用父类的构造函数 所以新建类之后系统默认添加这种有参构造函数来初始化parent指针</li>
+<li>当信号和槽发生重载时候，需要利用函数指针明确指出函数地址<br><code>void(Teacher:: *teacherSignal)(QString) = &amp;Teacher::hungry;</code></li>
+<li>创建“对象”在栈上，是个变量不是指针可以直接“.”来调用函数。<br>创建“对象指针”在堆区，函数结束之后不会释放掉的 “-&gt;”来调用函数。<br>对于静态成员函数可以用两种方式访问 一种是类名直接访问，一种是创建对象<br><code>QMessageBox：：critical（this，“错误”，“critical”）;</code>//其中”错误”代表地址 </li>
+<li>this使用：<ol>
+<li>哪个对象调用这个构造函数 this指向那个对象 this是指针</li>
+<li>在Mywidget的构造函数中，this代表mywidget类对象，既当前窗口对象Mywidget,而图中的<code>QPushButton * btn= new QPushButton();</code></li>
+<li>QPushButton()构造函数可以有很多重载</li>
+<li>第二个参数代表btn的父类是谁，this指向当前对象，让按钮显示在当前层中（button默认在顶层中）。</li>
+<li><code>QWidget *parent=this；</code>让当前指针this=parent指针 </li>
+<li>父类指针指向子类对象来实现多态<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person p =<span class="keyword">new</span> Son();</span><br><span class="line">QTextEdit *edit = <span class="keyword">new</span> QTextEdit（<span class="keyword">this</span>）；</span><br><span class="line">setCentralWidget（edit）；</span><br><span class="line"><span class="comment">//其中的参数是QWidget *widget 父类指针但是填写的是子类对象</span></span><br></pre></td></tr></table></figure></li>
+<li><img src="/C++/QT1.png" alt="avatar"></li>
+<li>函数的参数是父类指针，填写this代表将teacher绑定到this上不用析构了，其中将this代表widget对象继承Qwidget<ul>
+<li><img src="/C++/QT2.png" alt="avatar"></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>ui就是界面文件中的ui文件<ul>
+<li>ui函数体中 ui-&gt;setupUi(this);表示ui帮助创建的界面</li>
+<li>都在ui-&gt;setupUi(this);下进行编辑</li>
+<li>其中的actionNew默认对象是个指针 </li>
+<li>return a.exec(); //.exec()阻塞代码 不是创建在栈上</li>
+<li><img src="/C++/QT4.png" alt="avatar"></li>
+</ul>
+</li>
+<li>lambda表达式<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;=&#125;函数体内可以使用lambda所在作用范围内所有可见的局部变量</span><br><span class="line">QPushButton * btn2= <span class="keyword">new</span> QPushButton(<span class="string">&quot;aaa&quot;</span>,<span class="keyword">this</span>);</span><br><span class="line">[=]()&#123;</span><br><span class="line">btn2-&gt;setText(<span class="string">&quot;bbb&quot;</span>); <span class="comment">//lanbda的作用范围就是当前作用域</span></span><br><span class="line">&#125;；<span class="comment">//这只是函数的声明不是调用，想调用需要在后边添加一个()</span></span><br><span class="line">相当于值传递</span><br><span class="line">connect(btn4,&amp;QPushButton::clicked,<span class="keyword">this</span>,[=]()&#123;</span><br><span class="line">btn4-&gt;setText(<span class="string">&quot;bbb&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+this代表当前窗口 然后去执行lanbda表达式<br>this可以省略 因为this和后边的lambda表达式 是一个东西</li>
+<li>如果类的构造函数是无参的可以dataConfig config;直接创建对象<br>//同步二维数组 如果以后有保存需求 可以利用数组还原  记录点击前的样子<br><code>this-&gt;gameArray[i][j]=this-&gt;gameArray[i][j]==1?0:1;</code></li>
+<li>读取gbk格式<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    QTextCodec * codec = QTextCodec::codecForName(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line">    codec-&gt;toUnicode(<span class="built_in">array</span>)；	</span><br><span class="line">    QTextCodec * codec = QTextCodec::codecForName(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line">    <span class="comment">//codec-&gt;toUnicode(array);</span></span><br><span class="line">    <span class="keyword">this</span>-&gt;setWindowTitle(codec-&gt;toUnicode(<span class="string">&quot;翻金币主场景&quot;</span>));</span><br><span class="line">    <span class="comment">//自定义按钮需要设置到某个场景中</span></span><br><span class="line">    backBtn-&gt;setParent(<span class="keyword">this</span>);</span><br><span class="line">## 数据结构</span><br><span class="line"><span class="number">1.</span> <span class="class"><span class="keyword">struct</span> <span class="title">LinkNode</span>*<span class="title">Next</span> 四个字节，指针就是四个字节，<span class="title">return</span>的返回值 1和-1都是真 0是假</span></span><br><span class="line"><span class="class">2. 顺序存储-数组、链式存储-链表、栈存在顺序和链式，队列存在顺序和链式，树存在链式，顺序有点需要补全代码比较浪费资源、图有顺序（邻接矩阵）和链式（邻接表）</span></span><br><span class="line"><span class="class">3. 链表长度<span class="title">m_size</span>代表有几个节点，和<span class="title">pos</span>下标不一样，链表插入初始为0，<span class="title">m_size</span>比<span class="title">pos</span>多一  </span></span><br><span class="line"><span class="class">   ![<span class="title">avatar</span>](/<span class="title">C</span>++/数据1.<span class="title">png</span>)</span></span><br><span class="line"><span class="class">4. 动态数组初始化，用函数返回动态数组指针的形式初始化，这个返回的动态数组指针指向的是动态数组，堆区开辟空间时：</span></span><br><span class="line"><span class="class">   1. 动态数组开辟一块并将指针返回</span></span><br><span class="line"><span class="class">   2. 动态数组中的内容开辟指针</span></span><br><span class="line"><span class="class">   3. ![<span class="title">avatar</span>](/<span class="title">C</span>++/数据2.<span class="title">png</span>)</span></span><br><span class="line"><span class="class">   4. 可以直接定义结构体指针指针</span></span><br><span class="line"><span class="class">      1. ![<span class="title">avatar</span>](/<span class="title">C</span>++/数据3.<span class="title">png</span>)</span></span><br><span class="line"><span class="class">5. 头结点结构体中<span class="title">LJD</span> *<span class="title">next</span>；指向邻接点结构体  </span></span><br><span class="line"><span class="class">   邻接点结构体中的<span class="title">Struct</span> <span class="title">LJD</span> *<span class="title">next</span>；指向<span class="title">V0</span>的下一个邻接点结构体，  </span></span><br><span class="line"><span class="class">   不是<span class="title">V1</span>的邻接点结构体位置，虽然是链表形式，但是都是表示<span class="title">V0</span>的邻接点结构体</span></span><br><span class="line"><span class="class">   - ![<span class="title">avatar</span>](/<span class="title">C</span>++/数据4.<span class="title">png</span>)</span></span><br><span class="line"><span class="class">6. <span class="title">V0</span>首先就是一个一维的<span class="title">Char</span>*，一维的数组</span></span><br><span class="line"><span class="class">   ```<span class="title">c</span></span></span><br><span class="line"><span class="class">   <span class="title">typedef</span> <span class="title">char</span> <span class="title">VertexInfo</span>[9];</span> <span class="comment">//代表9个字符的字符串</span></span><br><span class="line">   VertexInfo vertex[MaxVertex];&lt;=&gt;vertex[MaxVertex][<span class="number">9</span>]</span><br><span class="line">   <span class="comment">//代表每行存一个字符串  顶点的名字</span></span><br><span class="line">   VertexInfo代表<span class="keyword">char</span>类型字符数组</span><br></pre></td></tr></table></figure></li>
+<li>选择排序（只是在更新下标，然后经过一次交换）<br>冒泡排序 插入排序 第二个for中如果满足条件先执行结构体中的代码然后执行j–操作<br><img src="/C++/%E6%95%B0%E6%8D%AE5.png" alt="avatar"></li>
+<li>链表结构体、动态数组结构体、队列结构体的初始化可以放在初始化函数中返回一个动态数组、链表、队列的指针，这个初始化工作也可以放在main函数中或者test01()函数中</li>
+<li>顺序队列这种数据类型的声明和初始化,入列函数中seqQueue queue类似于int a是形参  自定义结构体声明是不占有内存的，定义时赋值之后才有<br> <img src="/C++/%E6%95%B0%E6%8D%AE6.png" alt="avatar"></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/24/C++/" data-id="ckp3bilim00044sue6sz63yjo" data-title="C++" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux系统编程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据库学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

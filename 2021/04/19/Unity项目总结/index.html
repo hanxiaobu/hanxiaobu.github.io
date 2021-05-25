@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Unity项目总结 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="UnityApp项目总结虚拟仿真项目 开源模型：https:&#x2F;&#x2F;opengameart.org&#x2F; 防止无限生成AudioSource 注释掉这句m_AudioSource.Play(),静态的门是不会旋转的，只能旋转他的collider unity加载视频和淡入淡出:   https:&#x2F;&#x2F;blog.csdn.net&#x2F;itsxwz&#x2F;article&#x2F;details&#x2F;82626930 https:&#x2F;&#x2F;j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity项目总结">
+<meta property="og:url" content="http://example.com/2021/04/19/Unity%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="UnityApp项目总结虚拟仿真项目 开源模型：https:&#x2F;&#x2F;opengameart.org&#x2F; 防止无限生成AudioSource 注释掉这句m_AudioSource.Play(),静态的门是不会旋转的，只能旋转他的collider unity加载视频和淡入淡出:   https:&#x2F;&#x2F;blog.csdn.net&#x2F;itsxwz&#x2F;article&#x2F;details&#x2F;82626930 https:&#x2F;&#x2F;j">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Unity%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/%E7%9F%B3%E6%B2%B9%E9%A1%B9%E7%9B%AE%E8%AF%AD%E9%9F%B3%E4%B8%BB%E6%92%AD%E5%90%8D%E5%AD%97.png">
+<meta property="article:published_time" content="2021-04-19T00:22:30.279Z">
+<meta property="article:modified_time" content="2021-04-21T14:35:23.531Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Unity%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/%E7%9F%B3%E6%B2%B9%E9%A1%B9%E7%9B%AE%E8%AF%AD%E9%9F%B3%E4%B8%BB%E6%92%AD%E5%90%8D%E5%AD%97.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Unity项目总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/19/Unity%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2021-04-19T00:22:30.279Z" itemprop="datePublished">2021-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Unity项目总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="UnityApp项目总结"><a href="#UnityApp项目总结" class="headerlink" title="UnityApp项目总结"></a>UnityApp项目总结</h2><h3 id="虚拟仿真项目"><a href="#虚拟仿真项目" class="headerlink" title="虚拟仿真项目"></a>虚拟仿真项目</h3><ol>
+<li>开源模型：<a target="_blank" rel="noopener" href="https://opengameart.org/">https://opengameart.org/</a></li>
+<li>防止无限生成AudioSource 注释掉这句<code>m_AudioSource.Play()</code>,静态的门是不会旋转的，只能旋转他的collider</li>
+<li>unity加载视频和淡入淡出:</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/itsxwz/article/details/82626930">https://blog.csdn.net/itsxwz/article/details/82626930</a></li>
+<li><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/456c463b32b96e0a5931446b.html">https://jingyan.baidu.com/article/456c463b32b96e0a5931446b.html</a></li>
+</ul>
+<ol start="4">
+<li>eulerAngles和rotation区别：eulerAngles的角度是不能随时变化的，是一个定值，而rotation的角度是可以增加的，eulerAngles用vector3来赋值，而rotation用Quaternion来赋值</li>
+<li>语音主播名字<ul>
+<li><img src="/Unity%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/%E7%9F%B3%E6%B2%B9%E9%A1%B9%E7%9B%AE%E8%AF%AD%E9%9F%B3%E4%B8%BB%E6%92%AD%E5%90%8D%E5%AD%97.png" alt="avatar"></li>
+</ul>
+</li>
+<li>unity中最好不用while(true)函数调用update中的material循环调用offset，不适合使用单例模式Generate Colliders选项，然后即会自动在预支体或游戏物体中生成一个Mesh Collider组件，并添加了Mesh，若没有生成组件，可自行导入。</li>
+<li>fps游戏优化：</li>
+</ol>
+<ul>
+<li>视锥剔除(Frustum Culling) 在相机梯形的体积中的物体就会显示出来。因此：可以通过调节field of view 从60变成30，clipping planes 的far从1000变成300或者更小</li>
+<li>遮挡剔除：空场景有默认的天空盒子tris为1.7k想遮挡的物体设置成静态，相机不设置静态，然后bake</li>
+<li>平面不能添加mesh collider 点选Convex选项报错<code>[Physics.PhysX] ConvexHullBuilder::CreateTrianglesFromPolygons: convex hull</code></li>
+</ul>
+<ol start="8">
+<li>功能点介绍：</li>
+</ol>
+<ul>
+<li>使用HighlightingSystem插件实现鼠标移动到物体物体高亮效果</li>
+<li>使用 背景音乐和音效管理模板</li>
+<li>悠游课堂射线碰撞检测和loading界面加载 异步加载场景(loading界面)</li>
+<li>简单地图导航循环长箭头实现(导入一张贴图，注意图片的 Wrap Mode 为 Repeat)</li>
+<li>Updatel里间隔时间调用</li>
+<li>切换到GUI场景鼠标就消失了用<code>Cursor.visible=(true);</code>光标就在中间不动了，怎么让光标移动？<code>m_MouseLook.SetCursorLock(false);</code></li>
+<li>基础包 FirstPersonController下的MouseLook 脚本研究</li>
+<li>优化 Occlusion和LOD Occlusion Culling遮挡剔除理解设置和地形优化应用</li>
+<li>Stats窗口利用，tif格式窗户图片，可以有透明通道 jpg不行</li>
+<li>法线翻转 <a target="_blank" rel="noopener" href="https://blog.csdn.net/ch080239/article/details/52099544">https://blog.csdn.net/ch080239/article/details/52099544</a></li>
+<li>触发器开关门 注意：1门不能是static 2门父物体的名字唯一</li>
+<li>小地图制作：<ul>
+<li> 使用UGUI实现小地图</li>
+<li> 制作小地图（Minimap）系统</li>
+</ul>
+</li>
+</ul>
+<ol start="9">
+<li>IEnumerable和IEnumreator使用场合：</li>
+</ol>
+<ul>
+<li>如果要迭代一个类可以使用方法GetEnumrerator()，其返回类型IEnumreator.如果要迭代一个类成员,例如一个方法，则使用IEnumerable</li>
+<li>op1？？op2等价于op1==null？op2：op1</li>
+<li>C#中this关键字可以用作构造函数初始化器</li>
+</ul>
+<ol start="10">
+<li>抽象类和接口的区别：</li>
+</ol>
+<ul>
+<li>抽象类主要用作对象系列的基类，共享某些主要特征，例如，共同的目的和结构</li>
+<li>接口则主要用于类，这些类在基础水平上有所不同，但仍可以完成某些相同的任务</li>
+</ul>
+<ol start="11">
+<li>C#和C++关于switch不一样，在C++中，可以在运行完一个Case语句后，再运行另一个case<br>C#中执行完一个case再执行另一个是非法的</li>
+<li>接口就是把公共实例方法和属性结合起来，以封装特定功能的集合，接口这东西子类继承了 子类不用也要写出来，把常用的方法抽象出来，放到一个接口里，具体类按上接口后，再根据类的情况编写方法体。这是JAVA的重要编程思想：问题领域-&gt;对象模型中的对象-&gt;对象模型中的类-&gt;对象模型中的父类。注意最后从 对象模型中的类-&gt;对象模型中的父类 这一步，这样做的目的可提高两个系统间的松耦合。</li>
+<li>获取子物体的唯一方法<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (Transform child <span class="keyword">in</span> transform)</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="comment">//Debug.Log(child.gameObject.name);</span></span><br><span class="line">     target = child.gameObject;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li>常用缩写翻译： </li>
+</ol>
+<ul>
+<li>CTS：Common Type System通用类型系统</li>
+<li>CLR：Common Language Runtime 公共语言运行库，负责管理用.NET库开发的所有应用程序的执行</li>
+<li>CTS：Common Type System 通用类型系统</li>
+<li>CIL：Common Intermediate Language 通用中间语言</li>
+<li>JIT：Just In Time 即时编译器</li>
+<li>WPF：Windows Presentation Foundation 建立windows应用程序 其中Windows Forms模块是个控件库</li>
+<li>ASP：Active Server Pages   可以通过Web Forms建立ASP.NET应用</li>
+<li>WCF：Windows Communication Foundation web服务</li>
+<li>ADO.NET：Active Data Objects </li>
+<li>OOP：Object-Oriented Programming 面向对象编程</li>
+<li>SEH：structured Exception Handling 结构化异常处理</li>
+<li>UML：Unified Modeling language 统一建模语言</li>
+<li>LINQ：Language Integrated Query</li>
+</ul>
+<ol start="15">
+<li>查找物体方法：</li>
+</ol>
+<ul>
+<li>unity获取所有子物体(不包括父物体)  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">foreach</span> (Transform item <span class="keyword">in</span> transform)</span><br><span class="line">  &#123;</span><br><span class="line">    Debug.Log(item.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>或者(包括了父物体)  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">        Transform[] father = GetComponentsInChildren&lt;Transform&gt;();</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> child <span class="keyword">in</span> father)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(child.name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">- 或者</span><br><span class="line">    ```c<span class="meta">#</span></span><br><span class="line">    <span class="keyword">public</span> Transform father;</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>      &#123;</span><br><span class="line">        <span class="comment">/* GameObject name2 = GameObject.FindGameObjectWithTag(&quot;erzi&quot;);*/</span></span><br><span class="line">         GameObject[] name3 = GameObject.FindGameObjectsWithTag(<span class="string">&quot;erzi&quot;</span>);</span><br><span class="line">        <span class="comment">// Debug.Log(name2);</span></span><br><span class="line">         <span class="keyword">foreach</span>(<span class="keyword">var</span> son <span class="keyword">in</span> name3)</span><br><span class="line">         &#123;</span><br><span class="line">             Debug.Log(son.name);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">- 可以遍历所有子物体，以及孙物体</span><br><span class="line">  ``<span class="keyword">foreach</span>(Transform child <span class="keyword">in</span> obj.GetComponentsInChildren&lt;Transform&gt;()) ``</span><br><span class="line">  - ``<span class="number">1.</span>GameObject.FindGameObjectWithTag``获取不到隐藏的物体，``Debug.Log(zimu2.Length);``打印数组个数只有gameobject可见，</span><br><span class="line">  - 把所有你要找的东西放在一个对象下面，不就容易找了吗，或者工程启动时直接查找然后再把要关的关上</span><br><span class="line"><span class="number">16.</span> PhotonServer的单服聊天&amp;AB打包和加载注意事项</span><br><span class="line">  - MyServer.cs和MyClient.cs是服务器端的两个类</span><br><span class="line">  - 异步加载需要等待异步加载完成(返回的request)同步的方法就不用<span class="keyword">yield</span>暂停了，他会等待方法加载完才返回``AssetBundleCreateRequest reqeust = AssetBundle.LoadFromMemoryAsync(File.ReadAllBytes(path));<span class="keyword">yield</span> <span class="keyword">return</span> request;AssetBundle ab =request.assetbundle;``第一步异步加载 第二步等待加载完成 第三步加载对象 然后使用里边资源</span><br><span class="line">  - photon server下载安装</span><br><span class="line">    - https:<span class="comment">//www.photonengine.com/en/PUN -&gt;右上角的SDKs-&gt;下边的Server下载</span></span><br><span class="line">    - 点击右上角的头像 -&gt;Your servers</span><br><span class="line">  - 安装Apache和Mysql使用的命令符是在管理员模式下</span><br><span class="line">  - https:<span class="comment">//blog.csdn.net/missing2011/article/details/81474857</span></span><br><span class="line">不用设置环境变量</span><br><span class="line">  - lua安装时需把lua53.exe改成lua.exe</span><br><span class="line">  - 安装Redishttp:<span class="comment">//www.runoob.com/redis/redis-install.html</span></span><br><span class="line">  - php redis 扩展：http:<span class="comment">//pecl.php.net/package/redis/4.1.1/windows</span></span><br><span class="line"><span class="meta">## Unity游戏</span></span><br><span class="line"><span class="meta">### 微信飞机&amp;贪吃蛇&amp;俄罗斯方块技术细节</span></span><br><span class="line"><span class="number">1.</span> GameObject和gameObject的区别（大写是类，小写是对象）</span><br><span class="line">    <span class="number">1.</span> gameObject好理解一点，就是你脚本挂着的那个物体。这个实例化过程是Unity帮你实现的，不用在写代码实例化。<span class="keyword">this</span>.gameObject默认函数，脚本一创建直接就<span class="keyword">get</span>到了。例如，有一个A物体。你给它挂载一个脚本里写<span class="keyword">this</span>.gameObject。那就等于是直接获取（实例化）A这个物体了，你直接可以引用它下面挂载的属性。</span><br><span class="line">    <span class="number">2.</span> GameObject不是对象，通常需要获取一个对象，就像你定义一个<span class="keyword">public</span> GameObject A；那么属性里就会出现一个可托选的框，那就是Unity告诉你，你定义的这个物体是哪个物体要你选择，无论你拖拽也好，脚本里获取也好，都是要给A赋予对象的。</span><br><span class="line">    <span class="number">3.</span> GameObject代表类（人民币），gameObject代表对象（你兜里的人民币） </span><br><span class="line"><span class="number">2.</span> ``InvokeRepeating(<span class="string">&quot;Move&quot;</span>, <span class="number">0.3f</span>, <span class="number">0.3f</span>);``类似于委托 三个参数分别是 调用的函数 第一次调用时间 每隔多久再调用一次 cancelInvoke取消所有调用</span><br><span class="line"><span class="number">3.</span> ``GameObject g = (GameObject)Instantiate(tailPrefab,v,Quaternion.identity); ``动态生成预制体（必须是预制体） 同时也是实例化GameObject类 三个参数分别是 预制体 位置 角度 identity是默认角度 !!!先获取预制体<span class="keyword">public</span> GameObject prefab； </span><br><span class="line"><span class="number">4.</span> ```c<span class="meta">#</span></span><br><span class="line">   List&lt;Transform&gt; tail = <span class="keyword">new</span> List&lt;Transform&gt;();</span><br><span class="line">   <span class="comment">//Add to front of list, remove from the back</span></span><br><span class="line">   tail.Insert(<span class="number">0</span>, tail.Last());将元素添加到指定索引处</span><br><span class="line">   tail.RemoveAt(tail.Count - <span class="number">1</span>);移除最后一个元素 Count比index总是多一</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li>```c#<br>public Action OnLose;发送消息-&gt;using System;<br> void OnLose()<br> {<pre><code> textLose.text = &quot;You lose.&quot;;
+ textLose.gameObject.SetActive(true);
+ Time.timeScale = 0;//一切停止
+</code></pre>
+ } <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">2. spawn 孵化器的意思，空物体叫spawn，用来动态生成prefab物体 spawner生成器</span><br><span class="line">3. 在Update函数中的&#96;&#96;this.GetComponent&lt;SpriteRenderer&gt;().sprite&#x3D;sprites[frame];&#96;&#96;这样每一帧都需要get查询一下，所以优化时将get写到start中 &#96;&#96;spriteRenderer&#x3D;this.GetComponent&lt;SpriteRenderer&gt;();&#96;&#96;在update中直接调用属性 &#96;&#96;spriteRenderer.sprite&#x3D;sprtes[frame];&#96;&#96;</span><br><span class="line">4. 第一次是不能移动的，因为手指移动了 才可以移动 然后每次都归零</span><br><span class="line">   &#96;&#96;&#96;c#</span><br><span class="line">   if(isMouseDown)</span><br><span class="line">    &#123;</span><br><span class="line">	    if(lastMousePosition!&#x3D;Vector3.Zero)</span><br><span class="line">    &#123;</span><br><span class="line">	    Vector3 offset&#x3D;Camera.main.ScreenToWorldPoint(Input.mousePosition)-lastMousePosition;</span><br><span class="line">	    transform.Position&#x3D;transform.position+offset;</span><br><span class="line">    &#125;</span><br><span class="line">	    lastMousePosition&#x3D;Camera.main.ScreenToWorldPoint(Input.mousePosition);</span><br><span class="line">    &#125;</span><br><span class="line">    然后在</span><br><span class="line">    if（Input.GetMouseButtonUp(0)）</span><br><span class="line">    &#123;</span><br><span class="line">	    isMouseDown&#x3D;false;</span><br><span class="line">	    lastMousePosition&#x3D;Vector3.zero;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>transform.Position=new Vector3(x,y,0);</code>transform是个结构体不是对象 不能直接.y</li>
+<li>注意触发器是[Collider2D collision],碰撞器是[Collision2D collision]<br>脚本挂在Bullet物体上<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter2D</span>(<span class="params">Collider2D other</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(other.tag==<span class="string">&quot;Enemy&quot;</span>)</span><br><span class="line"> &#123;</span><br><span class="line">  other.gameObject.SendMessage(<span class="string">&quot;BeHit&quot;</span>);</span><br><span class="line">  GameObject.Destory(<span class="keyword">this</span>.gameObject);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这里边有两个gameObject，第一个是Enemy的，第二个是Bullet的，SendMessage是调用other.gameObject身上所有脚本中叫BeHit的方法，其中other代表Enemy</li>
+<li>box collider2D继承了Collider2D，获取collider物体上的Award脚本<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>（collider.tag==<span class="string">&quot;Award&quot;</span>）</span><br><span class="line">&#123;</span><br><span class="line"> Award award=collider.GetComponent&lt;Award&gt;();</span><br><span class="line"> <span class="keyword">if</span>(award.type==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">  superGunTime=resetSuperGunTime;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>this和this.gameobject区别：this是代码本类，this.gameobject代表代码挂在的对象<code>transform=this.transform=this.gameobject.transform=this.gameobject.getComponent&lt;transform&gt;()</code><h3 id="马舜的保卫萝卜MVC框架和flyBird面向对象思想"><a href="#马舜的保卫萝卜MVC框架和flyBird面向对象思想" class="headerlink" title="马舜的保卫萝卜MVC框架和flyBird面向对象思想"></a>马舜的保卫萝卜MVC框架和flyBird面向对象思想</h3></li>
+<li>GameObject的Find方法只能找到可见对象，所以先去查找父节点然后再查找子节点<br><code>GameObject.Find(&quot;Canvas&quot;).transfrom.Find(&quot;UICountDown&quot;).GetComponent&lt;UICountDown&gt;()</code></li>
+<li>unity协程用单线程模拟多线程比较安全,unity没办法让面板显示属性，但是可以让字段用public显示,枚举的本质就是int类型</li>
+<li>Sorting Layers和Layers的区别:</li>
+<li>Sorting Layers层针对是2D 越在下边(defout是最底下一层)，显示越在最上边 和 Hierarchy层一样 </li>
+<li>Layers层是逻辑层针对物理检测</li>
+<li>unity的2D图集处理 并切割出一张张小图片，ACT战斗游戏建议多放  CG一镜到底，unity GI光照缓存目录 C:\Users\HYY\AppData\LocalLow\Unity\Caches(10G)</li>
+<li>Update()内部使用的是反射的机制，重命名关键字 Ctrl+R，R。抽象类不可以实例化</li>
+<li>组件信息传递：他们三个都会发送当前对象</li>
+<li>SendMessage：发送到自己及自己的兄弟组件（这些组件都在同一个对象上）</li>
+<li>SendMessageUpWards：发送到自己所在对象以及父对象和这个根上所有的对象上的组件</li>
+<li>BroadcastMessage：发送到自己以及所有的子对象</li>
+<li>unity状态机中Parameters中的bool和trigger区别：<br>把bool设置为true时想变回false，需要手动还原，trigger可以自动还原（优势）</li>
+<li>事件归零小技巧：while（HpChanged！=null）{HpChanged-=HpChanged}</li>
+<li>2D游戏中Math.Atan和Math.Atan2函数：<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> angle=Mathf.Atan（dy/dx）表示<span class="number">-90</span>和+<span class="number">90</span>度之间，</span><br><span class="line"><span class="built_in">float</span> angle=Math.Atan2（dy,dx）表示<span class="number">-180</span>到+<span class="number">180</span>度之间</span><br><span class="line"><span class="comment">//欧拉角是个角度值    angle是弧度角 需要乘以Mathf.Rad2Deg变成角度</span></span><br><span class="line">Vector3 enlurAngles =transform.enlerAngles;</span><br><span class="line">culerAngles.z = angle * Mathf.Rad2Deg;（有的物体默认是向上的所以要减去<span class="number">90</span>度回到朝向右侧）</span><br><span class="line">transform.enlerAngles = eulerAngles;</span><br></pre></td></tr></table></figure></li>
+<li>flyBird：<ol>
+<li>unity中要常用事件来间解耦合 并且事件不会影响性能 分三步 定义事件 触发事件 监听事件</li>
+<li>!!!foreach（Transform child in obs）其中obs不是集合，但是是父物体，能用foreach不要看是不是集合而是看这个类能不能实现IEnumerable这个接口，而Transform组件实现了，所以可以使用foreach</li>
+<li>unity中cursor 用作鼠标的光标图片 unity 高级工具系统的”V键吸附工具”</li>
+<li>碰撞检测:<ol>
+<li>string a1=child.name;//主键名字 name是个属性 用name的时候还是会访问gameObject</li>
+<li>string a2 =child.gameObject.name;//游戏对象也有名字</li>
+<li>unity为了提供方便用第一个，结果是一样</li>
+</ol>
+</li>
+<li>C#基础知识:<ol>
+<li>类型泛型的约束用where<code>public abstruct Class Singleton&lt;T&gt;:MonoBehaviour where T:MonoBehaviour</code></li>
+<li>object是C#中的。Object是unity中的</li>
+<li>Canvas中Transform的2D组件Rest Transform 。Transform的3D组件是Transform<h3 id="悠游笔记"><a href="#悠游笔记" class="headerlink" title="悠游笔记"></a>悠游笔记</h3></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>技术细节：<ol>
+<li>PlayerPrefs类似一个字典，可以从中getstring 也可以setstring</li>
+<li>创建一个域，#region #endregion</li>
+<li>枚举转字符串 .ToString()</li>
+<li>抽象基类不准许实例化 必须由他的基类实例化，状态是需要每帧都执行的</li>
+<li>动画控制器(Animator)和有线状态机不同点：<ol>
+<li>战斗待机和普通待机</li>
+<li>有限状态机：只有待机</li>
+</ol>
+</li>
+<li>人型动画的优势：当一个角色动画有位移的时候，如果使用人形动画可以让这个角色控制器跟随这个动画走，一般动画达不到这个效果</li>
+<li>乘法的效率要比除法高 所以要*0.01 而不是/100</li>
+<li>(模型+动画)是一体都在模型上的状态机：<ol>
+<li>legacy旧版本 play是正常的播放 CrossFade是用动画融合的方式</li>
+<li>Generic新版本 动画控制器系统是通过连线的方式，后边的角色是通过动画重定向就不用重新连线了</li>
+</ol>
+</li>
+<li><ol>
+<li> 单例：普通类（实例化）和继承MonoBehaviour的类（创建一个物体）</li>
+<li> 协程：停止某个携程是要用StopCoroutine(“test”)；不是StopCoroutine(test());</li>
+</ol>
+</li>
+<li> NGUI中GetComponetsInChildren<UIButton>(true);其中的true代表包含隐藏的按钮<br>UIEventLIstener.Get(btnArr[i].gameObject).onClick=BtnClick;其中onclick传入gameObject</li>
+<li>新建一个单独”.cs”文件，里边只存枚举都是public类型，相当于定义在总的命名空间上了</li>
+<li>函数参数如果写这个bool cache = false，说明这个参数可填可不填,调用者需要在函数中传入（cache：true）</li>
+<li>定义泛型时，如果是普通类就没有什么要求，如果是继承MonoBehaviour需要注意他的约束也必须继承<code>MonoBehaviour：UISceneBase&lt;T&gt;:MonoBehaviour where T:MonoBehaviour</code></li>
+<li>克隆预设体：<code>Instantiate(m_BoxPrefab) as GameObject</code>用来读取存储的键值对<code>int number=PlayerPrefs.GetInt(&quot;m_Boxkey&quot;，0)；</code>参数是键值对</li>
+<li>射线:<ol>
+<li> 直线型 球形</li>
+<li> Mathf.Infinity；无限大 Infinity表示float最大值 radius 半径</li>
+<li> 层作为参数的写法，1&lt;&lt;LayerMask.NameToLayer(“Item”); item层</li>
+<li> 相机到平面的射线：<code>Debug.DrawLine(Camera.main.transform.position, m_TargetPos);</code></li>
+<li>把主角的碰撞半径画出来：<pre><code><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Gizmos.color=Color.Red;</span><br><span class="line">Gizmos.DrawWireSphere(transform.position,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>碰撞分为两种：碰撞器 触发器<ol>
+<li>碰撞脚本绑定在箱子上，然后撞到地面 （1，所在层进行碰撞，2，其中一个物体必须是刚体）</li>
+<li>碰撞：OnCollisionEnter(Collision info)，Collision中的Collider代表要撞到的碰撞体info.collider.gameobject.name;  Collision不是组件</li>
+<li>触发：OnTriggerEnter(Collider other)，other.gameobject.name;  other直接就是collider组件</li>
+<li>角色碰撞器：Character Controller 自带刚体（Rigidbody）不能设置触发。</li>
+<li>Character Controller和collider碰撞时，只能检测触发，不能检测到碰撞信息，但是可以产生碰撞</li>
+</ol>
+</li>
+<li>摄像机结构:四层文件夹中包含一个主相机<ol>
+<li>CameraFollowAndRotate 修改旋转轴的Y轴 根目录需要加标记 添加脚本 并且运OnDrawGizmos()方法</li>
+<li>CameraUpAndDown 修改旋转轴的Z轴 </li>
+<li>temp1 方便查看  临时建一个空物体 加标记 这样旋转 就可以查看转动相机 red</li>
+<li>CameraZoomContainer 改变x 然后拉出一段距离 然后照着主角  自身标记green</li>
+<li>temp2 方便查看  临时建一个空物体 加标记 这样旋转 就可以查看转动相机 blue</li>
+<li>CameraContainer 修改位置坐标的 Z坐标  </li>
+<li>Main Camera   实现震屏 摄像机动画的功能（需要transform都是0才行）</li>
+</ol>
+</li>
+<li>UI逻辑： 管理器都继承泛型单例类<ol>
+<li>ResourceMgr 资源管理器</li>
+<li>LogOnSceneCtrl 登陆UI场景控制器 调用SceneUIMgr中的登陆型UI 绑在空物体上 生成 UI Root</li>
+<li>SceneUIMgr 场景UI管理器 包含各种型UI 登陆型UI 主城型UI loading型UI</li>
+<li>UISceneLogonCtrl UI场景加载控制器 调用WindowUIMgr中的登陆窗口UI 绑在UI Root上 生成panLogOn</li>
+<li>WindowUIMgr 窗口型UI管理器</li>
+<li>UIlogonCtrl UI加载控制器 绑定panLogOn上 控制button</li>
+<li>UIRegCtrl UI注册控制机 绑定在panReg上 控制button</li>
+</ol>
+</li>
+<li>缓存的应用  运用键值对 可以存放地址和资源镜像(clone)<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先定义哈希表(键值对)</span></span><br><span class="line"><span class="keyword">private</span> Hashtable m_PrefabTable;</span><br><span class="line"><span class="comment">//在构造函数中实例化</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ResourcesMgr</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">m_PrefabTable=<span class="keyword">new</span> Hashtable();</span><br><span class="line">&#125;</span><br><span class="line">GameObject obj =<span class="literal">null</span>;</span><br><span class="line"><span class="keyword">if</span>(m_PrefabTable;.Contains(path))&#123;</span><br><span class="line">obj=m_PrefabTable;[path]<span class="keyword">as</span> GameOject;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">obj=Resources.Load(sbr.ToString())asGameObject;</span><br><span class="line"><span class="keyword">if</span>(cache)&#123;</span><br><span class="line">m_PrefabTable.Add(path,obj);</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure></li>
+<li>泛型&amp;单例 声明所有单例的基类Singleton.cs  定义一个泛型 所有子类继承它时会传给子类一个类型<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton&lt;T&gt; where T :new()&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> T instance;</span><br><span class="line"><span class="keyword">public</span> staitc T Instance&#123;</span><br><span class="line"><span class="keyword">get</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(instance==<span class="literal">null</span>)</span><br><span class="line">&#123;instance =<span class="keyword">new</span> T();&#125;</span><br><span class="line"><span class="keyword">return</span> instance;&#125;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用时</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ResourcesMgr</span> :<span class="title">Singleton</span>&lt;<span class="title">ResourcesMgr</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> GameObject <span class="title">load</span> (<span class="params">String path</span>)</span></span><br><span class="line"><span class="function"></span>&#123;<span class="keyword">return</span> Resources.Load(path) <span class="keyword">as</span> GameObject;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>协程：<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">Test</span>(<span class="params"><span class="built_in">int</span> x ,<span class="built_in">int</span> y</span>)</span>&#123;<span class="comment">//yield return new WaitForSeconds(2f);</span></span><br><span class="line"><span class="comment">//代表等待执行的秒数</span></span><br><span class="line">debug.log(<span class="string">&quot;1&quot;</span>);<span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">m_Ret=x*y;debug.log(<span class="string">&quot;2&quot;</span>);&#125;</span><br></pre></td></tr></table></figure>
+执行顺序 1-&gt;updata -&gt;updata-&gt;2<br>然后在Update中启动协程StartCoroutine(Test());<br>终止所有协程StopAllCoroutine();<br>终止协程StopCoroutine();</li>
+<li>值传递直接改栈上边的地址就可以<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> a =<span class="number">10</span>;</span><br><span class="line"><span class="built_in">int</span> b = a;</span><br><span class="line">a =<span class="number">20</span>; </span><br><span class="line">debug a=<span class="number">20</span> b=<span class="number">10</span>；</span><br></pre></td></tr></table></figure>
+引用传递需要先将地址(引用)指向，然后根据地址再改堆中的东西(stirng类型可以按照引用类型的方法传递)<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BoxEntity entity=<span class="keyword">new</span> BoxEntity();</span><br><span class="line">entity.BoxSize=<span class="number">20</span>;</span><br><span class="line"><span class="comment">//将entity引用赋值给entity2，然后修改引用对应堆中的值</span></span><br><span class="line">BoxEntity entity2 =entity;</span><br><span class="line">entity2.BoxSize=<span class="number">30</span>;</span><br><span class="line">debug entity=<span class="number">30</span></span><br></pre></td></tr></table></figure>
+String 字符串不可变性 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//string StrPath=string.Empty;</span></span><br><span class="line">StringBuilder sbr=<span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="keyword">switch</span>(type)&#123;</span><br><span class="line"><span class="keyword">case</span> ResourceType.UIScene;</span><br><span class="line">	<span class="comment">//StrPath=     </span></span><br><span class="line">	sbr.Append(<span class="string">&quot;UIPrefab/UIScene/&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+[SerializeField] 将成员变量 在Inspector中显示<br><code>private Transform m_CameraUpAndDown;</code></li>
+<li>扩展方法：StringUtil工具脚本 要求类是静态类<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Scene类中<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="built_in">string</span> a =<span class="string">&quot;10&quot;</span>;</span><br><span class="line"><span class="built_in">int</span> temp=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">int</span>.TryParse(a,<span class="keyword">out</span> temp);</span><br><span class="line">&#125;每次都要这么做有点啰嗦所以写在StringUtil类中</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">StringUtil</span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">ToInt</span>(<span class="params"><span class="keyword">this</span> <span class="built_in">string</span> str</span>)</span>&#123;</span><br><span class="line"><span class="built_in">int</span> temp=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">int</span>.TryParse(a,<span class="keyword">out</span> temp);</span><br><span class="line"><span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>单例模式：每个类中都可以调用自己的单例 SceneMgr代表返回类型<ol>
+<li>没有继承MonoBehaviour类时的写法 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> SceneMgr _Instance;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SceneMgr <span class="title">Instance</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">get</span></span><br><span class="line">&#123;<span class="keyword">if</span>(_Instance==<span class="literal">null</span>)</span><br><span class="line">&#123;_Instance=<span class="keyword">new</span> SceneMgr();&#125;</span><br><span class="line"><span class="keyword">return</span> _Instance;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">TestLog</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+然后在TestSence类中<code>SceneMgr.Instance.TestLog();</code></li>
+<li>MonoBehaviour类的单例写法（就是当SceneCtrl类继承MonoBehaviour时）:<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> BoxCtrl _Instance;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BoxCtrl <span class="title">Instance</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">get</span></span><br><span class="line">&#123;<span class="keyword">if</span>(_Instance==<span class="literal">null</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//新建空物体</span></span><br><span class="line">GameObject obj =<span class="keyword">new</span> GameObject(<span class="string">&quot;BoxCtrl&quot;</span>);</span><br><span class="line"><span class="comment">//添加脚本组件</span></span><br><span class="line"> _Instance =obj.AddComponent&lt;BoxCtrl&gt;();</span><br><span class="line"><span class="comment">//跨场景物体不释放</span></span><br><span class="line">DontDestroyOnLoad(obj);</span><br><span class="line">&#125;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>MonoBehaviour类的单例快捷写法（就是当SceneCtrl类继承MonoBehaviour时）：条件：物体是场景中唯一的物体比如主摄像机，而且这个脚本只在唯一物体上<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> SceneCtrl Instance;</span><br><span class="line">在Awake()&#123;&#125;中Instance=<span class="keyword">this</span>; </span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>委托：(命名时前边都加On)<ol>
+<li>委托原型： <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span>  <span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">OnHitHandler</span>(<span class="params">GameObject obj</span>)</span>;</span><br><span class="line"><span class="comment">//定义委托</span></span><br><span class="line"><span class="keyword">public</span> OnHitHandler OnHit;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Hit</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li>快捷定义(使用system.Action快捷定义委托)：<ol>
+<li>多个发布者对应一个监听者 在BoxCtrl中发布委托，在SceneCtrl中监听委托，BoxCtrl在SceneCtrl中不段实例化(克隆)<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//!!!当箱子被点击的时候执行Hit()方法 然后方法中执行委托</span></span><br><span class="line">BoxCtrl类中  <span class="keyword">public</span> System.Action&lt;GameObject&gt;OnHit; </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Hit</span>(<span class="params"></span>)</span>&#123;<span class="keyword">if</span>(OnHit!=<span class="literal">null</span>)&#123;OnHit(GameObject);&#125;&#125;</span><br><span class="line">SceneCtrl类中 </span><br><span class="line">BoxCtrl boxCtrl=objClone.GetComponent&lt;BoxCtrl&gt;();</span><br><span class="line"><span class="keyword">if</span>(boxCtrl!=<span class="literal">null</span>)&#123;</span><br><span class="line"><span class="comment">//当委托触发时才会执行这行</span></span><br><span class="line">boxCtrl.OnHit=BoxHit;</span><br><span class="line">m_CurrCount++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> 	<span class="keyword">void</span> <span class="title">BoxHit</span>(<span class="params">GameObject obj</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">GameObject.Destory(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>一个发布者多个监听者 在SceneCtrl中发布委托<code>(public System.Action&lt;GameObject&gt;OnChange;)</code><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">updata中判断<span class="keyword">if</span>(OnChange!=<span class="literal">null</span>)&#123;OnChange&#125;</span><br><span class="line">在BoxCtrl监听委托Scenectrl.Instance.Onchange+=change;<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">change</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">因为箱子会销毁所以<span class="function"><span class="keyword">void</span> <span class="title">OnDestory</span>(<span class="params"></span>)</span>&#123;Scenectrl.Instance.Onchange-=change;&#125; </span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>事件：是特殊的委托<br>快捷定义：在Scenesctrl中发布事件<code>(public Event System.Action&lt;GameObject&gt;Onhit)</code><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在BoxCtrl中监听事件</span><br><span class="line">SceneCtrl.Instance.Onchange+=Instance_OnChange;（按tab自动弹出）</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Instance_OnChange</span>(<span class="params"></span>)</span>&#123;transform.localScale=<span class="keyword">new</span> Vector3(Random.Range(<span class="number">0.3f</span>,<span class="number">3.5f</span>),Random.Range(<span class="number">0.3f</span>,<span class="number">3.5f</span>),Random.Range(<span class="number">0.3f</span>,<span class="number">3.5f</span>))&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnDestory</span>(<span class="params"></span>)</span>&#123;Scenectrl.Instance.Onchange-=Instance_OnChange;&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/19/Unity%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" data-id="ckp3bilir000a4sue3e1fffa2" data-title="Unity项目总结" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/21/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          C语言学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/18/UnityAR_VR_IOS_UI/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">UnityAR_VR_IOS_UI</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

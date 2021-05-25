@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>C语言学习 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="C基础 字符如何转换为整形：’1’ - ‘0’&#x3D;1;  ‘2’ - ‘0’&#x3D;2,它俩是用ASCII码相减的即49-48&#x3D;1,auto在c中自动变量可以省略 自动分配空间 自动释放空间auto在c++中自动推到类型 十进制数是站在用户角度 原码 二进制 八进制 十六进制 站在计算机角度 补码int 4个字节 32位(每个字节8位)1000 0000 0000 0000 0000 0000 0111">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言学习">
+<meta property="og:url" content="http://example.com/2021/04/21/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="C基础 字符如何转换为整形：’1’ - ‘0’&#x3D;1;  ‘2’ - ‘0’&#x3D;2,它俩是用ASCII码相减的即49-48&#x3D;1,auto在c中自动变量可以省略 自动分配空间 自动释放空间auto在c++中自动推到类型 十进制数是站在用户角度 原码 二进制 八进制 十六进制 站在计算机角度 补码int 4个字节 32位(每个字节8位)1000 0000 0000 0000 0000 0000 0111">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C1.png">
+<meta property="og:image" content="http://example.com/2021/04/21/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C2.png">
+<meta property="og:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C3.png">
+<meta property="og:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C4.png">
+<meta property="og:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C5.png">
+<meta property="og:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E6%96%87%E4%BB%B61.png">
+<meta property="og:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E6%8F%90%E9%AB%983.png">
+<meta property="og:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E6%8F%90%E9%AB%984.png">
+<meta property="og:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E6%8F%90%E9%AB%985.png">
+<meta property="og:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E9%93%BE%E8%A1%A8.png">
+<meta property="article:published_time" content="2021-04-21T14:36:32.634Z">
+<meta property="article:modified_time" content="2021-04-26T17:08:16.039Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-C语言学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/21/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2021-04-21T14:36:32.634Z" itemprop="datePublished">2021-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      C语言学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="C基础"><a href="#C基础" class="headerlink" title="C基础"></a>C基础</h2><ol>
+<li>字符如何转换为整形：’1’ - ‘0’=1;  ‘2’ - ‘0’=2,它俩是用ASCII码相减的即49-48=1,auto在c中自动变量可以省略 自动分配空间 自动释放空间auto在c++中自动推到类型</li>
+<li>十进制数是站在用户角度 原码 二进制 八进制 十六进制 站在计算机角度 补码<br>int 4个字节 32位(每个字节8位)1000 0000 0000 0000 0000 0000 0111 1011<br>8000007b 一看就是补码 考虑有符号位时(%d\n)需要转成原码 考虑无符号位时(%u\n)不需转，直接是原码</li>
+<li>8位数值越界 char a=127+2；129 的二进制1000 0001 这是负数补码(从计算机角度考虑二进制是补码)1000 0001的原码是1111 1111 是-127</li>
+<li>程序运行过程：需要运算不能再内存中运算，需要内存中数据加载到寄存器，再运算，把运算结果从寄存器中移回内存</li>
+<li>Sizeof():字符个数包括”\0”;Strlen():指定字符串长度不包括”\0”;字符串不用取地址&amp;，数组名就是首元素地址;int*p=null; *p=100;其中null也是野指针，也会发生段错误.</li>
+<li>```c<br>%c格式对应的是单个字符 %o格式对应的是八进制<br>%d格式对应的是十进制 %x格式对应的是16进制<br>%p格式对应的是地址,一般以16进制方式输出指针<br>%s格式对应的是字符串 %s特点：<br>0、一个数组也想一下都打印出来，需要自己写while<br>1、从首元素开始打印，直到结束符位置<br>2、操作指针所指向的内容<br>eg：char str[]=”hello mike”;<br>printf(“str=%p\n”,*str);打印的str首地址<br>printf(“str=%s\n”,str);打印hello mike<br>printf(“str=%c\n”,*str);*str代表第0个元素，它是char<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">7. 字符数组和字符串的关系：字符串一定是字符数组</span><br><span class="line">   &#96;&#96;&#96;c</span><br><span class="line">   eg：char[]&#x3D;&quot;abc&quot;;默认后边带&quot;\0&quot;</span><br><span class="line">   字符数组char[]&#x3D;&#123;&#39;a&#39;,&#39;b&#39;,&#39;c&#39;&#125;;</span><br><span class="line">   str[0]代表操作首元素地址中的内存，str[0]&lt;&#x3D;&gt;*(str+0)&lt;&#x3D;&gt;*str</span><br><span class="line">   &amp;str[0]代表获取到首元素的地址，&amp;str[0]&lt;&#x3D;&gt;str</span><br><span class="line">   p++&lt;&#x3D;&gt;&amp;str[0]+1</span><br></pre></td></tr></table></figure>
+<img src="/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C1.png" alt="avatar"></li>
+<li>指针：<ol>
+<li>如果操作p，就是操作p变量指向内存</li>
+<li>指针变量不同于普通变量</li>
+<li>数组指针不同于普通数组</li>
+<li>实参和形参 实参是零级指针要想赋值 需要形参是一级指针</li>
+<li>数组指针<code>*p</code>代表操作了首元素指向的地址 普通数组<code>*p</code>代表首元素,<code>*</code>解引用去操作指向的内存操作*p，就是操作指针指向内存.</li>
+<li><code>*p</code>等价于*(p+0)，同时等价于p[0];操作指针所指向的内存.</li>
+<li>!!!(p[0]不同于普通数组，不代表代表首元素，而是操作了首元素地址指向内存。因为p代表首元素地址&amp;p[0],所以 <em>p=</em>&amp;p[0]=p[0]，操作了int a)</li>
+<li>个人理解 可以把p指针看成一个元素的数组指针p[];</li>
+<li>指针数组<code>*p</code>代表首元素，数组指针*p代表操作首元素地址</li>
+<li>一级指针操作零级指针 二级指针操作一级指针</li>
+<li>普通指针p[0]不同于指针数组的p[0]差一层级</li>
+<li>因为普通指针p存放的是别的元素的地址，指针数组p存放的是自己数组的首地址</li>
+<li>!!!<code>*p</code>等价于*0xaabb (*代表操作地址对应内存(内容),p存的就是地址)两者都是操作0xaabb这个地址的内容</li>
+<li>只有定义后的变量，此变量的地址才是合法地址,int *p 没有初始化时，p默认的值是随机数(0xaabbcc)</li>
+<li>!!!指针变量默认存储的值是十六进制的地址，int类型变量默认存储的值是整型(100)</li>
+<li><img src="C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C2.png" alt="avatar"></li>
+</ol>
+</li>
+<li>首先p是一个指针数组，数组中每个元素存放指针 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">p[<span class="number">0</span>]操作的是p数组，*p[<span class="number">0</span>]操作的是a数组，&amp;a[<span class="number">0</span>]取a数组首元素地址</span><br><span class="line">p[<span class="number">0</span>]代表首元素地址的内容是&amp;a[<span class="number">0</span>]，直接操作p[<span class="number">0</span>]没有意义，*p[<span class="number">0</span>]才行</span><br><span class="line">p代表p数组的首元素地址&amp;p[<span class="number">0</span>], 所以*p代表p数组的首元素地址的内容(也就是地址指向的内存) </span><br><span class="line"> !!! 所以p[<span class="number">0</span>]&lt;=&gt;*p&lt;=&gt;*(p+<span class="number">0</span>)</span><br><span class="line"> !!! 其中的p不同于普通指针中的p</span><br><span class="line"> 我指针把地址给你 你就指向我    我要指向你 我比你多个*</span><br><span class="line"> eg <span class="keyword">int</span> ****p 我定义一个什么类型保存变量p  <span class="keyword">int</span> *****p来保存</span><br></pre></td></tr></table></figure>
+ <img src="/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C3.png" alt="avatar"></li>
+<li>只要是变量常量都有地址，无论指针变量、文字常量``char *str1=”abc”;其中abc存在data的字符常量区，str1存的是首元素地址，不能修改str1指向的内存数组名是常量不能更改<br><img src="/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C4.png" alt="avatar"></li>
+<li>指针数组是数组，数组指针是指针，指针函数是函数，都是看后边的<br>!!!P[i]等价*(p+i);内存就是数组，只要是指针都可以用”[]”，<br>转换偏向于从p[i]=&gt;*p   适用于指针数组和指针<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a[<span class="number">10</span>])</span>&lt;</span>=&gt;<span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a[])</span>&lt;</span>=&gt;<span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> *a)</span></span></span><br><span class="line">fun中&quot;int a[10]&quot;不是数组是普通指针变量  a[]&lt;=&gt;*a</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_array</span><span class="params">(<span class="keyword">char</span> **p,<span class="keyword">int</span> n)</span></span>; </span><br><span class="line">**p不是二维数组是指针数组，但是*p在形参中代表普通指针</span><br><span class="line">等价于<span class="function"><span class="keyword">void</span> <span class="title">print_array</span><span class="params">(<span class="keyword">char</span> *p[],<span class="keyword">int</span> n)</span></span>;</span><br><span class="line">!!!当数组名作为函数参数的时候，会退化成为指针</span><br></pre></td></tr></table></figure>
+<img src="/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C5.png" alt="avatar"></li>
+<li>```c<br>//p2是指针数组，其中char*存的是字符串”abc”地址<br>char <em>p2[]={“abc”,”mike”,”hello”};<br>//p2是char**类型，指向char</em>(单个指针)<br>char **p2={“abc”,”mike”,”hello”};//err    p2就是一个变量<br>如果char *tmp;   char *<em>p2=&tmp;//ok 指针p2指向tmp自己的地址<br>p2首元素是char</em>类型  &amp;p2[0]等价于p2<br>char **p=p2；//char *<em>指向char</em><br>char **p=&amp;p2[0];<br>如果char *p2[]作为函数参数，可以改为char **p2，数组当成指针用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">13. </span><br><span class="line">   - scanf()从缓冲区取内容</span><br><span class="line">   - fp文件指针，只要调用了fopen()函数就会指定文件(1.txt);</span><br><span class="line">   - fp指针只能借助文件库函数来操作</span><br><span class="line">   - fopen()在堆中开辟空间存放FILE结构体，并返回地址给fp指针，FILE结构体中有文件标识符(1024个)，与硬盘中文件建立连接，其中012被占用</span><br><span class="line">   - 没有fp&#x3D;fopen，然后fclose(fp)会段错误</span><br><span class="line">14.  C中函数的执行顺序是从上到下，如果自定义函数写在main函数的下边，需要在main函数的上边声明一下，然后在main函数中才可以调用变量的定义和声明不一样</span><br><span class="line">15. 普通局部变量不初始化，它的值为随机数static局部变量不初始化，它的值为0全局变量和static全局变量 不初始化都是0 &#96;&#96;static_fun()&#123;int a&#x3D;10; static int j&#x3D;a;&#125;&#96;&#96;j先分配的空间 a是当函数调用的时候才会有所有static只能用常量初始化</span><br><span class="line">16. #define和typedef区别</span><br><span class="line">    1. 前边是宏定义在预处理阶段</span><br><span class="line">    2. #define INT int；前边替换后边的</span><br><span class="line">    3. typedef在预编译阶段</span><br><span class="line">    4. typedef int int64；后边替换前边的</span><br><span class="line">17. %c和%d中间ASCII转换:</span><br><span class="line">    1. 数组清零</span><br><span class="line">    2. int b[10]&#x3D;&#123;0&#125;; 初始化可以这样赋值，数组个数是10 但是数组赋值的时候 最多到b[9] b[10]越界</span><br><span class="line">    3. &#x2F;&#x2F;处理一些代码，把b内部的元素改了 想重新清零</span><br><span class="line">    4. b[10]&#x3D;&#123;0&#125;;&#x2F;&#x2F;err !!!没有10这个元素</span><br><span class="line">18. return 0：一般用在主函数结束时，按照程序开发的一般惯例，表示成功完成本函数。</span><br><span class="line">return -1：:表示返回一个代数值，一般用在子函数结尾。按照程序开发的一般惯例，表示该函数失败；</span><br><span class="line">19. sizeof()测的是指针的长度(不是4就是8)，strlen()函数测的是字符串的长度&#96;&#96;int *p；&#96;&#96;&#x2F;&#x2F;指向堆区int类型空间,&#96;&#96;p&#x3D;(*int)molloc(sizeof(int));&#96;&#96; 但是保存的还是首元素地址,指针大小是根据系统位数决定的，32位 4个字节 64位 8个字节,size_t无符号整型</span><br><span class="line">地址也有地址，指的就是指针变量也有地址&#96;&#96;int *p&#x3D;NULL；printf(&quot;*p&#x3D;d%\n&quot;,*p);&#96;&#96;&#x2F;&#x2F;err,操作空指针指向的内存</span><br><span class="line">20. &#123;&#125;结尾有分号的两个 do while，struct，enum，联合体struct Student &#123; int age; char name[50]; int score;&#125;结构体是一个类型，在没有定义前 是没有分配空间的struct Student tmp；才会分配内存</span><br><span class="line">21. 在程序没有执行前，前三个分区已经确定了程序没有结束 heap空间不会自动释放data区分两部分：全局变量 static变量区和文字常量区!!!段错误 都是内存出现问题</span><br><span class="line">   ![avatar](&#x2F;C语言学习&#x2F;C6.png)</span><br><span class="line">22. 地址传递，形参修改影响到实参，所以函数中想打印实参而且不想通过参数被修改，所以可以用到coust</span><br><span class="line">   ![avatar](&#x2F;C语言学习&#x2F;C7.png)</span><br><span class="line">23. .h文件不能放定义，多个.c文件时容易发生重复定义所以.h文件存放声明 extern int a；static全局变量只能本文件(main.c)使用， 别的文件(test.c)不能使用main.c不引入头文件 然后自己声明，在test.c中定义全局变量和函数也是可以的getG();调用 无论是c还是c++，函数和变量都是“就近原则”register寄存器变量</span><br><span class="line">   ![avatar](&#x2F;C语言学习&#x2F;C8.png)</span><br><span class="line">24. ！！！指针赋值 ：在堆区开辟一块内存，他的地址固定 ，所以可以声明多个指针变量指向这个内存地址(c语言day15_指针复习)</span><br><span class="line">## C文件</span><br><span class="line">1. sprintf(buf,&quot;d%\n&quot;,num);字符串是以&quot;d%\n&quot;这种形式放到buf中</span><br><span class="line">sscanf(buf,&quot;d%\n&quot;,&amp;num);是以&quot;d%\n&quot;这种形式提取到num中</span><br><span class="line">2. int ch&#x3D;fgetc(fp); 返回值是读取到的字符；fgets(char*,sizeof(),char*stream)按行读取printf(&quot;ch&#x3D;%d\n&quot;,ch); fputc和fgetc主要根据文件指针操作文件初始的标志位都是在最前边</span><br><span class="line">   &#96;&#96;&#96;c</span><br><span class="line">   struct Student</span><br><span class="line">   &#123;</span><br><span class="line">   char *name;int id;int name_len;</span><br><span class="line">   &#125;Stu;</span><br><span class="line">   Stu s; s.id&#x3D;1; s.name_len&#x3D;strlen(&quot;mike&quot;);</span><br><span class="line">   s.name&#x3D;(char*)malloc(s.name_len+1);</span><br><span class="line">   printf(name&#x3D;%s,s.name);打印出mike，</span><br><span class="line">   printf(name&#x3D;%p,s.name);打印出0x112233，</span><br><span class="line">   s%代表指针指向内存</span><br></pre></td></tr></table></figure></li>
+<li>文件分为：磁盘文件和设备文件,磁盘文件分为：文本文件和二进制文件<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fp=fopen(<span class="string">&quot;text.txt&quot;</span>,<span class="string">&quot;w&quot;</span>);<span class="comment">//文件内容清空</span></span><br><span class="line">fp=fopen(<span class="string">&quot;text.txt&quot;</span>,<span class="string">&quot;a&quot;</span>);<span class="comment">//追加</span></span><br><span class="line">fp=fopen(<span class="string">&quot;text.txt&quot;</span>,<span class="string">&quot;r&quot;</span>);<span class="comment">//只读</span></span><br><span class="line">fp=fopen(<span class="string">&quot;text.txt&quot;</span>,<span class="string">&quot;r+&quot;</span>);<span class="comment">//可读可写不新建</span></span><br><span class="line">fp=fopen(<span class="string">&quot;text.txt&quot;</span>,<span class="string">&quot;w+&quot;</span>);<span class="comment">//可读可写新建</span></span><br></pre></td></tr></table></figure>
+Windows中 b是二进制的意思 在linux中用r和rb结果是一样的<br>windows 平台的换行符”\r\n”;linux平台的换行符”\n”;<br>windows中读取的时候 会将所有的\r\n转换成\n;写入的时候 会将所有的\n转换成\r\n<br>所有读写的时候要写”wb”或者”rb” 是以二进制的方式打开，有什么字符就是什么字符 不会转换</li>
+<li>字符可以直接比较，因为是ASCII码，文本文件最后是有一个”-1”类似于字符串最后有一个”\0”，fputc将字符放到指定的文件中或者屏幕中(stdout)；fgetc从键盘读取字符(stdin)</li>
+<li>fread()读取完一个结构体时，光标也会自动移动到下一个结构体，类似于fgetc中读取到”\n”然后换行，fread()和fwrite()的特点光标自动移动<br><img src="/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E6%96%87%E4%BB%B61.png" alt="avatar"></li>
+<li>```c<br>int <em>p 我需要保存你的地址，在原来类型的基础上多加</em>，所以int <strong>p<br>void fun(int</strong>p)<br>{        }<br>void main()<br>{ int *p=NULL;<br>fun (&amp;p);    }<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">   1. 因为p本身就是int*</span><br><span class="line">   2. 首先&amp;p代表地址需要用指针变量存</span><br><span class="line">   3. 能存放&amp;p的变量应该是&#96;&#96;int**q，因为**q&#x3D;*p&#96;&#96;值传递不能影响实参，所以需要一个地址传递&amp;p，所以需要一个二级指针，通过函数返回值改变p，但是只能返回一个。</span><br><span class="line">   结构体数组可以用元素操作 也可以用地址操作 也可以通过一个指针指向首元素 &#96;&#96;Struct Student *p &#x3D;a; 	 p&#x3D;&amp;a[0];&#96;&#96;</span><br><span class="line">## C语言提高</span><br><span class="line">1. continue语句的作用是跳过本次循环体中余下尚未执行的语句，立即进行下一次的循环条件判定，可以理解为仅结束本次循环</span><br><span class="line">   - ![avatar](&#x2F;C语言学习&#x2F;C提高1.png)</span><br><span class="line">2. &quot;%*&quot;忽略的意思，&quot;%[]&quot;匹配的意思。先是忽略非#，然后匹配非@，出现@匹配失败就不匹配了;忽略遇到空格或者\t代表忽略结束</span><br><span class="line">   - ![avatar](&#x2F;C语言学习&#x2F;C提高2.png)</span><br><span class="line">3. &#96;&#96;&#96;c</span><br><span class="line">   --&gt;fputc(buf[i]，f_write); &#x2F;&#x2F;写入文件</span><br><span class="line">   --&gt;fgetc(f_read);       &#x2F;&#x2F;读文件</span><br><span class="line">   --&gt;fputs(buf[i]，f_write);    &#x2F;&#x2F;写字符串到文件</span><br><span class="line">   --&gt;fgets(buf，1024，f_read)；&#x2F;&#x2F;从文件中读取到buf中</span><br><span class="line">   --&gt;fwrite(&amp;heros[i],sizeof(struct Hero),1,f_write);&#x2F;&#x2F;将数组写入到文件中</span><br><span class="line">   --&gt;fread(&amp;temp,sizeof(struct Hero)，4，f_read); &#x2F;&#x2F;从文件中读取到数组</span><br><span class="line">   --&gt;fprintf(f_write，&quot;%d&quot;，2018);   &#x2F;&#x2F;通过%d，格式化输出到文件中</span><br><span class="line">   --&gt;fscanf(f_read，&quot;%s&quot;，buf);   &#x2F;&#x2F;从文件中读取 存到buf中</span><br><span class="line">   --&gt;sprintf(buf，%s %s”，str1，str2);&#x2F;&#x2F;可以从str1中读取字符串，输出到buf中</span><br><span class="line">   --&gt;sscanf(str，%*d%s，buf1);  &#x2F;&#x2F;从str中读取 存到buf1中</span><br><span class="line">   --&gt;printf(“%d\n”,123);     &#x2F;&#x2F;123输出到屏幕</span><br><span class="line">   --&gt;scanf(&quot;%s&quot;,userName);   &#x2F;&#x2F;键盘输入到userName</span><br><span class="line">   --&gt;memcpy(buf，&amp;a，sizeof(int)); &#x2F;&#x2F;从a中拷贝到buf中</span><br><span class="line">   --&gt;strcpy(p，&quot;hello&quot;);     &#x2F;&#x2F;给p指向内存拷贝  拷贝到p指向内存</span><br><span class="line">   ***标准输出输入格式可以看作是分支和主干的关系</span><br><span class="line">   ***标准输出格式(分支到主干)是在被调中分配内存 主调中使用 </span><br><span class="line">   ***文件fgetc和sprintf都是把后边文件指针看做 分支 </span><br><span class="line">   ***读的时候从分支中读 写的时候往分支里写</span><br><span class="line">   ***遇到空格换行</span><br><span class="line">   while((ch&#x3D;fgetc(f_read))!&#x3D;EOF)</span><br><span class="line">   &#123;printf(&quot;%c&quot;,ch);&#125;&#x2F;&#x2F;当ch不是eof时，循环打印字符</span><br></pre></td></tr></table></figure>
+<ul>
+<li><img src="/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E6%8F%90%E9%AB%983.png" alt="avatar"></li>
+</ul>
+</li>
+<li>字符串反转：其中<code>char temp=*start；</code>解引用（地址） 解出里边的数据也可以叫做操作地址指向的数据,***野指针没有权利free<ul>
+<li><img src="/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E6%8F%90%E9%AB%984.png" alt="avatar"></li>
+</ul>
+</li>
+<li>输出特性，在被调函数中分配空间主调函数中利用，想改变<code>char*p</code>的值 不能值传递需要间接赋值，通过地址传递，而修饰地址的地址需要用到二级指针 实际上*pp就是操作p的内存，因为pp中放的就是p的地址 改变了NULL<ul>
+<li><img src="/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E6%8F%90%E9%AB%985.png" alt="avatar"></li>
+</ul>
+</li>
+<li>栈底 高地址 高位字节数据 栈顶低地址 低位字节数据 （小端对齐）然后取地址发现俩个地址之间相差12 不是16 是因为有一个存的指针 </li>
+<li>内存是一个一个字节的放 16进制=4个2进制=4位 8位=1字节 所以0x11223344=4个字节,地址默认就是16进制，但是%d打印出来的是int类型 需要转成int*类型,函数返回地址 代表函数执行完之后跳到哪里，存在栈区(存放第二行指令)在函数调用前先记录一下.代码可不是连续的 func函数执行完会直接跳到main函数的return的</li>
+<li>字符串拷贝的牛逼写法<ol>
+<li>主函数：<br><code>void test02（）&#123;char*str=&quot;hello world&quot;;char buf[1024]; copyString03（buf ,str）; printf（&quot;%s\n&quot;,buf）; &#125;</code></li>
+<li>被调函数：<br><code>void copyString03（char *dest,char *src）&#123; while（*dest++=*src++）&#123;&#125;&#125;</code></li>
+<li>***while条件中a=0跳出循环 不等于0不跳出循环</li>
+</ol>
+</li>
+<li>char *p=NULL;//给p指向的内容拷贝内容;strcpy（p,”1111”）;空指针可以重复释放 但是野指针不可以重复释放;int a=1000； 只占四个字节 因为是int类型 跟后边的值没有关系</li>
+<li>二维数组也是线性连续的内存，只不过是人为划分成了2维数组<br>一维数组 的数组指针 int(*p)[5]=&amp;arr；<br>二维数组 的数组指针 int(*p)[3]=arr； 一维数组的名代表指向第一个元素<br>二维数组 的数组指针 int(*p)[3][3]=&arr;   变量p就是一维数组指针<br>二维数组除了两种特殊情况外 二维数组名称是指向第一个一维数组  数组指针</li>
+</ol>
+<ul>
+<li>```c<br> printf(“%d”,arr[1][2]);<br> printf(“%d”,<em>(</em>(array+i)+j));<br> array[3][3] 等价于一维数组指针<br> int(*array)[3]; 存了三个数组指针<br> 对比字符串不能用地址去对比 要用strcmp(pArr[max],pArr[j])==-1 表示&lt; <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">11. 两种特殊情况(其他情况都是代表四个字节，比如作为参数)</span><br><span class="line">       &#96;&#96;&#96;c</span><br><span class="line">       一维数组名不是 指向第一个元素的指针</span><br><span class="line">       int arr[5]&#x3D;&#123;1,2,3,4,5&#125;;</span><br><span class="line">       printf(&quot;%d\n&quot;,sizeof(arr));&#x2F;&#x2F;20 要是int*类型的话 是4</span><br><span class="line">       1. sizeof </span><br><span class="line">       2. 对数组名取地址 得到数组指针 步长是整个数组长度</span><br><span class="line">       printf(&quot;%d\n&quot;,&amp;arr);</span><br><span class="line">       printf(&quot;%d\n&quot;,&amp;arr+1); 跳跃了20 </span><br><span class="line">       arr数组名 它是一个指针常量 指针的指向不可以修改 指针指向的值可以修改</span><br><span class="line">       int * count a,count int * a ，常量指针值不可以修改，指针可以修改</span><br><span class="line">       arr[0]&#x3D;2200; ok     arr&#x3D;NULL;err</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="12">
+<li>```c<br>int <em>pArray=(int</em>)malloc(sizeof(int)*5);<br>***返回的int类型数组首地址等价于栈区的指针数组<br>**<em>也可以理解为4</em>5个字符数组的首4个字符地址<br>类似于字符数组<br>**<em>连续线性空间可以当成一个数组<br>p=(char</em>)malloc(strlen(“hello”)+1);<br>strcpy(p,”hello”);<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">13. &#96;&#96;&#96;c</span><br><span class="line">    FILE *pFile&#x3D;fopen(&quot;.&#x2F;test.txt&quot;,&quot;r&quot;);</span><br><span class="line">    while（fgets（buf，1024，pFile）！&#x3D;NULL）</span><br><span class="line">    &#123;line++；&#125;调用fgets时光标会自己移动到文件尾,</span><br><span class="line">    需要将文件光标置首(FILE指针在统计完行之后没有置于光标的首，</span><br><span class="line">    然后接着往read&#39;FileData中放，所以不会读取到数据)</span><br><span class="line">    fseek（pFile，0，SEEK_SET）;</span><br></pre></td></tr></table></figure></li>
+<li>自定义结构体可以理解为字符数组，有个首地址结构体存放变量 有个内存对齐 以大的为准<ol>
+<li>位运算中 1代表真 0代表假</li>
+<li>进制中 1代表负 0代表正数</li>
+<li>电源中 1代表接通 0代表关闭</li>
+<li>~代表按位取反 ，按位与&amp; 全真为真 一假为假</li>
+<li>按位或 全假为假 一真为真</li>
+<li>按位异或 相同为假 不同为真</li>
+<li>***位运算实现交换</li>
+<li>左移n位 需要乘2的n次方  0000 0001&lt;&lt;1  0000 0010</li>
+<li>右移n位 需要除2的n次方  1000 1010&gt;&gt;2  0010 0010</li>
+<li>右移运算 有些机器用0填充高位 有些机器用1填充高位</li>
+<li>如果无符号都是用0填充</li>
+</ol>
+</li>
+<li>&amp;取地址<code>*操作地址 []操作地址 pArray首元素地址=*pArray[0]=**int</code><br>数组名作为函数参数的时候会退化为指针，是因为数组名本身就是首元素地址</li>
+<li>声明变量时<code>int **pArray 中的pArray相当于提取了两边地址（可以理解为引用），想操作内存的时候需要**pArray</code>(可以理解为解引用)。</li>
+<li>由于每一行都是一个字符串所以用char<em>存;输入特性是从主到调 在主调函数中申请内存<br>输出特性是从调到主 在调用函数中申请内存;如果主函数中``char</em>* pArray=NULL ``需要在调用函数中用到3级指针同级指针修饰不成功可以用高级指针接收修饰就可以了</li>
+<li>数组指针 int (*p)[5] 与指针数组int *p[3]不一样;二级指针都是指针数组首地址<br>指针大小是由系统决定一般都是4个字节或者8个字节</li>
+</ol>
+<ul>
+<li>*arrP=arr==数组名</li>
+<li><code>int *p=&amp;arr；</code>不等价<code>typedef int(ARRARY_TYPE)[5]；//ARRARY_TYPE</code>代表存放5个int类型的数组 的数据类型,这时可以用ARRARY_TYPE类型的指针接收 arr的地址 因为此时arr中有20个字符 如果用普通的二级指针接收的话只能存4个字节</li>
+<li>开始写<code>int *p=&amp;arr；会提示“int *”与“int (*)[5]”</code>的间接级别不同</li>
+</ul>
+<ol start="19">
+<li>perror（”打印文件失败”）；//打印显示信息和error宏相应信息</li>
+</ol>
+<p>***字符指针存放字符串地址 结构体指针存放自定义类型<br>**<em>结构体malloc开辟空间，如果结构体是一个 用char</em>存放地址 如果是多个，用char*存放首地址<br>***定义变量时 如果数组存的是指针 需要用二级指针维护，因为想实现引用传递 改变指针数组 需要用&amp;指针数组即三级指针</p>
+<h2 id="C提高"><a href="#C提高" class="headerlink" title="C提高"></a>C提高</h2><ol>
+<li><ul>
+<li>主调函数中没有分配内存 被调函数用（高级指针）二级指针维护和分配内存，然后下边调用可以用同级指针</li>
+<li>如果函数的参数是同级指针，类似于值传递，只能临时改变它的值。</li>
+<li>尤其是free的时候，如果同级指针参数传递，需要在外边再释放一次</li>
+<li>如果函数的参数是高一级指针，类似于地址传递，改变了这个指针的值</li>
+</ul>
+</li>
+<li>通过偏移量 操作内存<ul>
+<li><code>printf(&quot;t1.p=%d\n&quot;,*(int*)((char*)&amp;t1+offsetof(struct Teacher,b)));</code><br>offsetof 代表指针偏移数量 返回int类型</li>
+<li>上述代码表示 <code>char*类型</code>的t1首地址加上偏移量转成int*类型 在解引用</li>
+</ul>
+</li>
+<li>传参时<ul>
+<li>主调函数中的二级指针需要被调函数参数的三级指针去接收，或者用二级指针，函数返回值的方式接收</li>
+<li>释放的时候如果不是三级指针接收的 需要在最外边在释放一次</li>
+<li>char ** Student；存放指针数组相当于 用数组解了一层引用 再用*表示地址 可以理解为一个学生是一个char *</li>
+<li>char**是个数组 </li>
+<li>在堆区开辟地址存放结构体数组之类的 尽量用指针</li>
+<li>name就是字符地址 因为是字符串 字符串名是地址</li>
+<li>开辟内存 建立关系***strlen（pos+1）代表从pos+1位置到最后的个数</li>
+<li>在堆区分配内存 不能同时赋初值 需要在第二行初始化,浅拷贝在堆区分配内存 会出现重复释放 重复释放就是释放野指针</li>
+<li>内存对齐的 对其模数是2的n次方查看当前对齐模数 #pragma pack(show)；也可以是#pragma pack(1);</li>
+<li>pragma once防止头文件重复这里默认的对其模数是8 左边的结果是24（8*3）右边的结果是17 对其模数1,因为double要放在8 所以char放在4~7 前一个数偏移多少要看后面的</li>
+<li>没有内存对齐 好多变量都要二次访问 </li>
+<li>内存对齐使用空间换时间</li>
+</ul>
+</li>
+<li>递归函数必须有退出条件，否则一会儿栈区内存就满了,斐波那契数列就是利用递归函数 函数的退出条件就是前两个数</li>
+<li>预处理的基本概念：c语言对源程序处理的四个步骤：预处理（展开宏）、编译（做语法检测）、汇编（生成二进制文件）、链接（生成exe）。</li>
+<li><ol>
+<li>链表的分类一：<ul>
+<li>静态链表  在栈上分配内存   在当前函数中运用</li>
+<li>动态链表  在区分配内存   只要不释放掉</li>
+</ul>
+</li>
+<li>链表的分类二：<ul>
+<li>单向链表  双向链表</li>
+<li>单向循环链表  双向循环链表</li>
+<li>带头节点和不带头节点的链表：带头节点链表中头节点只有指针域，指向头节点。如果在头节点插入节点，只需要访问头节点.nest（真实有数据）就可以</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>函数指针（数组有三种定义方式）也有三种定义方式<ol>
+<li>先定义出函数类型，再通过类型定义函数指针<br>typedef void(FUNC_TYPE)(int, char);      FUNC_TYPE* p=func；</li>
+<li>定义出函数指针’类型’，再通过类型定义函数指针’变量’<br>typedef void( * FUNC_TYPE2)(int, char);   FUNC_TYPE2 p=func;</li>
+<li>直接定义函数指针变量<ul>
+<li>void(*pFunc3)(int, char) = func; pFunc3();</li>
+</ul>
+</li>
+<li>函数指针数组  void(*pArray[3])();</li>
+<li>不存在函数数组指针，因为函数 数组指针（函数数组 指针）是两个概念，但都是指针<br>类似于定义数组指针<ul>
+<li>函数名(func)本质就是一个函数指针   可以利用函数指针调用函数 </li>
+<li>函数调用的操作符就是”（）”    func+（）==&gt;变量+（） 就是调用函数了</li>
+</ul>
+</li>
+<li>定义一个函数类型 主要是 返回值类型和形参的类型  cdecl调用惯例</li>
+<li>函数指针和指针函数<ul>
+<li>函数指针 指向了函数的指针</li>
+<li>指针函数 函数返回值是指针的函数</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>难：函数指针作为函数参数叫回调函数<br>提供一个打印函数 可以打印任意类型的数据;为什么printTest中函数指针作为函数参数？<ul>
+<li>首先printTest中是没有办法确定数据类型的，可以取到a的内存首地址</li>
+<li>不能写printf,是因为不知道格式化怎么去写,所以把接口交还给客户，架接起“桥梁”。</li>
+<li>myPrint和myPrintInt只要是返回值和参数类型相同就可以，一个是形参一个是实参</li>
+<li>所以函数名作为参数的时候可以代表回调函数或者仿函数</li>
+</ul>
+</li>
+<li>回调函数：<ul>
+<li>一开始不能确定的东西，我们回头再去调用。类似一个接口 等待我们去实现，用户只要更改int* num=data；中的数据类型就可以</li>
+<li>打印需求可以直接调用myPrintInt去执行，也可以通过调用中间函数printAllArray去执行（中间函数中存在回调函数类似于多态和工厂模式）</li>
+<li>需要用户自己，交还给用户，需要用到回调函数</li>
+</ul>
+</li>
+<li>声明外部函数(导出函数):<ul>
+<li>__declspec(dllexport) int myminus(int a ,int b);</li>
+<li>declspec代表特殊声明 declear声明 specail特殊 dllexport dll导出的意思</li>
+<li>动态库添加现有项的其他方法 main函数前添加#pragma comment（lib，“./mydll.lib”）;添加声明</li>
+<li>静态库生成的.lib文件（声明和实现都在lib中）和动态库生成的.lib文件是不同的，动态库中的.lib只会放变量的声明和 导出函数的声明，函数实现体放在.dll中</li>
+</ul>
+</li>
+<li>插入节点到链表中<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> 	<span class="title">LinkNode</span> *<span class="title">newNode</span>=</span><span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct LinkNode));</span><br><span class="line">newNode-&gt;num =val;</span><br><span class="line">newNode-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">pTail-&gt;next=newNode;/更改指针指向</span><br><span class="line">pTail=newNode;<span class="comment">//更新新的尾节点指向</span></span><br></pre></td></tr></table></figure>
+链表反转时 pNest的作用就是记录一下后边到哪了，因为pCurrent指针指向的是前边的链表<ul>
+<li><img src="/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C%E9%93%BE%E8%A1%A8.png" alt="avatar"></li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/21/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" data-id="ckp3bilin00054sueg03wbujw" data-title="C语言学习" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据库学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/19/Unity%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Unity项目总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-libevent%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91/">Linux网络编程-libevent框架开发</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux网络编程-高并发服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E4%BF%A1%E5%8F%B7/">Linux系统编程-信号</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B-%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5/">守护进程-线程-网络基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/16/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
